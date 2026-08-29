@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Статьи — Новостной портал Богаева М. Е.</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/mobile.css">
+
+
+<style>
+/* ДОБАВЛЕНО ТОЛЬКО ДЛЯ СКРЫТИЯ ДЛИННОГО ОПИСАНИЯ В ОДНУ СТРОКУ */
+.article-card-content p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ВЕРХНИЙ БАННЕР -->
+
+<div class="top-banner">
+
+    <div class="banner-video">
+
+        <div class="banner-placeholder">
+            МЕСТО ДЛЯ ВИДЕО
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- САЙТ -->
+
+<div class="site">
+
+
+<!-- ШАПКА -->
+
+<header class="header">
+
+    <div class="header-content">
+
+        <h1>
+            НОВОСТНОЙ ПОРТАЛ БОГАЕВА М. Е.
+        </h1>
+
+        <p>
+            Новости • События • Материалы • Фото • Видео
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<!-- МЕНЮ -->
+
+<nav class="menu">
+
+    <a href="index.html">
+        Главная
+    </a>
+
+    <a href="news.html">
+        Новости
+    </a>
+
+    <a href="articles.html">
+        Статьи
+    </a>
+
+    <a href="photos.html">
+        Фото
+    </a>
+
+    <a href="videos.html">
+        Видео
+    </a>
+
+    <a href="about.html">
+        О сайте
+    </a>
+
+    <!-- ДОБАВИЛИ ТОЛЬКО ПОИСК -->
+
+    <a href="search.html">
+        🔎 Поиск
+    </a>
+
+    <a href="chat.html" class="chat-link">
+        💬 Всеобщий чат
+    </a>
+
+</nav>
+
+
+
+<!-- ОСНОВНАЯ СЕТКА -->
+
+<div class="layout">
+
+
+<!-- ЛЕВАЯ КОЛОНКА -->
+
+<aside class="sidebar">
+
+
+    <div class="box">
+
+        <div class="box-title">
+            Разделы
+        </div>
+
+        <div class="box-body">
+
+            <a href="index.html">
+                Главная
+            </a>
+
+            <a href="news.html">
+                Последние новости
+            </a>
+
+            <a href="articles.html">
+                Статьи
+            </a>
+
+            <a href="photos.html">
+                Фотографии
+            </a>
+
+            <a href="videos.html">
+                Видео
+            </a>
+
+            <a href="about.html">
+                О сайте
+            </a>
+
+            <!-- ДОБАВИЛИ ТОЛЬКО ПОИСК -->
+
+            <a href="search.html">
+                🔎 Поиск
+            </a>
+
+            <a href="chat.html" class="chat-link">
+                💬 Всеобщий чат
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="box">
+
+        <div class="box-title">
+            Последние публикации
+        </div>
+
+        <div
+            class="box-body"
+            id="sidebarPosts"
+        >
+            Загрузка...
+        </div>
+
+    </div>
+
+
+
+    <div class="side-banner">
+
+        БОКОВОЙ БАННЕР
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- ЦЕНТР -->
+
+<main class="main-content">
+
+
+    <section class="main">
+
+
+        <div class="main-title">
+            СТАТЬИ
+        </div>
+
+
+
+        <div class="article">
+
+
+            <h2>
+                Статьи
+            </h2>
+
+
+            <div class="date">
+                Аналитические и тематические материалы портала
+            </div>
+
+
+
+            <!-- ЗДЕСЬ БУДУТ СТАТЬИ -->
+
+            <div id="articlesList">
+
+                Загрузка статей...
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ПРАВАЯ КОЛОНКА -->
+
+<aside class="right-sidebar">
+
+
+    <div class="side-banner">
+
+        БАННЕР
+
+    </div>
+
+
+
+    <div class="box">
+
+        <div class="box-title">
+            Популярное
+        </div>
+
+        <div class="box-body" id="popularPosts">
+
+            <div class="sidebar-publication">
+                Загрузка...
+            </div>
+
+        </div>
+
+    </div>
+
+
+</aside>
+
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    © 2026 Новостной портал Богаева М. Е.
+
+    <br>
+
+    Новости • События • Материалы
+
+</footer>
+
+
+</div>
+
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+// ==========================================
+// SUPABASE
+// ==========================================
+
+const SUPABASE_URL =
+    "https://fmqjevqagtasqpeezwnn.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_Me5hyK-zIp3_5yBpHP8VVA_OFk2bqSj";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+// ==========================================
+// ЗАГРУЗКА СТАТЕЙ
+// ==========================================
+
+async function loadArticles() {
+
+
+    const articlesList =
+        document.getElementById(
+            "articlesList"
+        );
+
+
+    const sidebarPosts =
+        document.getElementById(
+            "sidebarPosts"
+        );
+
+
+
+    // ======================================
+    // ПОЛУЧАЕМ ТОЛЬКО СТАТЬИ
+    // ======================================
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("posts")
+        .select("*")
+        .eq("published", true)
+        .eq("category", "articles")
+        .order("created_at", {
+            ascending: false
+        });
+
+
+
+    // ======================================
+    // ОШИБКА
+    // ======================================
+
+    if (error) {
+
+        console.error(
+            "Ошибка загрузки статей:",
+            error
+        );
+
+
+        articlesList.innerHTML =
+            "<p>Не удалось загрузить статьи.</p>";
+
+
+        sidebarPosts.innerHTML =
+            "Ошибка загрузки.";
+
+
+        return;
+
+    }
+
+
+
+    // ======================================
+    // СТАТЕЙ НЕТ
+    // ======================================
+
+    if (!data || data.length === 0) {
+
+        articlesList.innerHTML =
+            "<p>Пока опубликованных статей нет.</p>";
+
+
+        sidebarPosts.innerHTML =
+            "Пока публикаций нет.";
+
+
+        return;
+
+    }
+
+
+
+    // ======================================
+    // ОЧИЩАЕМ
+    // ======================================
+
+    articlesList.innerHTML = "";
+
+    sidebarPosts.innerHTML = "";
+
+
+
+    // ======================================
+    // СОЗДАЁМ СТАТЬИ
+    // ======================================
+
+    data.forEach(function(post, index) {
+
+
+        // ==================================
+        // КАРТОЧКА СТАТЬИ
+        // ==================================
+
+        const articleCard =
+            document.createElement(
+                "article"
+            );
+
+
+        articleCard.className =
+            "article-card";
+
+
+
+        // ==================================
+        // ФОТО
+        // ==================================
+
+        const photo =
+            document.createElement(
+                "div"
+            );
+
+
+        photo.className =
+            "article-card-photo";
+
+
+        if (post.image_url) {
+
+
+            const img =
+                document.createElement(
+                    "img"
+                );
+
+
+            img.src =
+                post.image_url;
+
+
+            img.alt =
+                post.title ||
+                "Фотография статьи";
+
+
+            img.style.width =
+                "100%";
+
+
+            img.style.height =
+                "100%";
+
+
+            img.style.objectFit =
+                "cover";
+
+
+            photo.appendChild(
+                img
+            );
+
+
+        } else {
+
+
+            const placeholder =
+                document.createElement(
+                    "div"
+                );
+
+
+            placeholder.className =
+                "article-placeholder";
+
+
+            placeholder.textContent =
+                "ФОТО СТАТЬИ";
+
+
+            photo.appendChild(
+                placeholder
+            );
+
+        }
+
+
+
+        // ==================================
+        // КОНТЕНТ
+        // ==================================
+
+        const content =
+            document.createElement(
+                "div"
+            );
+
+
+        content.className =
+            "article-card-content";
+
+
+
+        // ==================================
+        // ДАТА
+        // ==================================
+
+        const date =
+            document.createElement(
+                "div"
+            );
+
+
+        date.className =
+            "article-card-date";
+
+
+        date.textContent =
+            formatDate(
+                post.created_at
+            );
+
+
+
+        // ==================================
+        // ЗАГОЛОВОК
+        // ==================================
+
+        const title =
+            document.createElement(
+                "h3"
+            );
+
+
+        title.textContent =
+            post.title ||
+            "Без названия";
+
+
+
+        // ==================================
+        // ОПИСАНИЕ
+        // ==================================
+
+        const description =
+            document.createElement(
+                "p"
+            );
+
+
+        description.textContent =
+            createDescription(
+                post.content
+            );
+
+
+
+        // ==================================
+        // КНОПКА
+        // ==================================
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.href =
+            "news-post.html?id="
+            + encodeURIComponent(
+                post.id
+            );
+
+
+        link.className =
+            "read-more";
+
+
+        link.textContent =
+            "Читать статью →";
+
+
+
+        // ==================================
+        // СОБИРАЕМ КАРТОЧКУ
+        // ==================================
+
+        content.appendChild(
+            date
+        );
+
+
+        content.appendChild(
+            title
+        );
+
+
+        content.appendChild(
+            description
+        );
+
+
+        content.appendChild(
+            link
+        );
+
+
+        articleCard.appendChild(
+            photo
+        );
+
+
+        articleCard.appendChild(
+            content
+        );
+
+
+        articlesList.appendChild(
+            articleCard
+        );
+
+
+
+        // ==================================
+        // РАЗДЕЛИТЕЛЬ
+        // ==================================
+
+        if (
+            index <
+            data.length - 1
+        ) {
+
+            const divider =
+                document.createElement(
+                    "hr"
+                );
+
+
+            divider.className =
+                "news-divider";
+
+
+            articlesList.appendChild(
+                divider
+            );
+
+        }
+
+
+
+        // ==================================
+        // ПОСЛЕДНИЕ ПУБЛИКАЦИИ
+        // ==================================
+
+        if (index < 3) {
+
+
+            const sidebarItem =
+                document.createElement(
+                    "div"
+                );
+
+
+            sidebarItem.className =
+                "sidebar-publication";
+
+
+            const sidebarLink =
+                document.createElement(
+                    "a"
+                );
+
+
+            sidebarLink.href =
+                "news-post.html?id="
+                + encodeURIComponent(
+                    post.id
+                );
+
+
+            sidebarLink.textContent =
+                post.title ||
+                "Без названия";
+
+
+            sidebarItem.appendChild(
+                sidebarLink
+            );
+
+
+            sidebarPosts.appendChild(
+                sidebarItem
+            );
+
+        }
+
+    });
+
+}
+
+
+
+// ==========================================
+// СОЗДАЁМ КОРОТКОЕ ОПИСАНИЕ
+// ==========================================
+
+function createDescription(
+    text
+) {
+
+
+    if (!text) {
+
+        return "Без описания.";
+
+    }
+
+
+    const cleanText =
+        text
+            .replace(
+                /\s+/g,
+                " "
+            )
+            .trim();
+
+
+    if (
+        cleanText.length <= 200
+    ) {
+
+        return cleanText;
+
+    }
+
+
+    return (
+        cleanText.substring(
+            0,
+            200
+        )
+        + "..."
+    );
+
+}
+
+
+
+// ==========================================
+// ФОРМАТ ДАТЫ
+// ==========================================
+
+function formatDate(
+    dateString
+) {
+
+
+    if (!dateString) {
+
+        return "Дата неизвестна";
+
+    }
+
+
+    return new Date(
+        dateString
+    ).toLocaleDateString(
+        "ru-RU",
+        {
+            day: "2-digit",
+            month: "long",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+
+// ==========================================
+// ЗАПУСК
+// ==========================================
+
+loadArticles();
+
+
+</script>
+
+
+
+<script>
+/* =================================================
+   ДИНАМИЧЕСКОЕ «ПОПУЛЯРНОЕ»
+   ================================================= */
+
+async function loadPopularPosts() {
+
+    const container =
+        document.getElementById("popularPosts");
+
+    if (!container) {
+        return;
+    }
+
+    if (typeof supabaseClient === "undefined") {
+        container.innerHTML = `
+            <div class="sidebar-publication">
+                Ошибка подключения.
+            </div>
+        `;
+        return;
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("posts")
+        .select("id,title,created_at")
+        .eq("published", true)
+        .order("created_at", {
+            ascending: false
+        })
+        .limit(3);
+
+    if (error) {
+        console.error(
+            "Ошибка загрузки популярных публикаций:",
+            error
+        );
+
+        container.innerHTML = `
+            <div class="sidebar-publication">
+                Не удалось загрузить публикации.
+            </div>
+        `;
+
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        container.innerHTML = `
+            <div class="sidebar-publication">
+                Публикаций пока нет.
+            </div>
+        `;
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    data.forEach(function(post) {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "sidebar-publication";
+
+        const link =
+            document.createElement("a");
+
+        link.href =
+            "news-post.html?id=" +
+            encodeURIComponent(post.id);
+
+        link.textContent =
+            post.title || "Без названия";
+
+        item.appendChild(link);
+        container.appendChild(item);
+
+    });
+}
+
+loadPopularPosts();
+</script>
+
+<script src="js/ban-guard.js"></script>
+
+
+<style>
+/* =========================================================
+   🔥 NEON ARTICLES PORTAL
+   Только визуальный слой — существующий код не изменён.
+   ========================================================= */
+
+body{
+    background:
+        radial-gradient(circle at 7% 4%,rgba(176,0,0,.17),transparent 28%),
+        radial-gradient(circle at 93% 82%,rgba(255,0,0,.09),transparent 27%),
+        linear-gradient(135deg,#080808,#171717 48%,#090909);
+    background-attachment:fixed;
+    animation:articlesPageIn .6s ease-out;
+}
+
+@keyframes articlesPageIn{
+    from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* ВЕРХНИЙ БАННЕР */
+.top-banner{
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid rgba(255,255,255,.10);
+    box-shadow:0 6px 25px rgba(0,0,0,.28),0 0 25px rgba(176,0,0,.08);
+}
+
+.top-banner::after{
+    content:"";
+    position:absolute;
+    left:-35%;
+    bottom:0;
+    width:170%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,40,40,.9),transparent);
+    animation:articlesScan 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes articlesScan{
+    from{transform:translateX(-25%);opacity:.25}
+    50%{opacity:1}
+    to{transform:translateX(25%);opacity:.25}
+}
+
+/* ШАПКА */
+.header{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(115deg,#650000,#b00000 50%,#720000);
+    border-bottom:1px solid rgba(255,255,255,.15);
+    box-shadow:0 8px 32px rgba(176,0,0,.28),0 0 35px rgba(176,0,0,.10);
+}
+
+.header::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    right:-190px;
+    top:-285px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.13);
+    box-shadow:0 0 35px rgba(255,40,40,.17);
+    animation:articlesOrb 8s ease-in-out infinite alternate;
+    pointer-events:none;
+}
+
+.header::after{
+    content:"";
+    position:absolute;
+    left:-30%;
+    bottom:0;
+    width:160%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    animation:articlesHeaderScan 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes articlesOrb{
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(-35px,35px) scale(1.12)}
+}
+
+@keyframes articlesHeaderScan{
+    from{transform:translateX(-30%);opacity:.2}
+    50%{opacity:1}
+    to{transform:translateX(30%);opacity:.2}
+}
+
+.header-content{
+    position:relative;
+    z-index:2;
+}
+
+.header h1{
+    text-shadow:0 0 9px rgba(255,255,255,.25),0 0 25px rgba(255,0,0,.25);
+}
+
+/* МЕНЮ */
+.menu{
+    position:relative;
+    z-index:5;
+    box-shadow:0 5px 20px rgba(0,0,0,.18);
+}
+
+.menu a{
+    position:relative;
+    overflow:hidden;
+    transition:transform .28s cubic-bezier(.2,.8,.2,1),background .3s ease,color .25s ease,box-shadow .3s ease;
+}
+
+.menu a::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+    pointer-events:none;
+}
+
+.menu a:hover{
+    transform:translateY(-3px);
+    background:linear-gradient(135deg,#850000,#b00000);
+    color:#fff;
+    box-shadow:0 7px 18px rgba(0,0,0,.22),0 0 18px rgba(176,0,0,.20);
+}
+
+.menu a:hover::after{left:140%}
+.menu a:active{transform:translateY(-1px) scale(.985)}
+
+/* БОКОВЫЕ БЛОКИ */
+.box{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.25);
+    border-radius:9px;
+    box-shadow:0 9px 26px rgba(0,0,0,.13),0 0 18px rgba(176,0,0,.06);
+    transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+    animation:articlesCardIn .55s ease both;
+}
+
+.box::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background:linear-gradient(#ff2020,#820000);
+    box-shadow:0 0 11px rgba(255,0,0,.55),0 0 23px rgba(176,0,0,.18);
+}
+
+.box:hover{
+    transform:translateY(-3px);
+    border-color:rgba(176,0,0,.40);
+    box-shadow:0 13px 30px rgba(0,0,0,.18),0 0 20px rgba(176,0,0,.10);
+}
+
+.box-title{
+    position:relative;
+    text-shadow:0 0 8px rgba(176,0,0,.12);
+}
+
+.box-title::after{
+    content:"";
+    display:block;
+    width:42px;
+    height:2px;
+    margin-top:7px;
+    border-radius:4px;
+    background:#b00000;
+    box-shadow:0 0 8px rgba(255,0,0,.55);
+}
+
+.box-body a{
+    transition:color .25s ease,padding-left .25s ease,text-shadow .25s ease;
+}
+
+.box-body a:hover{
+    color:#b00000;
+    padding-left:5px;
+    text-shadow:0 0 8px rgba(176,0,0,.15);
+}
+
+@keyframes articlesCardIn{
+    from{opacity:0;transform:translateY(12px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* ЦЕНТР */
+.main{
+    position:relative;
+    border:1px solid rgba(176,0,0,.23);
+    border-radius:10px;
+    box-shadow:0 11px 32px rgba(0,0,0,.14),0 0 20px rgba(176,0,0,.06);
+    animation:articlesMainIn .65s ease both;
+}
+
+@keyframes articlesMainIn{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.main-title{
+    position:relative;
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000);
+    box-shadow:0 4px 15px rgba(176,0,0,.15);
+    text-shadow:0 0 8px rgba(255,255,255,.14);
+}
+
+.main-title::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:80px;
+    height:2px;
+    background:#ff3030;
+    box-shadow:0 0 9px rgba(255,0,0,.7);
+    animation:articlesTitleGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes articlesTitleGlow{
+    0%,100%{opacity:.45}
+    50%{opacity:1}
+}
+
+.article h2{
+    text-shadow:0 0 8px rgba(176,0,0,.10);
+}
+
+/* КАРТОЧКИ СТАТЕЙ */
+.article-card{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.18);
+    border-radius:9px;
+    background:linear-gradient(145deg,#fff,#fafafa);
+    box-shadow:0 7px 20px rgba(0,0,0,.09);
+    transition:transform .32s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,border-color .3s ease;
+    animation:articleReveal .55s ease both;
+}
+
+.article-card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:3px;
+    height:0;
+    background:#b00000;
+    box-shadow:0 0 13px rgba(255,0,0,.55);
+    transition:height .35s ease;
+    z-index:3;
+}
+
+.article-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(176,0,0,.42);
+    box-shadow:0 13px 30px rgba(0,0,0,.16),0 0 21px rgba(176,0,0,.10);
+}
+
+.article-card:hover::before{height:100%}
+
+@keyframes articleReveal{
+    from{opacity:0;transform:translateY(13px) scale(.99)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* ФОТО СТАТЬИ */
+.article-card-photo{
+    position:relative;
+    overflow:hidden;
+}
+
+.article-card-photo::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(115deg,transparent 0%,transparent 42%,rgba(255,255,255,.15) 50%,transparent 58%,transparent 100%);
+    transform:translateX(-120%);
+    transition:transform .7s ease;
+    pointer-events:none;
+}
+
+.article-card:hover .article-card-photo::after{
+    transform:translateX(120%);
+}
+
+.article-card-photo img{
+    transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .5s ease;
+}
+
+.article-card:hover .article-card-photo img{
+    transform:scale(1.06);
+    filter:saturate(1.06);
+}
+
+.article-placeholder{
+    transition:background .3s ease,color .3s ease;
+}
+
+.article-card:hover .article-placeholder{
+    background:#f7eaea;
+    color:#b00000;
+}
+
+/* ТЕКСТ КАРТОЧКИ */
+.article-card-date{
+    transition:color .25s ease;
+}
+
+.article-card:hover .article-card-date{
+    color:#a00000;
+}
+
+.article-card-content h3{
+    transition:color .25s ease,text-shadow .25s ease;
+}
+
+.article-card:hover .article-card-content h3{
+    color:#b00000;
+    text-shadow:0 0 8px rgba(176,0,0,.10);
+}
+
+.article-card-content p{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+/* КНОПКА */
+.article-card-content .read-more{
+    position:relative;
+    overflow:hidden;
+    display:inline-block;
+    border-radius:6px;
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000);
+    color:#fff!important;
+    box-shadow:0 5px 16px rgba(176,0,0,.18);
+    transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,background .3s ease;
+}
+
+.article-card-content .read-more::after{
+    content:"";
+    position:absolute;
+    top:-20%;
+    left:-120%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+    pointer-events:none;
+}
+
+.article-card-content .read-more:hover{
+    transform:translateY(-4px);
+    background:linear-gradient(135deg,#b00000,#df0000 52%,#900000);
+    box-shadow:0 10px 24px rgba(0,0,0,.23),0 0 20px rgba(176,0,0,.25);
+}
+
+.article-card-content .read-more:hover::after{left:140%}
+
+/* РАЗДЕЛИТЕЛИ */
+.news-divider{
+    border:0;
+    height:1px;
+    margin:16px 0;
+    background:linear-gradient(90deg,transparent,rgba(176,0,0,.38),transparent);
+    box-shadow:0 0 7px rgba(176,0,0,.10);
+}
+
+/* ПОСЛЕДНИЕ / ПОПУЛЯРНОЕ */
+.sidebar-publication{
+    position:relative;
+    border-bottom:1px solid rgba(176,0,0,.10);
+    transition:background .25s ease,padding-left .25s ease,box-shadow .25s ease;
+}
+
+.sidebar-publication:hover{
+    background:rgba(176,0,0,.035);
+    padding-left:5px;
+    box-shadow:inset 2px 0 0 rgba(176,0,0,.55);
+}
+
+.sidebar-publication a{
+    transition:color .25s ease,text-shadow .25s ease;
+}
+
+.sidebar-publication a:hover{
+    color:#b00000;
+    text-shadow:0 0 8px rgba(176,0,0,.16);
+}
+
+/* БАННЕРЫ */
+.side-banner{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.25);
+    box-shadow:0 8px 22px rgba(0,0,0,.14),0 0 17px rgba(176,0,0,.07);
+}
+
+.side-banner::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:65%;
+    height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
+    transform:skewX(-18deg);
+    transition:left .7s ease;
+    pointer-events:none;
+}
+
+.side-banner:hover::after{left:140%}
+
+/* FOOTER */
+footer{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg,#090909,#161616);
+    border-top:1px solid rgba(176,0,0,.35);
+    box-shadow:0 -6px 25px rgba(0,0,0,.20);
+}
+
+footer::before{
+    content:"";
+    position:absolute;
+    left:-30%;
+    top:0;
+    width:160%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,#b00000,transparent);
+    box-shadow:0 0 10px rgba(255,0,0,.45);
+    animation:articlesFooterLine 4s linear infinite;
+}
+
+@keyframes articlesFooterLine{
+    from{transform:translateX(-25%)}
+    to{transform:translateX(25%)}
+}
+
+/* ПОСЛЕДОВАТЕЛЬНОЕ ПОЯВЛЕНИЕ */
+.article-card:nth-child(1){animation-delay:.05s}
+.article-card:nth-child(2){animation-delay:.12s}
+.article-card:nth-child(3){animation-delay:.19s}
+.article-card:nth-child(4){animation-delay:.26s}
+.article-card:nth-child(5){animation-delay:.33s}
+.article-card:nth-child(6){animation-delay:.40s}
+
+/* МОБИЛЬНАЯ ВЕРСИЯ */
+@media(max-width:700px){
+    body{
+        background:
+            radial-gradient(circle at 50% 0%,rgba(176,0,0,.17),transparent 35%),
+            #111;
+        background-attachment:fixed;
+    }
+
+    .box:hover{transform:none}
+    .article-card:hover{transform:translateY(-3px)}
+    .menu a:hover{transform:translateY(-2px)}
+    .article-card-content .read-more:hover{transform:translateY(-2px)}
+}
+
+@media(prefers-reduced-motion:reduce){
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important;
+    }
+}
+</style>
+
+</body>
+
+</html>

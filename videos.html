@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Видео — Новостной портал Богаева М. Е.</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/mobile.css">
+
+
+<style>
+
+/* ==========================================
+   КНОПКА PLAY
+   ========================================== */
+
+.video-player {
+    position: relative;
+}
+
+.custom-video-play {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 74px;
+    height: 74px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #c00000;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.custom-video-play:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+}
+
+.custom-video-play::before {
+
+    content: "";
+
+    width: 0;
+    height: 0;
+
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+    border-left: 19px solid white;
+
+    margin-left: 5px;
+}
+
+.custom-video-play.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+</style>
+
+
+<style>
+/* ДОБАВЛЕНО ТОЛЬКО ДЛЯ СКРЫТИЯ ОПИСАНИЯ ВИДЕО В ОДНУ СТРОКУ */
+.video-info p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     ВЕРХНИЙ БАННЕР
+     ========================= -->
+
+<div class="top-banner">
+
+    <div class="banner-video">
+
+        <div class="banner-placeholder">
+            МЕСТО ДЛЯ ВИДЕО
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     САЙТ
+     ========================= -->
+
+<div class="site">
+
+
+    <!-- =========================
+         ШАПКА
+         ========================= -->
+
+    <header class="header">
+
+        <div class="header-content">
+
+            <h1>
+                НОВОСТНОЙ ПОРТАЛ БОГАЕВА М. Е.
+            </h1>
+
+            <p>
+                Новости • События • Материалы • Фото • Видео
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         МЕНЮ
+         ========================= -->
+
+    <nav class="menu">
+
+        <a href="index.html">
+            Главная
+        </a>
+
+        <a href="news.html">
+            Новости
+        </a>
+
+        <a href="articles.html">
+            Статьи
+        </a>
+
+        <a href="photos.html">
+            Фото
+        </a>
+
+        <a href="videos.html">
+            Видео
+        </a>
+
+        <a href="about.html">
+            О сайте
+        </a>
+
+        <!-- ПОИСК -->
+
+        <a href="search.html">
+            🔎 Поиск
+        </a>
+
+        <a href="chat.html" class="chat-link">
+            💬 Всеобщий чат
+        </a>
+
+    </nav>
+
+
+
+    <!-- =========================
+         ОСНОВНОЙ LAYOUT
+         ========================= -->
+
+    <div class="layout">
+
+
+        <!-- =========================
+             ЛЕВАЯ КОЛОНКА
+             ========================= -->
+
+        <aside class="sidebar">
+
+
+            <div class="box">
+
+                <div class="box-title">
+                    Разделы
+                </div>
+
+
+                <div class="box-body">
+
+                    <a href="index.html">
+                        Главная
+                    </a>
+
+                    <a href="news.html">
+                        Последние новости
+                    </a>
+
+                    <a href="articles.html">
+                        Статьи
+                    </a>
+
+                    <a href="photos.html">
+                        Фотографии
+                    </a>
+
+                    <a href="videos.html">
+                        Видео
+                    </a>
+
+                    <a href="about.html">
+                        О сайте
+                    </a>
+
+                    <a href="search.html">
+                        🔎 Поиск
+                    </a>
+
+                    <a href="chat.html" class="chat-link">
+                        💬 Всеобщий чат
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ПОСЛЕДНИЕ ПУБЛИКАЦИИ -->
+
+            <div class="box">
+
+                <div class="box-title">
+                    Последние публикации
+                </div>
+
+
+                <div
+                    class="box-body"
+                    id="sidebar-publications"
+                >
+
+                    <div class="sidebar-publication">
+                        Загрузка...
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- БОКОВОЙ БАННЕР -->
+
+            <div class="side-banner">
+
+                БОКОВОЙ БАННЕР
+
+            </div>
+
+
+        </aside>
+
+
+
+        <!-- =========================
+             ЦЕНТР
+             ========================= -->
+
+        <main class="main-content">
+
+
+            <section class="main">
+
+
+                <div class="main-title">
+
+                    ВИДЕО
+
+                </div>
+
+
+
+                <div class="article">
+
+
+                    <h2>
+
+                        Видеоматериалы
+
+                    </h2>
+
+
+                    <div class="date">
+
+                        Видео и видеорепортажи портала
+
+                    </div>
+
+
+
+                    <!-- =========================
+                         СПИСОК ВИДЕО
+                         ========================= -->
+
+                    <div id="videos-list">
+
+                        <p>
+                            Загрузка видеоматериалов...
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+        </main>
+
+
+
+        <!-- =========================
+             ПРАВАЯ КОЛОНКА
+             ========================= -->
+
+        <aside class="right-sidebar">
+
+
+            <div class="side-banner">
+
+                БАННЕР
+
+            </div>
+
+
+
+            <div class="box">
+
+                <div class="box-title">
+
+                    Популярное
+
+                </div>
+
+
+                <div class="box-body" id="popularPosts">
+
+                    <div class="sidebar-publication">
+                        Загрузка...
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </aside>
+
+
+    </div>
+
+
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
+
+    <footer>
+
+        © 2026 Новостной портал Богаева М. Е.
+
+        <br>
+
+        Новости • События • Материалы
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- =========================
+     SUPABASE
+     ========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+const SUPABASE_URL =
+    "https://fmqjevqagtasqpeezwnn.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_Me5hyK-zIp3_5yBpHP8VVA_OFk2bqSj";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+/* ==========================================
+   ФОРМАТ ДАТЫ
+   ========================================== */
+
+function formatVideoDate(
+    dateString
+) {
+
+    if (!dateString) {
+
+        return "Дата неизвестна";
+
+    }
+
+
+    return new Date(
+        dateString
+    ).toLocaleDateString(
+        "ru-RU",
+        {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+
+/* ==========================================
+   ОПИСАНИЕ
+   ========================================== */
+
+function createVideoDescription(
+    text
+) {
+
+    if (!text) {
+
+        return "Без описания.";
+
+    }
+
+
+    const cleanText =
+        String(text)
+            .replace(/\s+/g, " ")
+            .trim();
+
+
+    if (
+        cleanText.length <= 180
+    ) {
+
+        return cleanText;
+
+    }
+
+
+    return (
+        cleanText.substring(
+            0,
+            180
+        )
+        + "..."
+    );
+
+}
+
+
+
+/* ==========================================
+   ЗАГРУЗКА ВИДЕО
+   ========================================== */
+
+async function loadVideos() {
+
+
+    const videosList =
+        document.getElementById(
+            "videos-list"
+        );
+
+
+    const sidebar =
+        document.getElementById(
+            "sidebar-publications"
+        );
+
+
+    /* =========================
+       ПОЛУЧАЕМ ПУБЛИКАЦИИ
+       ========================= */
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("posts")
+        .select("*")
+        .eq(
+            "published",
+            true
+        )
+        .order(
+            "created_at",
+            {
+                ascending: false
+            }
+        );
+
+
+    /* =========================
+       ОШИБКА
+       ========================= */
+
+    if (error) {
+
+        console.error(
+            "Ошибка загрузки публикаций:",
+            error
+        );
+
+
+        videosList.innerHTML = `
+            <p>
+                Не удалось загрузить видеоматериалы.
+            </p>
+        `;
+
+
+        sidebar.innerHTML = `
+            <div class="sidebar-publication">
+                Ошибка загрузки.
+            </div>
+        `;
+
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       ОСТАВЛЯЕМ ТОЛЬКО ВИДЕО
+       ========================= */
+
+    const videos =
+        (data || []).filter(
+            function(post) {
+
+                const category =
+                    String(
+                        post.category || ""
+                    )
+                        .trim()
+                        .toLowerCase();
+
+
+                return (
+                    category === "видео" ||
+                    category === "video" ||
+                    category === "videos"
+                );
+
+            }
+        );
+
+
+
+    /* =========================
+       ЕСЛИ ВИДЕО НЕТ
+       ========================= */
+
+    if (
+        videos.length === 0
+    ) {
+
+        videosList.innerHTML = `
+            <p>
+                Пока опубликованных видеоматериалов нет.
+            </p>
+        `;
+
+
+        sidebar.innerHTML = `
+            <div class="sidebar-publication">
+                Пока публикаций нет.
+            </div>
+        `;
+
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       SIDEBAR
+       ========================= */
+
+    sidebar.innerHTML = "";
+
+
+    videos
+        .slice(0, 5)
+        .forEach(
+            function(post) {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "sidebar-publication";
+
+
+                item.textContent =
+                    post.title ||
+                    "Без названия";
+
+
+                sidebar.appendChild(
+                    item
+                );
+
+            }
+        );
+
+
+
+    /* =========================
+       ОЧИЩАЕМ СПИСОК
+       ========================= */
+
+    videosList.innerHTML = "";
+
+
+
+    /* =========================
+       СОЗДАЁМ КАРТОЧКИ
+       ========================= */
+
+    videos.forEach(
+        function(post) {
+
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "video-card";
+
+
+
+            /* =========================
+               ВИДЕОПЛЕЕР
+               ========================= */
+
+            const player =
+                document.createElement(
+                    "div"
+                );
+
+
+            player.className =
+                "video-player";
+
+
+
+            /*
+             * Если есть video_url —
+             * создаём настоящий video
+             */
+
+            if (
+                post.video_url
+            ) {
+
+
+                const video =
+                    document.createElement(
+                        "video"
+                    );
+
+
+                video.src =
+                    post.video_url;
+
+
+                video.controls =
+                    true;
+
+
+                video.preload =
+                    "metadata";
+
+
+                video.playsInline =
+                    true;
+
+
+                video.style.width =
+                    "100%";
+
+
+                video.style.height =
+                    "100%";
+
+
+                video.style.objectFit =
+                    "contain";
+
+
+                video.style.background =
+                    "#222";
+
+
+                /*
+                 * Если есть фотография —
+                 * используем её как превью.
+                 */
+
+                if (
+                    post.image_url
+                ) {
+
+                    video.poster =
+                        post.image_url;
+
+                }
+
+
+                player.appendChild(
+                    video
+                );
+
+
+                /* ==========================================
+                   КАСТОМНАЯ КНОПКА PLAY
+                   ========================================== */
+
+                const playButton =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                playButton.type =
+                    "button";
+
+
+                playButton.className =
+                    "custom-video-play";
+
+
+                playButton.setAttribute(
+                    "aria-label",
+                    "Воспроизвести видео"
+                );
+
+
+                /* НАЖАТИЕ */
+
+                playButton.addEventListener(
+                    "click",
+                    function() {
+
+                        video.play();
+
+                    }
+                );
+
+
+                /* ВИДЕО НАЧАЛО ИГРАТЬ */
+
+                video.addEventListener(
+                    "play",
+                    function() {
+
+                        playButton.classList.add(
+                            "hidden"
+                        );
+
+                    }
+                );
+
+
+                /* ПАУЗА */
+
+                video.addEventListener(
+                    "pause",
+                    function() {
+
+                        playButton.classList.remove(
+                            "hidden"
+                        );
+
+                    }
+                );
+
+
+                /* КОНЕЦ ВИДЕО */
+
+                video.addEventListener(
+                    "ended",
+                    function() {
+
+                        playButton.classList.remove(
+                            "hidden"
+                        );
+
+                    }
+                );
+
+
+                player.appendChild(
+                    playButton
+                );
+
+
+            }
+
+
+            /*
+             * Если видео нет,
+             * но есть фотография.
+             */
+
+            else if (
+                post.image_url
+            ) {
+
+
+                const img =
+                    document.createElement(
+                        "img"
+                    );
+
+
+                img.src =
+                    post.image_url;
+
+
+                img.alt =
+                    post.title ||
+                    "Видео";
+
+
+                img.style.width =
+                    "100%";
+
+
+                img.style.height =
+                    "100%";
+
+
+                img.style.objectFit =
+                    "cover";
+
+
+                player.appendChild(
+                    img
+                );
+
+
+            }
+
+
+            /*
+             * Если нет ни видео,
+             * ни фотографии.
+             */
+
+            else {
+
+
+                const placeholder =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                placeholder.className =
+                    "video-placeholder";
+
+
+                placeholder.textContent =
+                    "ВИДЕО";
+
+
+                player.appendChild(
+                    placeholder
+                );
+
+            }
+
+
+
+            /* =========================
+               ИНФОРМАЦИЯ
+               ========================= */
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+
+            info.className =
+                "video-info";
+
+
+
+            /* ДАТА */
+
+            const date =
+                document.createElement(
+                    "div"
+                );
+
+
+            date.className =
+                "video-date";
+
+
+            date.textContent =
+                formatVideoDate(
+                    post.created_at
+                );
+
+
+
+            /* ЗАГОЛОВОК */
+
+            const title =
+                document.createElement(
+                    "h3"
+                );
+
+
+            title.textContent =
+                post.title ||
+                "Без названия";
+
+
+
+            /* ОПИСАНИЕ */
+
+            const description =
+                document.createElement(
+                    "p"
+                );
+
+
+            description.textContent =
+                createVideoDescription(
+                    post.content
+                );
+
+
+
+            /* =========================
+               КНОПКА
+               ========================= */
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            link.href =
+                "news-post.html?id=" +
+                encodeURIComponent(
+                    post.id
+                );
+
+
+            link.className =
+                "read-more";
+
+
+            link.textContent =
+                "Открыть публикацию →";
+
+
+
+            /* =========================
+               СОБИРАЕМ ИНФОРМАЦИЮ
+               ========================= */
+
+            info.appendChild(
+                date
+            );
+
+
+            info.appendChild(
+                title
+            );
+
+
+            info.appendChild(
+                description
+            );
+
+
+            info.appendChild(
+                link
+            );
+
+
+
+            /* =========================
+               СОБИРАЕМ КАРТОЧКУ
+               ========================= */
+
+            card.appendChild(
+                player
+            );
+
+
+            card.appendChild(
+                info
+            );
+
+
+            videosList.appendChild(
+                card
+            );
+
+        });
+
+}
+
+
+
+/* ==========================================
+   ЗАПУСК
+   ========================================== */
+
+loadVideos();
+
+
+</script>
+
+
+
+<script>
+/* =================================================
+   ДИНАМИЧЕСКОЕ «ПОПУЛЯРНОЕ»
+   ================================================= */
+
+async function loadPopularPosts() {
+
+    const container =
+        document.getElementById("popularPosts");
+
+    if (!container) {
+        return;
+    }
+
+    if (typeof supabaseClient === "undefined") {
+        container.innerHTML = `
+            <div class="sidebar-publication">
+                Ошибка подключения.
+            </div>
+        `;
+        return;
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("posts")
+        .select("id,title,created_at")
+        .eq("published", true)
+        .order("created_at", {
+            ascending: false
+        })
+        .limit(3);
+
+    if (error) {
+        console.error(
+            "Ошибка загрузки популярных публикаций:",
+            error
+        );
+
+        container.innerHTML = `
+            <div class="sidebar-publication">
+                Не удалось загрузить публикации.
+            </div>
+        `;
+
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        container.innerHTML = `
+            <div class="sidebar-publication">
+                Публикаций пока нет.
+            </div>
+        `;
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    data.forEach(function(post) {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "sidebar-publication";
+
+        const link =
+            document.createElement("a");
+
+        link.href =
+            "news-post.html?id=" +
+            encodeURIComponent(post.id);
+
+        link.textContent =
+            post.title || "Без названия";
+
+        item.appendChild(link);
+        container.appendChild(item);
+
+    });
+}
+
+loadPopularPosts();
+</script>
+
+<script src="js/ban-guard.js"></script>
+
+
+<style>
+/* =========================================================
+   🔥 NEON NEWS PORTAL — ВИДЕО
+   Только визуальный слой. Старый код и функционал сохранены.
+   ========================================================= */
+
+body{
+    background:
+        radial-gradient(circle at 7% 4%,rgba(176,0,0,.17),transparent 28%),
+        radial-gradient(circle at 93% 82%,rgba(255,0,0,.09),transparent 27%),
+        linear-gradient(135deg,#080808,#171717 48%,#090909);
+    background-attachment:fixed;
+    animation:videosPageIn .6s ease-out;
+}
+
+@keyframes videosPageIn{
+    from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* БАННЕР */
+.top-banner{
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid rgba(255,255,255,.10);
+    box-shadow:0 6px 25px rgba(0,0,0,.28),0 0 25px rgba(176,0,0,.08);
+}
+
+.top-banner::after{
+    content:"";
+    position:absolute;
+    left:-35%;
+    bottom:0;
+    width:170%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,40,40,.9),transparent);
+    animation:videosScan 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes videosScan{
+    from{transform:translateX(-25%);opacity:.25}
+    50%{opacity:1}
+    to{transform:translateX(25%);opacity:.25}
+}
+
+/* ШАПКА */
+.header{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(115deg,#650000,#b00000 50%,#720000);
+    border-bottom:1px solid rgba(255,255,255,.15);
+    box-shadow:0 8px 32px rgba(176,0,0,.28),0 0 35px rgba(176,0,0,.10);
+}
+
+.header::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    right:-190px;
+    top:-285px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.13);
+    box-shadow:0 0 35px rgba(255,40,40,.17);
+    animation:videosOrb 8s ease-in-out infinite alternate;
+    pointer-events:none;
+}
+
+.header::after{
+    content:"";
+    position:absolute;
+    left:-30%;
+    bottom:0;
+    width:160%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    animation:videosHeaderScan 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes videosOrb{
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(-35px,35px) scale(1.12)}
+}
+
+@keyframes videosHeaderScan{
+    from{transform:translateX(-30%);opacity:.2}
+    50%{opacity:1}
+    to{transform:translateX(30%);opacity:.2}
+}
+
+.header-content{
+    position:relative;
+    z-index:2;
+}
+
+.header h1{
+    text-shadow:0 0 9px rgba(255,255,255,.25),0 0 25px rgba(255,0,0,.25);
+}
+
+/* МЕНЮ */
+.menu{
+    position:relative;
+    z-index:5;
+    box-shadow:0 5px 20px rgba(0,0,0,.18);
+}
+
+.menu a{
+    position:relative;
+    overflow:hidden;
+    transition:transform .28s cubic-bezier(.2,.8,.2,1),background .3s ease,color .25s ease,box-shadow .3s ease;
+}
+
+.menu a::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+    pointer-events:none;
+}
+
+.menu a:hover{
+    transform:translateY(-3px);
+    background:linear-gradient(135deg,#850000,#b00000);
+    color:#fff;
+    box-shadow:0 7px 18px rgba(0,0,0,.22),0 0 18px rgba(176,0,0,.20);
+}
+
+.menu a:hover::after{left:140%}
+.menu a:active{transform:translateY(-1px) scale(.985)}
+
+/* БОКОВЫЕ БЛОКИ */
+.box{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.25);
+    border-radius:9px;
+    box-shadow:0 9px 26px rgba(0,0,0,.13),0 0 18px rgba(176,0,0,.06);
+    transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+    animation:videosBoxIn .55s ease both;
+}
+
+.box::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background:linear-gradient(#ff2020,#820000);
+    box-shadow:0 0 11px rgba(255,0,0,.55),0 0 23px rgba(176,0,0,.18);
+}
+
+.box:hover{
+    transform:translateY(-3px);
+    border-color:rgba(176,0,0,.40);
+    box-shadow:0 13px 30px rgba(0,0,0,.18),0 0 20px rgba(176,0,0,.10);
+}
+
+.box-title{
+    position:relative;
+    text-shadow:0 0 8px rgba(176,0,0,.12);
+}
+
+.box-title::after{
+    content:"";
+    display:block;
+    width:42px;
+    height:2px;
+    margin-top:7px;
+    border-radius:4px;
+    background:#b00000;
+    box-shadow:0 0 8px rgba(255,0,0,.55);
+}
+
+.box-body a{
+    transition:color .25s ease,padding-left .25s ease,text-shadow .25s ease;
+}
+
+.box-body a:hover{
+    color:#b00000;
+    padding-left:5px;
+    text-shadow:0 0 8px rgba(176,0,0,.15);
+}
+
+@keyframes videosBoxIn{
+    from{opacity:0;transform:translateY(12px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* ЦЕНТР */
+.main{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.23);
+    border-radius:10px;
+    box-shadow:0 11px 32px rgba(0,0,0,.14),0 0 20px rgba(176,0,0,.06);
+    animation:videosMainIn .65s ease both;
+}
+
+@keyframes videosMainIn{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.main-title{
+    position:relative;
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000);
+    box-shadow:0 4px 15px rgba(176,0,0,.15);
+    text-shadow:0 0 8px rgba(255,255,255,.14);
+}
+
+.main-title::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:80px;
+    height:2px;
+    background:#ff3030;
+    box-shadow:0 0 9px rgba(255,0,0,.7);
+    animation:videosTitleGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes videosTitleGlow{
+    0%,100%{opacity:.45}
+    50%{opacity:1}
+}
+
+/* ВИДЕО-КАРТОЧКИ */
+.video-card{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.18);
+    border-radius:9px;
+    background:linear-gradient(145deg,#fff,#fafafa);
+    box-shadow:0 7px 20px rgba(0,0,0,.09);
+    transition:transform .32s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,border-color .3s ease;
+    animation:videoCardReveal .55s ease both;
+}
+
+.video-card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:3px;
+    height:0;
+    background:#b00000;
+    box-shadow:0 0 13px rgba(255,0,0,.55);
+    transition:height .35s ease;
+    z-index:5;
+}
+
+.video-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(176,0,0,.42);
+    box-shadow:0 14px 32px rgba(0,0,0,.17),0 0 23px rgba(176,0,0,.11);
+}
+
+.video-card:hover::before{height:100%}
+
+@keyframes videoCardReveal{
+    from{opacity:0;transform:translateY(13px) scale(.99)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* ВИДЕОПЛЕЕР */
+.video-player{
+    position:relative;
+    overflow:hidden;
+    background:#101010;
+    border-bottom:1px solid rgba(176,0,0,.18);
+    box-shadow:inset 0 0 25px rgba(176,0,0,.06);
+}
+
+.video-player video,
+.video-player img{
+    transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .5s ease;
+}
+
+.video-card:hover .video-player video,
+.video-card:hover .video-player img{
+    transform:scale(1.025);
+    filter:saturate(1.05) contrast(1.02);
+}
+
+.video-player::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(115deg,transparent 0%,transparent 42%,rgba(255,255,255,.13) 50%,transparent 58%,transparent 100%);
+    transform:translateX(-120%);
+    transition:transform .75s ease;
+    pointer-events:none;
+    z-index:3;
+}
+
+.video-card:hover .video-player::after{
+    transform:translateX(120%);
+}
+
+/* КНОПКА PLAY */
+.custom-video-play{
+    border:1px solid rgba(255,255,255,.35)!important;
+    background:linear-gradient(135deg,#850000,#c00000 55%,#720000)!important;
+    box-shadow:
+        0 0 0 6px rgba(176,0,0,.12),
+        0 5px 18px rgba(0,0,0,.38),
+        0 0 24px rgba(255,0,0,.28)!important;
+    transition:
+        transform .3s cubic-bezier(.2,.8,.2,1),
+        box-shadow .3s ease,
+        background .3s ease,
+        opacity .2s ease!important;
+}
+
+.custom-video-play:hover{
+    transform:translate(-50%,-50%) scale(1.12)!important;
+    background:linear-gradient(135deg,#b00000,#e00000)!important;
+    box-shadow:
+        0 0 0 9px rgba(176,0,0,.13),
+        0 7px 23px rgba(0,0,0,.42),
+        0 0 34px rgba(255,0,0,.43)!important;
+}
+
+.custom-video-play::before{
+    filter:drop-shadow(0 0 4px rgba(255,255,255,.25));
+}
+
+/* ИНФОРМАЦИЯ */
+.video-info{
+    position:relative;
+}
+
+.video-date{
+    color:#888;
+    transition:color .25s ease;
+}
+
+.video-card:hover .video-date{
+    color:#a00000;
+}
+
+.video-info h3{
+    transition:color .25s ease,text-shadow .25s ease;
+}
+
+.video-card:hover .video-info h3{
+    color:#b00000;
+    text-shadow:0 0 8px rgba(176,0,0,.10);
+}
+
+.video-info p{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+/* КНОПКА ПУБЛИКАЦИИ */
+.video-info .read-more{
+    position:relative;
+    overflow:hidden;
+    display:inline-block;
+    border-radius:6px;
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000);
+    color:#fff!important;
+    box-shadow:0 5px 16px rgba(176,0,0,.18);
+    transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,background .3s ease;
+}
+
+.video-info .read-more::after{
+    content:"";
+    position:absolute;
+    top:-20%;
+    left:-120%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+    pointer-events:none;
+}
+
+.video-info .read-more:hover{
+    transform:translateY(-4px);
+    background:linear-gradient(135deg,#b00000,#df0000 52%,#900000);
+    box-shadow:0 10px 24px rgba(0,0,0,.23),0 0 20px rgba(176,0,0,.25);
+}
+
+.video-info .read-more:hover::after{left:140%}
+
+/* ЗАГЛУШКА */
+.video-placeholder{
+    transition:background .3s ease,color .3s ease,text-shadow .3s ease;
+}
+
+.video-card:hover .video-placeholder{
+    background:#260b0b!important;
+    color:#ff3030!important;
+    text-shadow:0 0 12px rgba(255,0,0,.35);
+}
+
+/* SIDEBAR */
+.sidebar-publication{
+    position:relative;
+    border-bottom:1px solid rgba(176,0,0,.10);
+    transition:background .25s ease,padding-left .25s ease,box-shadow .25s ease;
+}
+
+.sidebar-publication:hover{
+    background:rgba(176,0,0,.035);
+    padding-left:5px;
+    box-shadow:inset 2px 0 0 rgba(176,0,0,.55);
+}
+
+/* БАННЕРЫ */
+.side-banner{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.25);
+    box-shadow:0 8px 22px rgba(0,0,0,.14),0 0 17px rgba(176,0,0,.07);
+}
+
+.side-banner::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:65%;
+    height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
+    transform:skewX(-18deg);
+    transition:left .7s ease;
+    pointer-events:none;
+}
+
+.side-banner:hover::after{left:140%}
+
+/* FOOTER */
+footer{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg,#090909,#161616);
+    border-top:1px solid rgba(176,0,0,.35);
+    box-shadow:0 -6px 25px rgba(0,0,0,.20);
+}
+
+footer::before{
+    content:"";
+    position:absolute;
+    left:-30%;
+    top:0;
+    width:160%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,#b00000,transparent);
+    box-shadow:0 0 10px rgba(255,0,0,.45);
+    animation:videosFooterLine 4s linear infinite;
+}
+
+@keyframes videosFooterLine{
+    from{transform:translateX(-25%)}
+    to{transform:translateX(25%)}
+}
+
+/* ПОСЛЕДОВАТЕЛЬНОЕ ПОЯВЛЕНИЕ */
+.video-card:nth-child(1){animation-delay:.05s}
+.video-card:nth-child(2){animation-delay:.12s}
+.video-card:nth-child(3){animation-delay:.19s}
+.video-card:nth-child(4){animation-delay:.26s}
+.video-card:nth-child(5){animation-delay:.33s}
+.video-card:nth-child(6){animation-delay:.40s}
+
+/* МОБИЛЬНАЯ ВЕРСИЯ */
+@media(max-width:700px){
+    body{
+        background:
+            radial-gradient(circle at 50% 0%,rgba(176,0,0,.17),transparent 35%),
+            #111;
+        background-attachment:fixed;
+    }
+
+    .box:hover{transform:none}
+    .video-card:hover{transform:translateY(-3px)}
+    .menu a:hover{transform:translateY(-2px)}
+    .video-info .read-more:hover{transform:translateY(-2px)}
+
+    .custom-video-play:hover{
+        transform:translate(-50%,-50%) scale(1.06)!important;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important;
+    }
+}
+</style>
+
+</body>
+
+</html>

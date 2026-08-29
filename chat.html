@@ -1,0 +1,4405 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Общий чат — Новостной портал</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: #222;
+
+            background:
+                radial-gradient(
+                    circle at 8% 3%,
+                    rgba(176, 0, 0, .18),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 92% 82%,
+                    rgba(255, 0, 0, .08),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    135deg,
+                    #080808,
+                    #171717 48%,
+                    #090909
+                );
+
+            background-attachment: fixed;
+
+            animation:
+                chatPageIn .55s ease-out;
+        }
+
+
+        @keyframes chatPageIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        .site {
+
+            width: min(
+                1180px,
+                calc(100% - 24px)
+            );
+
+            margin: 18px auto;
+
+            background: #fff;
+
+            border:
+                1px solid
+                rgba(176, 0, 0, .24);
+
+            box-shadow:
+                0 16px 45px
+                rgba(0, 0, 0, .35),
+                0 0 30px
+                rgba(176, 0, 0, .08);
+        }
+
+
+        /* =========================
+           ШАПКА
+           ========================= */
+
+        .header {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 25px 28px;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    115deg,
+                    #650000,
+                    #b00000 50%,
+                    #720000
+                );
+
+            box-shadow:
+                0 8px 30px
+                rgba(176, 0, 0, .28);
+        }
+
+
+        .header::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 420px;
+            height: 420px;
+
+            right: -190px;
+            top: -285px;
+
+            border-radius: 50%;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, .14);
+
+            box-shadow:
+                0 0 35px
+                rgba(255, 40, 40, .18);
+
+            animation:
+                chatOrb 8s
+                ease-in-out
+                infinite alternate;
+
+            pointer-events: none;
+        }
+
+
+        .header::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: -30%;
+            bottom: 0;
+
+            width: 160%;
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, .9),
+                    transparent
+                );
+
+            animation:
+                chatHeaderLine 4s
+                linear
+                infinite;
+
+            pointer-events: none;
+        }
+
+
+        @keyframes chatOrb {
+
+            from {
+                transform:
+                    translate(0, 0)
+                    scale(1);
+            }
+
+            to {
+                transform:
+                    translate(-35px, 35px)
+                    scale(1.12);
+            }
+        }
+
+
+        @keyframes chatHeaderLine {
+
+            from {
+                transform: translateX(-30%);
+                opacity: .2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            to {
+                transform: translateX(30%);
+                opacity: .2;
+            }
+        }
+
+
+        .header-inner {
+
+            position: relative;
+
+            z-index: 2;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+
+        .header h1 {
+
+            margin: 0 0 7px;
+
+            font-size: 28px;
+
+            text-shadow:
+                0 0 10px
+                rgba(255,255,255,.22),
+                0 0 24px
+                rgba(255,0,0,.25);
+        }
+
+
+        .header p {
+
+            margin: 0;
+
+            opacity: .88;
+
+            font-size: 13px;
+        }
+
+
+        .back-button {
+
+            display: inline-block;
+
+            padding: 11px 16px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            border:
+                1px solid
+                rgba(255,255,255,.25);
+
+            border-radius: 6px;
+
+            background:
+                rgba(0,0,0,.18);
+
+            box-shadow:
+                0 0 15px
+                rgba(0,0,0,.15);
+
+            transition:
+                transform .25s ease,
+                background .25s ease,
+                box-shadow .3s ease;
+        }
+
+
+        .back-button:hover {
+
+            transform:
+                translateY(-3px);
+
+            background:
+                rgba(0,0,0,.30);
+
+            box-shadow:
+                0 7px 20px
+                rgba(0,0,0,.24),
+                0 0 16px
+                rgba(255,255,255,.10);
+        }
+
+
+        /* =========================
+           МЕНЮ
+           ========================= */
+
+        .menu {
+
+            display: flex;
+
+            overflow-x: auto;
+
+            background: #111;
+
+            border-bottom:
+                1px solid
+                rgba(176,0,0,.30);
+        }
+
+
+        .menu a {
+
+            position: relative;
+
+            flex-shrink: 0;
+
+            padding: 13px 17px;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            overflow: hidden;
+
+            transition:
+                transform .28s ease,
+                background .3s ease,
+                box-shadow .3s ease;
+        }
+
+
+        .menu a::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: -120%;
+            top: -20%;
+
+            width: 65%;
+            height: 140%;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    transparent,
+                    rgba(255,255,255,.25),
+                    transparent
+                );
+
+            transform:
+                skewX(-18deg);
+
+            transition:
+                left .6s ease;
+        }
+
+
+        .menu a:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #850000,
+                    #b00000
+                );
+
+            box-shadow:
+                0 6px 16px
+                rgba(0,0,0,.25),
+                0 0 16px
+                rgba(176,0,0,.18);
+        }
+
+
+        .menu a:hover::after {
+            left: 140%;
+        }
+
+
+        /* =========================
+           КОНТЕНТ
+           ========================= */
+
+        .content {
+
+            padding: 22px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #fff,
+                    #fafafa
+                );
+        }
+
+
+        .rules {
+
+            position: relative;
+
+            overflow: hidden;
+
+            margin-bottom: 16px;
+
+            padding: 17px 18px;
+
+            border:
+                1px solid
+                rgba(176,0,0,.25);
+
+            border-left:
+                4px solid
+                #b00000;
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #fff,
+                    #f8f8f8
+                );
+
+            box-shadow:
+                0 7px 20px
+                rgba(0,0,0,.08),
+                0 0 18px
+                rgba(176,0,0,.05);
+        }
+
+
+        .rules::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: -120%;
+            top: -20%;
+
+            width: 60%;
+            height: 140%;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    transparent,
+                    rgba(255,255,255,.45),
+                    transparent
+                );
+
+            transform:
+                skewX(-18deg);
+
+            animation:
+                rulesShine 6s
+                ease-in-out
+                infinite;
+
+            pointer-events: none;
+        }
+
+
+        @keyframes rulesShine {
+
+            0%, 55% {
+                left: -120%;
+            }
+
+            75%, 100% {
+                left: 140%;
+            }
+        }
+
+
+        .rules h2 {
+
+            margin:
+                0 0 8px;
+
+            color: #b00000;
+
+            font-size: 18px;
+        }
+
+
+        .rules p {
+
+            margin: 5px 0;
+
+            line-height: 1.55;
+
+            font-size: 13px;
+
+            color: #555;
+        }
+
+
+        .rules-note {
+
+            margin-top: 9px!important;
+
+            color: #888!important;
+
+            font-size: 12px!important;
+        }
+
+
+        /* =========================
+           ИМЯ ПОЛЬЗОВАТЕЛЯ
+           ========================= */
+
+        .chat-name-overlay {
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 18px;
+
+            background:
+                rgba(0,0,0,.72);
+
+            backdrop-filter:
+                blur(7px);
+
+            animation:
+                chatOverlayIn .25s ease both;
+        }
+
+
+        .chat-name-modal {
+
+            position: relative;
+
+            width: min(
+                460px,
+                100%
+            );
+
+            padding: 24px;
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                rgba(176,0,0,.45);
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #ffffff,
+                    #f7f7f7
+                );
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,.45),
+                0 0 35px
+                rgba(176,0,0,.16);
+
+            animation:
+                chatModalIn .35s ease both;
+        }
+
+
+        .chat-name-modal::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: -30%;
+
+            top: 0;
+
+            width: 160%;
+
+            height: 2px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #b00000,
+                    transparent
+                );
+
+            box-shadow:
+                0 0 15px
+                rgba(176,0,0,.55);
+
+            animation:
+                chatModalLine 3.5s
+                linear
+                infinite;
+        }
+
+
+        .chat-name-modal h2 {
+
+            margin:
+                0 0 8px;
+
+            color: #b00000;
+
+            font-size: 22px;
+        }
+
+
+        .chat-name-modal p {
+
+            margin:
+                0 0 16px;
+
+            color: #666;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        .chat-name-input {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border:
+                1px solid
+                rgba(176,0,0,.25);
+
+            border-radius: 7px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            transition:
+                border-color .25s ease,
+                box-shadow .3s ease;
+        }
+
+
+        .chat-name-input:focus {
+
+            border-color:
+                #b00000;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(176,0,0,.08),
+                0 0 16px
+                rgba(176,0,0,.10);
+        }
+
+
+        .chat-name-error {
+
+            min-height: 18px;
+
+            margin-top: 7px;
+
+            color: #b00000;
+
+            font-size: 12px;
+        }
+
+
+        .chat-name-actions {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 13px;
+        }
+
+
+        .chat-name-save,
+        .chat-nickname-request {
+
+            padding: 10px 14px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            font-weight: bold;
+
+            transition:
+                transform .22s ease,
+                box-shadow .25s ease,
+                background .25s ease;
+        }
+
+
+        .chat-name-save {
+
+            border:
+                1px solid
+                #b00000;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #850000,
+                    #b00000
+                );
+        }
+
+
+        .chat-name-save:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 7px 18px
+                rgba(176,0,0,.25);
+        }
+
+
+        .chat-nickname-request {
+
+            border:
+                1px solid
+                rgba(176,0,0,.25);
+
+            color: #8b0000;
+
+            background: #fff;
+        }
+
+
+        .chat-nickname-request:hover {
+
+            transform:
+                translateY(-2px);
+
+            background: #fff5f5;
+
+            box-shadow:
+                0 6px 15px
+                rgba(0,0,0,.08);
+        }
+
+
+        .chat-name-note {
+
+            margin-top: 12px!important;
+
+            margin-bottom: 0!important;
+
+            color: #999!important;
+
+            font-size: 11px!important;
+        }
+
+
+        .role-user {
+
+            color: #555;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eeeeee,
+                    #d9d9d9
+                );
+
+            border:
+                1px solid
+                #d0d0d0;
+        }
+
+
+        @keyframes chatOverlayIn {
+
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+
+        @keyframes chatModalIn {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(15px)
+                    scale(.97);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        @keyframes chatModalLine {
+
+            from {
+                transform:
+                    translateX(-25%);
+            }
+
+            to {
+                transform:
+                    translateX(25%);
+            }
+        }
+
+
+        /* =========================
+           ЧАТ
+           ========================= */
+
+        .chat-shell {
+
+            overflow: hidden;
+
+            border:
+                1px solid
+                rgba(176,0,0,.25);
+
+            border-radius: 9px;
+
+            box-shadow:
+                0 11px 30px
+                rgba(0,0,0,.12),
+                0 0 22px
+                rgba(176,0,0,.05);
+        }
+
+
+        .chat-title {
+
+            padding: 14px 17px;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #850000,
+                    #b00000 52%,
+                    #720000
+                );
+
+            font-weight: bold;
+
+            box-shadow:
+                0 4px 15px
+                rgba(176,0,0,.16);
+        }
+
+
+        .chat-status {
+
+            padding: 9px 14px;
+
+            color: #777;
+
+            font-size: 12px;
+
+            border-bottom:
+                1px solid
+                rgba(176,0,0,.12);
+
+            background: #fafafa;
+        }
+
+
+        .chat-messages {
+
+            height: 540px;
+
+            overflow-y: auto;
+
+            padding: 16px;
+
+            background:
+                radial-gradient(
+                    circle at 50% 0,
+                    rgba(176,0,0,.035),
+                    transparent 38%
+                ),
+                #fff;
+
+            scroll-behavior: smooth;
+        }
+
+
+        .chat-message {
+
+            position: relative;
+
+            overflow: hidden;
+
+            margin-bottom: 10px;
+
+            padding: 11px 13px;
+
+            border:
+                1px solid
+                rgba(176,0,0,.13);
+
+            border-radius: 8px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #fff,
+                    #fafafa
+                );
+
+            box-shadow:
+                0 4px 13px
+                rgba(0,0,0,.055);
+
+            animation:
+                messageIn .35s ease both;
+
+            transition:
+                transform .25s ease,
+                box-shadow .3s ease,
+                border-color .3s ease;
+        }
+
+
+        .chat-message::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            top: 0;
+
+            width: 3px;
+            height: 0;
+
+            background: #b00000;
+
+            box-shadow:
+                0 0 11px
+                rgba(255,0,0,.45);
+
+            transition:
+                height .3s ease;
+        }
+
+
+        .chat-message:hover {
+
+            transform:
+                translateY(-2px);
+
+            border-color:
+                rgba(176,0,0,.28);
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,.10),
+                0 0 14px
+                rgba(176,0,0,.05);
+        }
+
+
+        .chat-message:hover::before {
+            height: 100%;
+        }
+
+
+        /* =========================
+           ВЕТКИ ОТВЕТОВ
+           ========================= */
+
+        .chat-thread-replies {
+
+            margin:
+                8px 0
+                0 18px;
+
+            padding-left:
+                12px;
+
+            border-left:
+                2px solid
+                rgba(176,0,0,.13);
+        }
+
+
+        .chat-thread-reply {
+
+            margin-top:
+                8px;
+
+            position: relative;
+        }
+
+
+        .chat-thread-reply::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: -14px;
+
+            top: 18px;
+
+            width: 12px;
+
+            height: 1px;
+
+            background:
+                rgba(176,0,0,.22);
+        }
+
+
+        .chat-thread-replies .chat-message {
+
+            margin-bottom:
+                8px;
+        }
+
+
+        .chat-thread-replies .chat-thread-replies {
+
+            margin-left:
+                14px;
+        }
+
+
+        @media(max-width:700px) {
+
+            .chat-thread-replies {
+
+                margin-left:
+                    10px;
+
+                padding-left:
+                    8px;
+            }
+
+            .chat-thread-replies .chat-thread-replies {
+
+                margin-left:
+                    8px;
+            }
+
+        }
+
+
+        @keyframes messageIn {
+
+            from {
+                opacity: 0;
+                transform:
+                    translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0);
+            }
+        }
+
+
+        .message-head {
+
+            display: flex;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .message-name {
+
+            color: #222;
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+
+        .role-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            padding: 3px 7px;
+
+            border-radius: 4px;
+
+            font-size: 9px;
+
+            font-weight: bold;
+
+            letter-spacing: .3px;
+        }
+
+
+        .role-admin {
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #650000,
+                    #c00000
+                );
+
+            box-shadow:
+                0 0 10px
+                rgba(176,0,0,.22);
+        }
+
+
+        .role-moderator {
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #333,
+                    #777
+                );
+
+            box-shadow:
+                0 0 9px
+                rgba(0,0,0,.15);
+        }
+
+
+        .message-time {
+
+            color: #999;
+
+            font-size: 10px;
+        }
+
+
+        .message-text {
+
+            color: #333;
+
+            line-height: 1.55;
+
+            font-size: 14px;
+
+            white-space: pre-wrap;
+
+            word-break: break-word;
+        }
+
+
+        .message-actions {
+
+            margin-top: 8px;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            gap: 6px;
+        }
+
+
+        .delete-message {
+
+            padding: 5px 8px;
+
+            border:
+                1px solid
+                rgba(176,0,0,.18);
+
+            border-radius: 4px;
+
+            color: #8c0000;
+
+            background: #fff;
+
+            cursor: pointer;
+
+            font-size: 10px;
+
+            transition:
+                transform .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+        }
+
+
+        .delete-message:hover {
+
+            transform:
+                translateY(-1px);
+
+            background: #fff1f1;
+
+            box-shadow:
+                0 4px 10px
+                rgba(0,0,0,.08);
+        }
+
+
+
+
+        /* =========================
+           ОТВЕТЫ НА СООБЩЕНИЯ
+           ========================= */
+
+        .reply-preview {
+
+            margin: 8px 0 9px;
+
+            padding: 8px 10px;
+
+            border-left: 3px solid #b00000;
+
+            border-radius: 5px;
+
+            background: #fff5f5;
+
+            color: #666;
+
+            cursor: pointer;
+
+            transition:
+                background .2s ease,
+                transform .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .reply-preview:hover {
+
+            transform: translateX(2px);
+
+            background: #ffeded;
+
+            box-shadow: 0 4px 12px rgba(176,0,0,.08);
+        }
+
+        .reply-preview-author {
+
+            display: block;
+
+            margin-bottom: 3px;
+
+            color: #8b0000;
+
+            font-size: 11px;
+
+            font-weight: bold;
+        }
+
+        .reply-preview-text {
+
+            display: -webkit-box;
+
+            overflow: hidden;
+
+            -webkit-line-clamp: 2;
+
+            -webkit-box-orient: vertical;
+
+            font-size: 12px;
+
+            line-height: 1.4;
+        }
+
+        .message-actions {
+
+            margin-top: 9px;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            flex-wrap: wrap;
+
+            gap: 6px;
+        }
+
+        .reply-message,
+        .delete-message {
+
+            padding: 5px 8px;
+
+            border: 1px solid rgba(176,0,0,.18);
+
+            border-radius: 4px;
+
+            cursor: pointer;
+
+            font-size: 10px;
+
+            transition:
+                transform .2s ease,
+                background .2s ease,
+                box-shadow .2s ease;
+        }
+
+        .reply-message {
+
+            color: #8c0000;
+
+            background: #fff8f8;
+        }
+
+        .reply-message:hover,
+        .delete-message:hover {
+
+            transform: translateY(-1px);
+
+            background: #fff1f1;
+
+            box-shadow: 0 4px 10px rgba(0,0,0,.08);
+        }
+
+        .reply-composer {
+
+            display: none;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin: 0 13px;
+
+            padding: 8px 10px;
+
+            border-left: 3px solid #b00000;
+
+            border-radius: 5px;
+
+            background: #fff5f5;
+
+            color: #555;
+
+            font-size: 12px;
+        }
+
+        .reply-composer.active {
+            display: flex;
+        }
+
+        .reply-composer-copy {
+
+            min-width: 0;
+
+            flex: 1;
+        }
+
+        .reply-composer-title {
+
+            color: #8b0000;
+
+            font-weight: bold;
+
+            margin-bottom: 2px;
+        }
+
+        .reply-composer-text {
+
+            overflow: hidden;
+
+            white-space: nowrap;
+
+            text-overflow: ellipsis;
+
+            color: #777;
+        }
+
+        .cancel-reply {
+
+            border: 0;
+
+            background: transparent;
+
+            color: #8b0000;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            line-height: 1;
+        }
+
+        .message-replied {
+
+            box-shadow:
+                0 0 0 2px rgba(176,0,0,.18),
+                0 8px 20px rgba(176,0,0,.10);
+
+        }
+
+        /* =========================
+           ФОРМА
+           ========================= */
+
+        .chat-form {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr auto;
+
+            gap: 10px;
+
+            padding: 13px;
+
+            border-top:
+                1px solid
+                rgba(176,0,0,.15);
+
+            background:
+                #fafafa;
+        }
+
+
+        .chat-form textarea {
+
+            width: 100%;
+
+            min-height: 48px;
+
+            max-height: 150px;
+
+            resize: vertical;
+
+            padding: 11px 12px;
+
+            border:
+                1px solid
+                rgba(176,0,0,.22);
+
+            border-radius: 7px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            transition:
+                border-color .25s ease,
+                box-shadow .3s ease;
+        }
+
+
+        .chat-form textarea:focus {
+
+            border-color:
+                #b00000;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(176,0,0,.08),
+                0 0 16px
+                rgba(176,0,0,.08);
+        }
+
+
+        .send-button {
+
+            align-self: stretch;
+
+            position: relative;
+
+            overflow: hidden;
+
+            min-width: 145px;
+
+            padding: 10px 18px;
+
+            border: 0;
+
+            border-radius: 7px;
+
+            color: #fff;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #850000,
+                    #b00000 52%,
+                    #720000
+                );
+
+            box-shadow:
+                0 5px 16px
+                rgba(176,0,0,.18);
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+            transition:
+                transform .25s ease,
+                box-shadow .3s ease,
+                background .3s ease;
+        }
+
+
+        .send-button::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: -120%;
+            top: -20%;
+
+            width: 65%;
+            height: 140%;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    transparent,
+                    rgba(255,255,255,.28),
+                    transparent
+                );
+
+            transform:
+                skewX(-18deg);
+
+            transition:
+                left .6s ease;
+        }
+
+
+        .send-button:hover {
+
+            transform:
+                translateY(-3px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #b00000,
+                    #df0000 52%,
+                    #900000
+                );
+
+            box-shadow:
+                0 9px 23px
+                rgba(0,0,0,.22),
+                0 0 20px
+                rgba(176,0,0,.25);
+        }
+
+
+        .send-button:hover::after {
+            left: 140%;
+        }
+
+
+        .send-button:disabled {
+
+            opacity: .55;
+
+            cursor: wait;
+
+            transform: none;
+        }
+
+
+        /* =========================================================
+           📷 ФОТО В ЧАТЕ
+           ДОБАВЛЕНО — СТАРЫЕ СТИЛИ НЕ УДАЛЯЕМ
+           ========================================================= */
+
+        .chat-photo-button {
+
+            align-self: stretch;
+
+            min-width: 145px;
+
+            padding: 10px 18px;
+
+            border:
+                1px solid
+                rgba(176,0,0,.25);
+
+            border-radius: 7px;
+
+            color: #8c0000;
+
+            background: #fff;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            font-weight: bold;
+
+            transition:
+                transform .25s ease,
+                box-shadow .3s ease,
+                background .3s ease;
+        }
+
+
+        .chat-photo-button:hover {
+
+            transform:
+                translateY(-2px);
+
+            background:
+                #fff5f5;
+
+            box-shadow:
+                0 7px 18px
+                rgba(176,0,0,.14),
+                0 0 14px
+                rgba(176,0,0,.10);
+        }
+
+
+        .chat-photo-preview {
+
+            display: none;
+
+            grid-column:
+                1 / -1;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                8px 10px;
+
+            border-left:
+                3px solid
+                #b00000;
+
+            border-radius: 5px;
+
+            background:
+                #fff5f5;
+
+            color: #777;
+
+            font-size: 12px;
+        }
+
+
+        .chat-photo-preview.active {
+
+            display: flex;
+        }
+
+
+        .chat-photo-preview-name {
+
+            overflow: hidden;
+
+            flex: 1;
+
+            white-space: nowrap;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .chat-photo-remove {
+
+            border: 0;
+
+            background: transparent;
+
+            color: #8b0000;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+            line-height: 1;
+        }
+
+
+        .chat-message-image {
+
+            display: block;
+
+            width: auto;
+
+            max-width: 100%;
+
+            max-height: 520px;
+
+            margin-top: 3px;
+
+            border:
+                1px solid
+                rgba(176,0,0,.20);
+
+            border-radius: 7px;
+
+            box-shadow:
+                0 6px 18px
+                rgba(0,0,0,.10),
+                0 0 14px
+                rgba(176,0,0,.07);
+
+            object-fit: contain;
+
+            cursor: pointer;
+        }
+
+
+        .chat-message-image:hover {
+
+            box-shadow:
+                0 8px 22px
+                rgba(0,0,0,.14),
+                0 0 18px
+                rgba(176,0,0,.12);
+        }
+
+
+        @media(max-width:700px) {
+
+            .chat-photo-button {
+
+                width: 100%;
+
+                min-width: 0;
+
+                min-height: 46px;
+            }
+
+
+            .chat-message-image {
+
+                max-height: 420px;
+            }
+
+        }
+
+
+        .chat-error {
+
+            min-height: 18px;
+
+            padding:
+                0 13px
+                8px;
+
+            color: #b00000;
+
+            font-size: 12px;
+        }
+
+
+        footer {
+
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 18px;
+
+            text-align: center;
+
+            color: #999;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #090909,
+                    #161616
+                );
+
+            border-top:
+                1px solid
+                rgba(176,0,0,.35);
+
+            font-size: 11px;
+        }
+
+
+        footer::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: -30%;
+            top: 0;
+
+            width: 160%;
+            height: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    #b00000,
+                    transparent
+                );
+
+            box-shadow:
+                0 0 10px
+                rgba(255,0,0,.45);
+
+            animation:
+                footerLine 4s
+                linear
+                infinite;
+        }
+
+
+        @keyframes footerLine {
+
+            from {
+                transform:
+                    translateX(-25%);
+            }
+
+            to {
+                transform:
+                    translateX(25%);
+            }
+        }
+
+
+        @media(max-width:700px) {
+
+            .site {
+                width: 100%;
+                margin: 0;
+                border-left: 0;
+                border-right: 0;
+            }
+
+            .header {
+                padding: 18px 14px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .header-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .content {
+                padding: 9px;
+            }
+
+            .chat-messages {
+                height: 62vh;
+                min-height: 380px;
+            }
+
+            .chat-form {
+                grid-template-columns: 1fr;
+            }
+
+            .send-button {
+                min-height: 46px;
+            }
+
+            .chat-message:hover {
+                transform: none;
+            }
+        }
+
+
+        @media(prefers-reduced-motion:reduce) {
+
+            *,
+            *::before,
+            *::after {
+
+                animation-duration: .01ms!important;
+
+                animation-iteration-count: 1!important;
+
+                transition-duration: .01ms!important;
+            }
+        }
+
+    
+        /* =========================================================
+           ОТВЕТЫ — ОДНА ЛИНИЯ ВНУТРИ ОСНОВНОГО СООБЩЕНИЯ
+           ========================================================= */
+
+        .chat-replies,
+        .chat-replies .chat-replies,
+        .chat-reply .chat-replies,
+        .chat-reply .chat-reply {
+            margin-left: 0;
+            padding-left: 0 !important;
+            border-left: 0 !important;
+        }
+
+        .chat-replies {
+            width: 100%;
+        }
+
+        .chat-reply {
+            margin-top: 8px !important;
+            margin-left: 0;
+            padding-left: 12px !important;
+            border-left: 3px solid #b00000 !important;
+            box-sizing: border-box;
+        }
+
+        .chat-reply .chat-reply {
+            margin-left: 0;
+        }
+
+
+        /* =========================================================
+           ОТВЕТЫ — СЛЕГКА ВПРАВО ОТ ОСНОВНОГО СООБЩЕНИЯ
+           БЕЗ ЛЕСТНИЦЫ И БЕЗ ДОПОЛНИТЕЛЬНОГО СМЕЩЕНИЯ
+           ========================================================= */
+
+        .chat-thread-replies {
+            margin: 10px 0 0 34px !important;
+            padding-left: 12px !important;
+            border-left: 2px solid rgba(176,0,0,.16) !important;
+            width: auto !important;
+            box-sizing: border-box;
+        }
+
+        /* Вложенные ответы НЕ добавляют новое смещение вправо.
+           Они остаются на той же линии, что и остальные ответы. */
+        .chat-thread-replies .chat-thread-replies {
+            margin-left: 0 !important;
+        }
+
+        .chat-thread-reply {
+            margin-top: 8px !important;
+            margin-left: 0 !important;
+            padding-left: 0 !important;
+            position: relative;
+        }
+
+        .chat-thread-reply::before {
+            left: -14px !important;
+            width: 12px !important;
+        }
+
+        @media (max-width: 700px) {
+            .chat-thread-replies {
+                margin-left: 18px !important;
+                padding-left: 9px !important;
+            }
+
+            .chat-thread-replies .chat-thread-replies {
+                margin-left: 0 !important;
+            }
+        }
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div
+    class="chat-name-overlay"
+    id="chat-name-overlay"
+    style="display:none;"
+>
+
+    <div
+        class="chat-name-modal"
+    >
+
+        <h2>
+            👋 Добро пожаловать в общий чат!
+        </h2>
+
+        <p>
+            Перед отправкой первого сообщения напишите,
+            как вас будут видеть другие участники.
+        </p>
+
+        <input
+            type="text"
+            id="chat-name-input"
+            class="chat-name-input"
+            maxlength="30"
+            placeholder="Введите своё имя"
+            autocomplete="nickname"
+        >
+
+        <div
+            id="chat-name-error"
+            class="chat-name-error"
+        ></div>
+
+        <div class="chat-name-actions">
+
+            <button
+                type="button"
+                id="chat-name-save"
+                class="chat-name-save"
+            >
+                Сохранить имя
+            </button>
+
+            <button
+                type="button"
+                id="chat-nickname-request"
+                class="chat-nickname-request"
+            >
+                🔄 Попросить сменить ник
+            </button>
+
+        </div>
+
+        <p class="chat-name-note">
+            Запрос на смену никнейма отправляется администратору
+            на рассмотрение.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="site">
+
+
+    <header class="header">
+
+        <div class="header-inner">
+
+            <h1>
+                💬 ОБЩИЙ ЧАТ
+            </h1>
+
+
+            <a
+                class="back-button"
+                href="index.html"
+            >
+                ← На главную
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <main class="content">
+
+
+        <section class="chat-shell">
+
+
+            <div class="chat-title">
+                Общий чат
+            </div>
+
+
+            <div
+                class="chat-status"
+                id="chat-status"
+            >
+                Подключение к чату...
+            </div>
+
+
+            <div
+                class="chat-messages"
+                id="chat-messages"
+            >
+                Загрузка сообщений...
+            </div>
+
+
+            <div
+                class="chat-error"
+                id="chat-error"
+            ></div>
+
+
+            <div
+                class="reply-composer"
+                id="reply-composer"
+            >
+
+                <div class="reply-composer-copy">
+
+                    <div
+                        class="reply-composer-title"
+                        id="reply-composer-title"
+                    >
+                        ↩ Ответ
+                    </div>
+
+                    <div
+                        class="reply-composer-text"
+                        id="reply-composer-text"
+                    ></div>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="cancel-reply"
+                    id="cancel-reply"
+                    aria-label="Отменить ответ"
+                    title="Отменить ответ"
+                >
+                    ×
+                </button>
+
+            </div>
+
+
+            <form
+                class="chat-form"
+                id="chat-form"
+            >
+
+                <div
+                    class="chat-photo-preview"
+                    id="chat-photo-preview"
+                >
+                    <span
+                        class="chat-photo-preview-name"
+                        id="chat-photo-preview-name"
+                    ></span>
+
+                    <button
+                        type="button"
+                        class="chat-photo-remove"
+                        id="chat-photo-remove"
+                        aria-label="Удалить выбранное фото"
+                        title="Удалить фото"
+                    >
+                        ×
+                    </button>
+                </div>
+
+
+                <textarea
+                    id="chat-input"
+                    maxlength="2000"
+                    placeholder="Напишите сообщение..."
+                    required
+                ></textarea>
+
+
+                <input
+                    type="file"
+                    id="chat-photo-input"
+                    accept="image/jpeg,image/png,image/webp"
+                    hidden
+                >
+
+
+                <button
+                    type="button"
+                    class="chat-photo-button"
+                    id="chat-photo-button"
+                >
+                    📷 Отправить фото
+                </button>
+
+
+                <button
+                    class="send-button"
+                    id="send-button"
+                    type="submit"
+                >
+                    Отправить сообщение
+                </button>
+
+            </form>
+
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+
+        © 2026 Новостной портал Богаева М. Е.
+
+        <br>
+
+        Новости • События • Материалы • Общий чат
+
+    </footer>
+
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!--
+     ВАЖНО:
+     Как и index.html, чат использует твой существующий js/main.js.
+     Поэтому второй Supabase-клиент здесь НЕ создаём.
+-->
+<script src="js/main.js"></script>
+
+
+<script>
+
+/* =========================================================
+   ОБЩИЙ ЧАТ
+   ========================================================= */
+
+
+
+/* =========================================================
+   СОСТОЯНИЕ
+   ========================================================= */
+
+let currentUser = null;
+
+let currentProfile = null;
+
+let realtimeChannel = null;
+
+let replyToMessage = null;
+
+let selectedChatPhoto = null;
+
+
+/* =========================================================
+   📷 ФОТО И ЗАЩИТА ОТ ССЫЛОК
+   ========================================================= */
+
+/*
+   В Supabase Storage должен существовать публичный bucket:
+   images
+
+   Разрешены только JPG/JPEG, PNG и WEBP.
+*/
+const CHAT_IMAGE_BUCKET =
+    "images";
+
+const CHAT_IMAGE_MAX_SIZE =
+    8 * 1024 * 1024;
+
+
+function containsChatLink(text) {
+
+    const value =
+        String(
+            text || ""
+        );
+
+    return /(?:https?:\/\/|ftp:\/\/|www\.|(?:[a-z0-9-]+\.)+(?:com|net|org|ru|kz|io|me|tv|dev|app|xyz|site|online)(?:\/|\b))/i.test(
+        value
+    );
+}
+
+
+function isAllowedChatImage(file) {
+
+    if (!file) {
+        return false;
+    }
+
+    const allowedTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+    ];
+
+    return (
+        allowedTypes.includes(
+            file.type
+        )
+        &&
+        file.size <=
+            CHAT_IMAGE_MAX_SIZE
+    );
+}
+
+
+function updateChatPhotoPreview() {
+
+    const preview =
+        document.getElementById(
+            "chat-photo-preview"
+        );
+
+    const name =
+        document.getElementById(
+            "chat-photo-preview-name"
+        );
+
+    if (
+        !preview ||
+        !name
+    ) {
+        return;
+    }
+
+    if (!selectedChatPhoto) {
+
+        preview.classList.remove(
+            "active"
+        );
+
+        name.textContent =
+            "";
+
+        return;
+    }
+
+    name.textContent =
+        "📷 " +
+        selectedChatPhoto.name;
+
+    preview.classList.add(
+        "active"
+    );
+}
+
+
+function clearSelectedChatPhoto() {
+
+    selectedChatPhoto =
+        null;
+
+    const input =
+        document.getElementById(
+            "chat-photo-input"
+        );
+
+    if (input) {
+        input.value =
+            "";
+    }
+
+    updateChatPhotoPreview();
+}
+
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        text == null
+            ? ""
+            : String(text);
+
+    return div.innerHTML;
+}
+
+
+/* =========================================================
+   РОЛИ
+   ========================================================= */
+
+function getRoleInfo(role) {
+
+    const normalized =
+        String(
+            role || "user"
+        ).toLowerCase();
+
+
+    if (
+        normalized === "admin" ||
+        normalized === "administrator"
+    ) {
+
+        return {
+            label: "👑 АДМИНИСТРАТОР",
+            className: "role-admin"
+        };
+
+    }
+
+
+    if (
+        normalized === "moderator" ||
+        normalized === "mod"
+    ) {
+
+        return {
+            label: "🛡 МОДЕРАТОР",
+            className: "role-moderator"
+        };
+
+    }
+
+
+    return {
+        label: "👤 ПОЛЬЗОВАТЕЛЬ",
+        className: "role-user"
+    };
+}
+
+
+/* =========================================================
+   👤 ИМЯ ПОЛЬЗОВАТЕЛЯ В ЧАТЕ
+   ========================================================= */
+
+function showNameModal() {
+
+    const overlay =
+        document.getElementById(
+            "chat-name-overlay"
+        );
+
+
+    if (!overlay) {
+
+        return;
+
+    }
+
+
+    overlay.style.display =
+        "flex";
+
+
+    const input =
+        document.getElementById(
+            "chat-name-input"
+        );
+
+
+    if (input) {
+
+        setTimeout(
+            function() {
+
+                input.focus();
+
+            },
+            80
+        );
+
+    }
+
+}
+
+
+function hideNameModal() {
+
+    const overlay =
+        document.getElementById(
+            "chat-name-overlay"
+        );
+
+
+    if (overlay) {
+
+        overlay.style.display =
+            "none";
+
+    }
+
+}
+
+
+async function saveChatUsername() {
+
+    if (!currentUser) {
+
+        return;
+
+    }
+
+
+    const input =
+        document.getElementById(
+            "chat-name-input"
+        );
+
+
+    const errorBox =
+        document.getElementById(
+            "chat-name-error"
+        );
+
+
+    if (!input || !errorBox) {
+
+        return;
+
+    }
+
+
+    const username =
+        input.value.trim();
+
+
+    errorBox.textContent =
+        "";
+
+
+    if (username.length < 2) {
+
+        errorBox.textContent =
+            "❌ Имя должно содержать минимум 2 символа.";
+
+        return;
+
+    }
+
+
+    if (username.length > 30) {
+
+        errorBox.textContent =
+            "❌ Максимальная длина имени — 30 символов.";
+
+        return;
+
+    }
+
+
+    const button =
+        document.getElementById(
+            "chat-name-save"
+        );
+
+
+    if (button) {
+
+        button.disabled =
+            true;
+
+        button.textContent =
+            "Сохранение...";
+
+    }
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("comment_profiles")
+            .insert({
+                user_id:
+                    currentUser.id,
+
+                username:
+                    username,
+
+                username_locked:
+                    true
+            })
+            .select(
+                "user_id, username, username_locked, role, is_banned, banned_until, ban_reason"
+            )
+            .single();
+
+
+    if (error) {
+
+        console.error(
+            "Ошибка сохранения имени:",
+            error
+        );
+
+
+        if (button) {
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                "Сохранить имя";
+
+        }
+
+
+        if (
+            error.code === "23505"
+        ) {
+
+            errorBox.textContent =
+                "❌ Этот никнейм уже занят.";
+
+        } else {
+
+            errorBox.textContent =
+                "❌ Не удалось сохранить имя.";
+
+        }
+
+
+        return;
+
+    }
+
+
+    currentProfile =
+        data;
+
+
+    hideNameModal();
+
+
+    document.getElementById(
+        "chat-status"
+    ).textContent =
+        "🟢 Чат подключён • сообщений без лимита";
+
+}
+
+
+/* =========================================================
+   🔄 ЗАПРОС СМЕНЫ НИКНЕЙМА
+   Используем существующую систему nickname_change_requests.
+   ========================================================= */
+
+async function requestNicknameChangeFromChat() {
+
+    if (
+        !currentUser ||
+        !currentProfile
+    ) {
+
+        return;
+
+    }
+
+
+    const requestedUsername =
+        prompt(
+            "Введите новый никнейм:"
+        );
+
+
+    if (
+        requestedUsername === null
+    ) {
+
+        return;
+
+    }
+
+
+    const nickname =
+        requestedUsername.trim();
+
+
+    if (nickname.length < 2) {
+
+        alert(
+            "❌ Новый никнейм должен содержать минимум 2 символа."
+        );
+
+        return;
+
+    }
+
+
+    if (nickname.length > 30) {
+
+        alert(
+            "❌ Максимальная длина никнейма — 30 символов."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        nickname ===
+        currentProfile.username
+    ) {
+
+        alert(
+            "❌ Новый никнейм должен отличаться от текущего."
+        );
+
+        return;
+
+    }
+
+
+    const reason =
+        prompt(
+            "Причина смены (необязательно):"
+        );
+
+
+    if (
+        reason !== null &&
+        reason.trim().length > 300
+    ) {
+
+        alert(
+            "❌ Причина не должна превышать 300 символов."
+        );
+
+        return;
+
+    }
+
+
+    const {
+        data: existing,
+        error: existingError
+    } =
+        await supabaseClient
+            .from("nickname_change_requests")
+            .select("id")
+            .eq(
+                "user_id",
+                currentUser.id
+            )
+            .eq(
+                "status",
+                "pending"
+            )
+            .limit(1);
+
+
+    if (existingError) {
+
+        console.error(
+            "Ошибка проверки запроса:",
+            existingError
+        );
+
+        alert(
+            "❌ Не удалось проверить текущие запросы."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        existing &&
+        existing.length > 0
+    ) {
+
+        alert(
+            "⏳ У вас уже есть запрос на рассмотрении."
+        );
+
+        return;
+
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("nickname_change_requests")
+            .insert({
+                user_id:
+                    currentUser.id,
+
+                current_username:
+                    currentProfile.username,
+
+                requested_username:
+                    nickname,
+
+                reason:
+                    reason
+                        ? reason.trim()
+                        : null,
+
+                status:
+                    "pending"
+            });
+
+
+    if (error) {
+
+        console.error(
+            "Ошибка отправки запроса:",
+            error
+        );
+
+
+        if (
+            error.code === "23505"
+        ) {
+
+            alert(
+                "❌ Такой никнейм уже занят."
+            );
+
+        } else {
+
+            alert(
+                "❌ Не удалось отправить запрос."
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    alert(
+        "✅ Запрос отправлен администратору."
+    );
+
+}
+
+
+/* =========================================================
+   АВТОРИЗАЦИЯ
+   ========================================================= */
+
+async function initUser() {
+
+    const {
+        data: sessionData,
+        error: sessionError
+    } =
+        await supabaseClient
+            .auth
+            .getSession();
+
+
+    if (sessionError) {
+
+        throw sessionError;
+
+    }
+
+
+    if (
+        sessionData &&
+        sessionData.session &&
+        sessionData.session.user
+    ) {
+
+        currentUser =
+            sessionData.session.user;
+
+    } else {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .auth
+                .getUser();
+
+
+        if (
+            error ||
+            !data ||
+            !data.user
+        ) {
+
+            throw new Error(
+                "Пользователь не авторизован."
+            );
+
+        }
+
+
+        currentUser =
+            data.user;
+
+    }
+
+
+    await loadProfile();
+
+}
+
+
+/* =========================================================
+   ПРОФИЛЬ
+   ========================================================= */
+
+async function loadProfile() {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("comment_profiles")
+            .select(
+                "user_id, username, role, is_banned, banned_until, ban_reason"
+            )
+            .eq(
+                "user_id",
+                currentUser.id
+            )
+            .maybeSingle();
+
+
+    if (error) {
+
+        throw error;
+
+    }
+
+
+    currentProfile =
+        data || null;
+
+
+    if (
+        !currentProfile ||
+        !currentProfile.username ||
+        !String(
+            currentProfile.username
+        ).trim()
+    ) {
+
+        showNameModal();
+
+    }
+
+
+    if (
+        currentProfile &&
+        currentProfile.is_banned
+    ) {
+
+        document.getElementById(
+            "chat-input"
+        ).disabled = true;
+
+        document.getElementById(
+            "send-button"
+        ).disabled = true;
+
+        document.getElementById(
+            "chat-status"
+        ).textContent =
+            "🚫 Доступ к чату ограничен.";
+
+        return false;
+
+    }
+
+
+    return true;
+}
+
+
+/* =========================================================
+   ДАТА
+   ========================================================= */
+
+function formatDate(value) {
+
+    if (!value) {
+
+        return "";
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "";
+
+    }
+
+
+    return date.toLocaleString(
+        "ru-RU",
+        {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   СООБЩЕНИЕ
+   ========================================================= */
+
+function createMessageElement(message) {
+
+    const article =
+        document.createElement("article");
+
+    article.className =
+        "chat-message";
+
+    article.dataset.id =
+        message.id;
+
+    const head =
+        document.createElement("div");
+
+    head.className =
+        "message-head";
+
+    const name =
+        document.createElement("span");
+
+    name.className =
+        "message-name";
+
+    name.textContent =
+        message.username ||
+        "Пользователь";
+
+    head.appendChild(name);
+
+    const roleInfo =
+        getRoleInfo(message.role);
+
+    if (roleInfo) {
+
+        const badge =
+            document.createElement("span");
+
+        badge.className =
+            "role-badge " +
+            roleInfo.className;
+
+        badge.textContent =
+            roleInfo.label;
+
+        head.appendChild(badge);
+
+    }
+
+    const time =
+        document.createElement("span");
+
+    time.className =
+        "message-time";
+
+    time.textContent =
+        formatDate(message.created_at);
+
+    head.appendChild(time);
+
+    article.appendChild(head);
+
+    /* Ответ на другое сообщение */
+    if (message.reply_to) {
+
+        const reply =
+            message.reply_to;
+
+        const preview =
+            document.createElement("div");
+
+        preview.className =
+            "reply-preview";
+
+        preview.title =
+            "Перейти к исходному сообщению";
+
+        const author =
+            document.createElement("span");
+
+        author.className =
+            "reply-preview-author";
+
+        author.textContent =
+            "↩ " +
+            (reply.username || "Пользователь");
+
+        const text =
+            document.createElement("span");
+
+        text.className =
+            "reply-preview-text";
+
+        text.textContent =
+            String(
+                reply.message || ""
+            ).startsWith(
+                "[[CHAT_IMAGE]]"
+            )
+                ? "📷 Фото"
+                : (
+                    reply.message ||
+                    "Сообщение недоступно"
+                );
+
+        preview.appendChild(author);
+        preview.appendChild(text);
+
+        preview.addEventListener(
+            "click",
+            function() {
+
+                const target =
+                    document.querySelector(
+                        '[data-id="' +
+                        CSS.escape(String(reply.id)) +
+                        '"]'
+                    );
+
+                if (target) {
+
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+                    target.classList.add(
+                        "message-replied"
+                    );
+
+                    setTimeout(
+                        function() {
+
+                            target.classList.remove(
+                                "message-replied"
+                            );
+
+                        },
+                        1300
+                    );
+
+                }
+
+            }
+        );
+
+        article.appendChild(preview);
+
+    }
+
+    const body =
+        document.createElement("div");
+
+    body.className =
+        "message-text";
+
+    const messageText =
+        message.message || "";
+
+    if (
+        String(messageText)
+            .startsWith(
+                "[[CHAT_IMAGE]]"
+            )
+    ) {
+
+        const imageUrl =
+            String(messageText)
+                .slice(
+                    "[[CHAT_IMAGE]]".length
+                );
+
+        const image =
+            document.createElement(
+                "img"
+            );
+
+        image.className =
+            "chat-message-image";
+
+        image.src =
+            imageUrl;
+
+        image.alt =
+            "Фото из общего чата";
+
+        image.loading =
+            "lazy";
+
+        image.addEventListener(
+            "click",
+            function() {
+
+                window.open(
+                    imageUrl,
+                    "_blank",
+                    "noopener,noreferrer"
+                );
+
+            }
+        );
+
+        body.appendChild(
+            image
+        );
+
+    } else {
+
+        body.textContent =
+            messageText;
+
+    }
+
+    article.appendChild(body);
+
+    const actions =
+        document.createElement("div");
+
+    actions.className =
+        "message-actions";
+
+    const replyButton =
+        document.createElement("button");
+
+    replyButton.type =
+        "button";
+
+    replyButton.className =
+        "reply-message";
+
+    replyButton.textContent =
+        "↩ Ответить";
+
+    replyButton.addEventListener(
+        "click",
+        function() {
+
+            startReply(message);
+
+        }
+    );
+
+    actions.appendChild(
+        replyButton
+    );
+
+    const role =
+        String(
+            currentProfile &&
+            currentProfile.role ||
+            "user"
+        ).toLowerCase();
+
+    const canDelete =
+        String(message.user_id) ===
+            String(
+                currentUser &&
+                currentUser.id
+            )
+        ||
+        role === "admin"
+        ||
+        role === "administrator"
+        ||
+        role === "moderator"
+        ||
+        role === "mod";
+
+    if (canDelete) {
+
+        const deleteButton =
+            document.createElement("button");
+
+        deleteButton.type =
+            "button";
+
+        deleteButton.className =
+            "delete-message";
+
+        deleteButton.textContent =
+            "Удалить";
+
+        deleteButton.addEventListener(
+            "click",
+            function() {
+
+                deleteMessage(
+                    message.id
+                );
+
+            }
+        );
+
+        actions.appendChild(
+            deleteButton
+        );
+
+    }
+
+    article.appendChild(actions);
+
+    return article;
+
+}
+
+
+/* =========================================================
+   ОТВЕТ НА СООБЩЕНИЕ
+   ========================================================= */
+
+function startReply(message) {
+
+    replyToMessage = {
+        id: message.id,
+        username: message.username || "Пользователь",
+        message: message.message || ""
+    };
+
+    const composer =
+        document.getElementById(
+            "reply-composer"
+        );
+
+    const title =
+        document.getElementById(
+            "reply-composer-title"
+        );
+
+    const text =
+        document.getElementById(
+            "reply-composer-text"
+        );
+
+    if (title) {
+
+        title.textContent =
+            "↩ Ответ пользователю " +
+            replyToMessage.username;
+
+    }
+
+    if (text) {
+
+        text.textContent =
+            replyToMessage.message;
+
+    }
+
+    if (composer) {
+
+        composer.classList.add(
+            "active"
+        );
+
+    }
+
+    const input =
+        document.getElementById(
+            "chat-input"
+        );
+
+    if (input) {
+
+        input.focus();
+
+    }
+
+}
+
+
+function cancelReply() {
+
+    replyToMessage = null;
+
+    const composer =
+        document.getElementById(
+            "reply-composer"
+        );
+
+    if (composer) {
+
+        composer.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   ЗАГРУЗКА
+   ========================================================= */
+
+async function loadMessages() {
+
+    const list =
+        document.getElementById(
+            "chat-messages"
+        );
+
+
+    list.innerHTML =
+        "Загрузка сообщений...";
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("chat_messages")
+            .select(
+                "id, user_id, username, role, message, created_at, reply_to"
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Ошибка загрузки чата:",
+            error
+        );
+
+
+        list.innerHTML =
+            "Не удалось загрузить сообщения.";
+
+
+        throw error;
+
+    }
+
+
+    list.innerHTML =
+        "";
+
+
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
+        list.innerHTML = `
+            <div
+                style="
+                    padding:25px;
+                    text-align:center;
+                    color:#999;
+                "
+            >
+                Пока сообщений нет. Будьте первым!
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       СОЗДАЁМ КАРТУ ВСЕХ СООБЩЕНИЙ
+       ===================================================== */
+
+    const messageMap =
+        new Map();
+
+
+    data.forEach(
+        function(message) {
+
+            messageMap.set(
+                String(message.id),
+                message
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       СОЗДАЁМ ДЕРЕВО:
+       ГЛАВНОЕ СООБЩЕНИЕ
+          └─ ОТВЕТ
+              └─ ОТВЕТ НА ОТВЕТ
+                  └─ И Т.Д. БЕЗ ОГРАНИЧЕНИЯ
+       ===================================================== */
+
+    const childrenMap =
+        new Map();
+
+
+    data.forEach(
+        function(message) {
+
+            if (!message.reply_to) {
+
+                return;
+
+            }
+
+
+            const parent =
+                messageMap.get(
+                    String(
+                        message.reply_to
+                    )
+                );
+
+
+            if (!parent) {
+
+                /* Если исходное сообщение уже удалено,
+                   оставляем это сообщение обычным. */
+
+                message.reply_to =
+                    null;
+
+                return;
+
+            }
+
+
+            message.reply_to =
+                parent;
+
+
+            const parentId =
+                String(
+                    parent.id
+                );
+
+
+            if (
+                !childrenMap.has(
+                    parentId
+                )
+            ) {
+
+                childrenMap.set(
+                    parentId,
+                    []
+                );
+
+            }
+
+
+            childrenMap
+                .get(parentId)
+                .push(message);
+
+        }
+    );
+
+
+    /* =====================================================
+       НОВЫЕ ГЛАВНЫЕ СООБЩЕНИЯ — СВЕРХУ.
+       ОТВЕТЫ ВНУТРИ СВОЕЙ ВЕТКИ — СНИЗУ.
+       ===================================================== */
+
+    const roots =
+        data
+            .filter(
+                function(message) {
+
+                    return !message.reply_to;
+
+                }
+            )
+            .sort(
+                function(a, b) {
+
+                    return (
+                        new Date(
+                            b.created_at
+                        )
+                        -
+                        new Date(
+                            a.created_at
+                        )
+                    );
+
+                }
+            );
+
+
+    const visited =
+        new Set();
+
+
+    function appendThread(
+        message,
+        container
+    ) {
+
+        const messageId =
+            String(message.id);
+
+
+        if (
+            visited.has(messageId)
+        ) {
+
+            return;
+
+        }
+
+
+        visited.add(messageId);
+
+
+        container.appendChild(
+            createMessageElement(
+                message
+            )
+        );
+
+
+        const children =
+            childrenMap.get(
+                messageId
+            ) || [];
+
+
+        if (!children.length) {
+
+            return;
+
+        }
+
+
+        /* Внутри одной ветки:
+           старые ответы сверху,
+           новые ответы снизу. */
+
+        children.sort(
+            function(a, b) {
+
+                return (
+                    new Date(
+                        a.created_at
+                    )
+                    -
+                    new Date(
+                        b.created_at
+                    )
+                );
+
+            }
+        );
+
+
+        const repliesContainer =
+            document.createElement(
+                "div"
+            );
+
+
+        repliesContainer.className =
+            "chat-thread-replies";
+
+
+        children.forEach(
+            function(child) {
+
+                const replyWrapper =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                replyWrapper.className =
+                    "chat-thread-reply";
+
+
+                appendThread(
+                    child,
+                    replyWrapper
+                );
+
+
+                repliesContainer.appendChild(
+                    replyWrapper
+                );
+
+            }
+        );
+
+
+        container.appendChild(
+            repliesContainer
+        );
+
+    }
+
+
+    roots.forEach(
+        function(message) {
+
+            appendThread(
+                message,
+                list
+            );
+
+        }
+    );
+
+
+    /*
+       Если по какой-то причине осталась запись,
+       которая не вошла в дерево, не теряем её.
+    */
+
+    data.forEach(
+        function(message) {
+
+            if (
+                !visited.has(
+                    String(message.id)
+                )
+            ) {
+
+                appendThread(
+                    message,
+                    list
+                );
+
+            }
+
+        }
+    );
+
+
+    list.scrollTop =
+        0;
+
+}
+
+
+/* =========================================================
+   ОТПРАВКА
+   ========================================================= */
+
+async function sendMessage(event) {
+
+    event.preventDefault();
+
+
+    if (!currentUser) {
+
+        return;
+
+    }
+
+
+    if (
+        !currentProfile ||
+        !currentProfile.username ||
+        !String(
+            currentProfile.username
+        ).trim()
+    ) {
+
+        showNameModal();
+
+        showError(
+            "Сначала напишите своё имя."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        currentProfile.is_banned
+    ) {
+
+        showError(
+            "🚫 У вас нет доступа к чату."
+        );
+
+        return;
+
+    }
+
+
+    const input =
+        document.getElementById(
+            "chat-input"
+        );
+
+    const button =
+        document.getElementById(
+            "send-button"
+        );
+
+
+    const message =
+        input.value.trim();
+
+
+    /*
+       🔗 ССЫЛКИ ЗАПРЕЩЕНЫ.
+       Проверка выполняется ДО INSERT,
+       поэтому ссылка вообще не попадает в чат.
+    */
+    if (
+        message &&
+        containsChatLink(
+            message
+        )
+    ) {
+
+        clearError();
+
+        showError(
+            "🚫 Ссылки в общем чате запрещены."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Если выбрано фото — отправляем только фото.
+       Текст вместе с фото не отправляется.
+    */
+    if (
+        !message &&
+        !selectedChatPhoto
+    ) {
+
+        return;
+
+    }
+
+
+    button.disabled =
+        true;
+
+    clearError();
+
+
+    let messageToInsert =
+        message;
+
+
+    if (selectedChatPhoto) {
+
+        if (
+            !isAllowedChatImage(
+                selectedChatPhoto
+            )
+        ) {
+
+            button.disabled =
+                false;
+
+            showError(
+                "❌ Можно отправлять только JPG, PNG или WEBP до 8 МБ."
+            );
+
+            return;
+
+        }
+
+
+        const extension =
+            selectedChatPhoto.name
+                .split(".")
+                .pop()
+                .toLowerCase();
+
+
+        const filePath =
+            String(
+                currentUser.id
+            ) +
+            "/" +
+            Date.now() +
+            "-" +
+            Math.random()
+                .toString(36)
+                .slice(2) +
+            "." +
+            extension;
+
+
+        const {
+            error: uploadError
+        } =
+            await supabaseClient
+                .storage
+                .from(
+                    CHAT_IMAGE_BUCKET
+                )
+                .upload(
+                    filePath,
+                    selectedChatPhoto,
+                    {
+                        cacheControl:
+                            "3600",
+                        upsert:
+                            false,
+                        contentType:
+                            selectedChatPhoto.type
+                    }
+                );
+
+
+        if (uploadError) {
+
+            console.error(
+                "Ошибка загрузки фото:",
+                uploadError
+            );
+
+            button.disabled =
+                false;
+
+            showError(
+                "❌ Не удалось загрузить фото. Проверьте bucket images в Supabase."
+            );
+
+            return;
+
+        }
+
+
+        const {
+            data: publicUrlData
+        } =
+            supabaseClient
+                .storage
+                .from(
+                    CHAT_IMAGE_BUCKET
+                )
+                .getPublicUrl(
+                    filePath
+                );
+
+
+        const imageUrl =
+            publicUrlData &&
+            publicUrlData.publicUrl;
+
+
+        if (!imageUrl) {
+
+            button.disabled =
+                false;
+
+            showError(
+                "❌ Не удалось получить адрес фото."
+            );
+
+            return;
+
+        }
+
+
+        messageToInsert =
+            "[[CHAT_IMAGE]]" +
+            imageUrl;
+
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("chat_messages")
+            .insert({
+                user_id:
+                    currentUser.id,
+
+                message:
+                    messageToInsert,
+
+                reply_to:
+                    replyToMessage
+                        ? replyToMessage.id
+                        : null
+            });
+
+
+    button.disabled =
+        false;
+
+
+    if (error) {
+
+        console.error(
+            "Ошибка отправки:",
+            error
+        );
+
+
+        showError(
+            "Не удалось отправить сообщение."
+        );
+
+        return;
+
+    }
+
+
+    input.value =
+        "";
+
+    clearSelectedChatPhoto();
+
+    cancelReply();
+
+    /*
+       Realtime сам получит INSERT и обновит список.
+       Повторный loadMessages() здесь не вызываем,
+       чтобы одно новое сообщение не появлялось дважды.
+    */
+
+}
+
+
+/* =========================================================
+   УДАЛЕНИЕ
+   ========================================================= */
+
+async function deleteMessage(id) {
+
+    if (!id) {
+
+        return;
+
+    }
+
+
+    const {
+        error
+    } =
+        await supabaseClient
+            .from("chat_messages")
+            .delete()
+            .eq(
+                "id",
+                id
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Ошибка удаления:",
+            error
+        );
+
+
+        showError(
+            "Не удалось удалить сообщение."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   REALTIME
+   ========================================================= */
+
+function subscribeToChat() {
+
+    realtimeChannel =
+        supabaseClient
+            .channel(
+                "public-chat-messages"
+            )
+            .on(
+                "postgres_changes",
+                {
+                    event: "*",
+                    schema: "public",
+                    table: "chat_messages"
+                },
+                function() {
+
+                    loadMessages()
+                        .catch(
+                            console.error
+                        );
+
+                }
+            )
+            .subscribe(
+                function(status) {
+
+                    if (
+                        status ===
+                        "SUBSCRIBED"
+                    ) {
+
+                        document.getElementById(
+                            "chat-status"
+                        ).textContent =
+                            "🟢 Чат подключён • сообщений без лимита";
+
+                    }
+
+                }
+            );
+
+}
+
+
+/* =========================================================
+   ОШИБКИ
+   ========================================================= */
+
+function showError(message) {
+
+    document.getElementById(
+        "chat-error"
+    ).textContent =
+        message;
+
+}
+
+
+function clearError() {
+
+    document.getElementById(
+        "chat-error"
+    ).textContent =
+        "";
+
+}
+
+
+/* =========================================================
+   ОБРАБОТЧИКИ ИМЕНИ
+   ========================================================= */
+
+document.getElementById(
+    "chat-name-save"
+).addEventListener(
+    "click",
+    saveChatUsername
+);
+
+
+document.getElementById(
+    "chat-nickname-request"
+).addEventListener(
+    "click",
+    requestNicknameChangeFromChat
+);
+
+
+document.getElementById(
+    "chat-name-input"
+).addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Enter"
+        ) {
+
+            event.preventDefault();
+
+            saveChatUsername();
+
+        }
+
+    }
+);
+
+
+document.getElementById(
+    "cancel-reply"
+).addEventListener(
+    "click",
+    cancelReply
+);
+
+
+/* =========================================================
+   START
+   ========================================================= */
+
+document.getElementById(
+    "chat-form"
+).addEventListener(
+    "submit",
+    sendMessage
+);
+
+
+document.getElementById(
+    "chat-photo-button"
+).addEventListener(
+    "click",
+    function() {
+
+        document.getElementById(
+            "chat-photo-input"
+        ).click();
+
+    }
+);
+
+
+document.getElementById(
+    "chat-photo-input"
+).addEventListener(
+    "change",
+    function(event) {
+
+        const file =
+            event.target.files &&
+            event.target.files[0];
+
+        if (!file) {
+
+            clearSelectedChatPhoto();
+
+            return;
+
+        }
+
+
+        if (
+            !isAllowedChatImage(
+                file
+            )
+        ) {
+
+            clearSelectedChatPhoto();
+
+            showError(
+                "❌ Можно отправлять только JPG, PNG или WEBP до 8 МБ."
+            );
+
+            return;
+
+        }
+
+
+        clearError();
+
+        selectedChatPhoto =
+            file;
+
+        updateChatPhotoPreview();
+
+    }
+);
+
+
+document.getElementById(
+    "chat-photo-remove"
+).addEventListener(
+    "click",
+    clearSelectedChatPhoto
+);
+
+
+(async function() {
+
+    try {
+
+        await initUser();
+
+        const canUseChat =
+            currentProfile &&
+            !currentProfile.is_banned;
+
+
+        if (!canUseChat) {
+
+            document.getElementById(
+                "chat-messages"
+            ).textContent =
+                "Доступ к чату ограничен.";
+
+            return;
+
+        }
+
+
+        await loadMessages();
+
+        subscribeToChat();
+
+    } catch (error) {
+
+        console.error(
+            "Ошибка запуска чата:",
+            error
+        );
+
+
+        document.getElementById(
+            "chat-status"
+        ).textContent =
+            "🔴 Ошибка подключения";
+
+
+        showError(
+            "Не удалось подключиться к чату. Проверьте настройки Supabase."
+        );
+
+    }
+
+})();
+
+</script>
+
+</body>
+
+</html>

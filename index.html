@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Новостной портал Богаева М. Е.</title>
+
+<link
+    rel="stylesheet"
+    href="css/style.css"
+>
+
+<link
+    rel="stylesheet"
+    href="css/mobile.css"
+>
+
+<style>
+/* V2: анонс строго в одну строку */
+.card p {
+    display: block !important;
+    width: 100%;
+    min-width: 0;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    box-sizing: border-box;
+}
+</style>
+
+<style>
+/* ТОЧЕЧНО: текст главной публикации — одна строка + ... */
+.main-content .main .article > p:first-of-type {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* Не даём самому article растягиваться из-за длинной строки */
+.main-content .main .article {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+</style>
+
+<style>
+/* =========================================================
+   🔒 ГЛОБАЛЬНОЕ УВЕДОМЛЕНИЕ О БЛОКИРОВКЕ САЙТА
+   ДОБАВЛЕНО — СУЩЕСТВУЮЩИЙ CSS НЕ ТРОГАЕМ
+   ========================================================= */
+
+#global-site-ban-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
+#global-site-ban-overlay.global-site-ban-visible {
+    display: flex;
+}
+
+.global-site-ban-window {
+    width: min(560px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 26px 28px 24px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(22, 22, 22, 0.94);
+    color: #fff;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.5);
+    font-family: Arial, sans-serif;
+}
+
+.global-site-ban-title {
+    margin: 0 0 20px;
+    font-size: 23px;
+    line-height: 1.25;
+    font-weight: 700;
+    color: #ff5a36;
+}
+
+.global-site-ban-text {
+    margin: 0 0 18px;
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.global-site-ban-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 20px;
+}
+
+.global-site-ban-table th,
+.global-site-ban-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    text-align: left;
+    vertical-align: top;
+}
+
+.global-site-ban-table th {
+    width: 220px;
+    color: #cfcfcf;
+    font-weight: 600;
+}
+
+.global-site-ban-table td {
+    color: #fff;
+    word-break: break-word;
+}
+
+.global-site-ban-countdown {
+    font-weight: 700;
+    color: #ff6a43;
+}
+
+.global-site-ban-support {
+    margin-top: 8px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.global-site-ban-support a {
+    color: #ff6a43;
+    font-weight: 700;
+}
+
+.global-site-ban-close {
+    display: block;
+    min-width: 150px;
+    margin: 22px auto 0;
+    padding: 12px 22px;
+    border: 0;
+    border-radius: 999px;
+    background: #f4511e;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.global-site-ban-close:hover {
+    background: #e04414;
+}
+
+body.global-site-ban-active {
+    overflow: hidden !important;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================================================= -->
+<!-- ВЕРХНИЙ БАННЕР -->
+<!-- ================================================= -->
+
+<div class="top-banner">
+
+    <div class="banner-video">
+
+        <div class="banner-placeholder">
+            МЕСТО ДЛЯ ВИДЕО
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- ОСНОВНОЙ САЙТ -->
+<!-- ================================================= -->
+
+<div class="site">
+
+
+<!-- ================================================= -->
+<!-- ШАПКА -->
+<!-- ================================================= -->
+
+<header class="header">
+
+    <div class="header-content">
+
+        <h1>
+            НОВОСТНОЙ ПОРТАЛ БОГАЕВА М. Е.
+        </h1>
+
+        <p>
+            Новости • События • Материалы • Фото • Видео
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<!-- ================================================= -->
+<!-- ВЕРХНЕЕ МЕНЮ -->
+<!-- ================================================= -->
+
+<nav class="menu">
+
+    <a href="index.html">
+        Главная
+    </a>
+
+    <a href="news.html">
+        Новости
+    </a>
+
+    <a href="articles.html">
+        Статьи
+    </a>
+
+    <a href="photos.html">
+        Фото
+    </a>
+
+    <a href="videos.html">
+        Видео
+    </a>
+
+    <a href="about.html">
+        О сайте
+    </a>
+
+    <a href="search.html">
+        🔎 Поиск
+    </a>
+
+    <a href="chat.html" class="chat-link">
+        💬 Всеобщий чат
+    </a>
+
+</nav>
+
+
+
+<!-- ================================================= -->
+<!-- ОСНОВНОЙ LAYOUT -->
+<!-- ================================================= -->
+
+<div class="layout">
+
+
+<!-- ================================================= -->
+<!-- ЛЕВАЯ КОЛОНКА -->
+<!-- ================================================= -->
+
+<aside class="sidebar">
+
+
+    <!-- ============================================= -->
+    <!-- РАЗДЕЛЫ -->
+    <!-- ============================================= -->
+
+    <div class="box">
+
+        <div class="box-title">
+            Разделы
+        </div>
+
+        <div class="box-body">
+
+            <a href="index.html">
+                Главная
+            </a>
+
+            <a href="news.html">
+                Последние новости
+            </a>
+
+            <a href="articles.html">
+                Статьи
+            </a>
+
+            <a href="photos.html">
+                Фотографии
+            </a>
+
+            <a href="videos.html">
+                Видео
+            </a>
+
+            <a href="about.html">
+                О сайте
+            </a>
+
+            <a href="search.html">
+                🔎 Поиск
+            </a>
+
+            <a href="chat.html" class="chat-link">
+                💬 Всеобщий чат
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ============================================= -->
+    <!-- ПОСЛЕДНИЕ ПУБЛИКАЦИИ -->
+    <!-- ============================================= -->
+
+    <div class="box">
+
+        <div class="box-title">
+            Последние публикации
+        </div>
+
+        <div
+            class="box-body"
+            id="latestSidebarPosts"
+        >
+
+            <div class="sidebar-publication">
+                Загрузка...
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ============================================= -->
+    <!-- БОКОВОЙ БАННЕР -->
+    <!-- ============================================= -->
+
+    <div class="side-banner">
+
+        БОКОВОЙ БАННЕР
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- ================================================= -->
+<!-- ЦЕНТРАЛЬНАЯ ЧАСТЬ -->
+<!-- ================================================= -->
+
+<main class="main-content">
+
+
+    <!-- ============================================= -->
+    <!-- ГЛАВНАЯ ПУБЛИКАЦИЯ -->
+    <!-- ============================================= -->
+
+    <section class="main">
+
+        <div class="main-title">
+            ГЛАВНАЯ ПУБЛИКАЦИЯ
+        </div>
+
+
+        <article class="article">
+
+
+            <h2>
+                Новостной центр
+            </h2>
+
+
+            <div class="date">
+                В ожидании публикации...
+            </div>
+
+
+            <!-- ===================================== -->
+            <!-- ГЛАВНОЕ МЕДИА -->
+            <!-- ===================================== -->
+
+            <div class="main-photo">
+
+                <img
+                    src="images/news/main.jpg"
+                    alt="Главная публикация"
+                >
+
+            </div>
+
+
+            <!-- ===================================== -->
+            <!-- ОПИСАНИЕ -->
+            <!-- ===================================== -->
+
+            <p>
+                Здесь будет отображаться последняя
+                опубликованная новость портала.
+            </p>
+
+
+            <p>
+                После подключения системы публикаций
+                новые материалы будут автоматически
+                появляться здесь.
+            </p>
+
+
+            <!-- ===================================== -->
+            <!-- КНОПКА -->
+            <!-- ===================================== -->
+
+            <a
+                href="news.html"
+                class="read-more"
+            >
+                Читать все новости →
+            </a>
+
+
+        </article>
+
+    </section>
+
+
+
+    <!-- ================================================= -->
+    <!-- ПОСЛЕДНИЕ МАТЕРИАЛЫ -->
+    <!-- ================================================= -->
+
+    <section class="latest-section">
+
+
+        <div class="section-title">
+            ПОСЛЕДНИЕ МАТЕРИАЛЫ
+        </div>
+
+
+        <div class="cards">
+
+
+            <!-- РЕЗЕРВНАЯ КАРТОЧКА -->
+            <!-- main.js автоматически заменит её -->
+
+            <article class="card">
+
+                <div class="card-photo">
+
+                    <span>
+                        ФОТО
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Другая публикация
+                </h3>
+
+
+                <p>
+                    Краткое описание материала.
+                </p>
+
+
+                <a href="news.html">
+                    Читать →
+                </a>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-photo">
+
+                    <span>
+                        ФОТО
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Новая статья
+                </h3>
+
+
+                <p>
+                    Краткое описание материала.
+                </p>
+
+
+                <a href="articles.html">
+                    Читать →
+                </a>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-photo">
+
+                    <span>
+                        ФОТО
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Свежие фотографии
+                </h3>
+
+
+                <p>
+                    Новые фотографии портала.
+                </p>
+
+
+                <a href="photos.html">
+                    Смотреть →
+                </a>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ================================================= -->
+<!-- ПРАВАЯ КОЛОНКА -->
+<!-- ================================================= -->
+
+<aside class="right-sidebar">
+
+
+    <!-- БАННЕР -->
+
+    <div class="side-banner">
+
+        БАННЕР
+
+    </div>
+
+
+
+    <!-- ПОПУЛЯРНОЕ -->
+
+    <div class="box">
+
+        <div class="box-title">
+            Популярное
+        </div>
+
+        <div class="box-body" id="popularPosts">
+
+            <div class="sidebar-publication">
+                Загрузка...
+            </div>
+
+        </div>
+
+    </div>
+
+
+</aside>
+
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- FOOTER -->
+<!-- ================================================= -->
+
+<footer>
+
+    © 2026 Новостной портал Богаева М. Е.
+
+    <br>
+
+    Новости • События • Материалы
+
+</footer>
+
+
+</div>
+
+
+
+<!-- ================================================= -->
+<!-- SUPABASE -->
+<!-- ================================================= -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+
+
+<!-- ================================================= -->
+<!-- ТВОЙ СТАРЫЙ MAIN.JS -->
+<!-- ================================================= -->
+
+<script
+    src="js/main.js"
+></script>
+
+
+
+<!-- ================================================= -->
+<!-- ДИНАМИЧЕСКИЕ ПОСЛЕДНИЕ ПУБЛИКАЦИИ -->
+<!-- ================================================= -->
+
+<script>
+
+async function loadSidebarPosts() {
+
+    const container =
+        document.getElementById(
+            "latestSidebarPosts"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    /*
+     * ВАЖНО:
+     *
+     * Здесь НЕ создаём новый Supabase-клиент.
+     *
+     * Используем supabaseClient из main.js.
+     */
+
+
+    if (
+        typeof supabaseClient ===
+        "undefined"
+    ) {
+
+        console.error(
+            "supabaseClient из main.js не найден."
+        );
+
+        container.innerHTML =
+            `
+            <div class="sidebar-publication">
+                Ошибка подключения.
+            </div>
+            `;
+
+        return;
+
+    }
+
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+
+        .from("posts")
+
+        .select(
+            "id, title, created_at, video_url"
+        )
+
+        .eq(
+            "published",
+            true
+        )
+
+        .order(
+            "created_at",
+            {
+                ascending: false
+            }
+        )
+
+        .limit(5);
+
+
+
+    /* ============================================= */
+    /* ОШИБКА */
+    /* ============================================= */
+
+    if (error) {
+
+        console.error(
+            "Ошибка загрузки последних публикаций:",
+            error
+        );
+
+
+        container.innerHTML =
+            `
+            <div class="sidebar-publication">
+                Не удалось загрузить публикации.
+            </div>
+            `;
+
+
+        return;
+
+    }
+
+
+
+    /* ============================================= */
+    /* ПУСТО */
+    /* ============================================= */
+
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
+        container.innerHTML =
+            `
+            <div class="sidebar-publication">
+                Публикаций пока нет.
+            </div>
+            `;
+
+
+        return;
+
+    }
+
+
+
+    /* ============================================= */
+    /* ОЧИЩАЕМ ЗАГРУЗКУ */
+    /* ============================================= */
+
+    container.innerHTML = "";
+
+
+
+    /* ============================================= */
+    /* СОЗДАЁМ ПУБЛИКАЦИИ */
+    /* ============================================= */
+
+    data.forEach(
+        function(post) {
+
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "sidebar-publication";
+
+
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            link.href =
+                "news-post.html?id=" +
+                encodeURIComponent(
+                    post.id
+                );
+
+
+
+            const title =
+                post.title ||
+                "Без названия";
+
+
+
+            /*
+             * Если публикация содержит видео,
+             * показываем маленькую отметку.
+             */
+
+            if (
+                post.video_url &&
+                String(
+                    post.video_url
+                ).trim() !== ""
+            ) {
+
+                link.textContent =
+                    "🎥 " +
+                    title;
+
+            }
+
+            else {
+
+                link.textContent =
+                    title;
+
+            }
+
+
+
+            item.appendChild(
+                link
+            );
+
+
+            container.appendChild(
+                item
+            );
+
+
+        }
+    );
+
+}
+
+
+/* ================================================= */
+/* ЗАПУСК САЙДБАРА */
+/* ================================================= */
+
+loadSidebarPosts();
+
+</script>
+
+
+
+<script>
+/* =================================================
+   ДИНАМИЧЕСКОЕ «ПОПУЛЯРНОЕ»
+   ================================================= */
+
+async function loadPopularPosts() {
+
+    const container =
+        document.getElementById("popularPosts");
+
+    if (!container) {
+        return;
+    }
+
+    if (typeof supabaseClient === "undefined") {
+        container.innerHTML = `
+            <div class="sidebar-publication">
+                Ошибка подключения.
+            </div>
+        `;
+        return;
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("posts")
+        .select("id,title,created_at")
+        .eq("published", true)
+        .order("created_at", {
+            ascending: false
+        })
+        .limit(3);
+
+    if (error) {
+        console.error(
+            "Ошибка загрузки популярных публикаций:",
+            error
+        );
+
+        container.innerHTML = `
+            <div class="sidebar-publication">
+                Не удалось загрузить публикации.
+            </div>
+        `;
+
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        container.innerHTML = `
+            <div class="sidebar-publication">
+                Публикаций пока нет.
+            </div>
+        `;
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    data.forEach(function(post) {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "sidebar-publication";
+
+        const link =
+            document.createElement("a");
+
+        link.href =
+            "news-post.html?id=" +
+            encodeURIComponent(post.id);
+
+        link.textContent =
+            post.title || "Без названия";
+
+        item.appendChild(link);
+        container.appendChild(item);
+
+    });
+}
+
+loadPopularPosts();
+</script>
+
+
+
+<script>
+/* =========================================================
+   🔒 ГЛОБАЛЬНАЯ ПРОВЕРКА БАНА
+   ДОБАВЛЕНО — СТАРЫЙ MAIN.JS НЕ ТРОГАЕМ
+   ========================================================= */
+
+(function () {
+
+    let globalSiteBanData = null;
+
+    function globalBanEscape(value) {
+        const div = document.createElement("div");
+        div.textContent = value == null ? "" : String(value);
+        return div.innerHTML;
+    }
+
+    function globalBanFormatDate(value) {
+        if (!value) {
+            return "—";
+        }
+
+        const date = new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+            return "—";
+        }
+
+        return date.toLocaleString(
+            "ru-RU",
+            {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+    }
+
+    function globalBanFormatRemaining(expiresAt) {
+
+        if (!expiresAt) {
+            return "Никогда";
+        }
+
+        const remaining =
+            new Date(expiresAt).getTime() -
+            Date.now();
+
+        if (remaining <= 0) {
+            return "Блокировка закончилась";
+        }
+
+        const totalSeconds =
+            Math.floor(remaining / 1000);
+
+        const days =
+            Math.floor(totalSeconds / 86400);
+
+        const hours =
+            Math.floor(
+                (totalSeconds % 86400) / 3600
+            );
+
+        const minutes =
+            Math.floor(
+                (totalSeconds % 3600) / 60
+            );
+
+        const seconds =
+            totalSeconds % 60;
+
+        const parts = [];
+
+        if (days > 0) {
+            parts.push(days + " д");
+        }
+
+        if (hours > 0 || days > 0) {
+            parts.push(hours + " ч");
+        }
+
+        parts.push(minutes + " мин");
+        parts.push(seconds + " сек");
+
+        return parts.join(" ");
+    }
+
+    function globalBanDuration(
+        issuedAt,
+        expiresAt
+    ) {
+
+        if (!issuedAt || !expiresAt) {
+            return "Никогда";
+        }
+
+        const from =
+            new Date(issuedAt).getTime();
+
+        const to =
+            new Date(expiresAt).getTime();
+
+        if (
+            !Number.isFinite(from) ||
+            !Number.isFinite(to) ||
+            to <= from
+        ) {
+            return "—";
+        }
+
+        const totalMinutes =
+            Math.ceil(
+                (to - from) / 60000
+            );
+
+        return totalMinutes + " мин";
+    }
+
+    function globalBanIsBanType(type) {
+
+        const value =
+            String(type || "").toLowerCase();
+
+        return (
+            value === "ban" ||
+            value === "temporary_ban"
+        );
+    }
+
+    function globalBanBuildOverlay(punishment) {
+
+        const existing =
+            document.getElementById(
+                "global-site-ban-overlay"
+            );
+
+        if (existing) {
+            existing.remove();
+        }
+
+        const temporary =
+            Boolean(punishment.expires_at);
+
+        const endText =
+            temporary
+                ? globalBanFormatDate(
+                    punishment.expires_at
+                )
+                : "Никогда";
+
+        const duration =
+            temporary
+                ? globalBanDuration(
+                    punishment.issued_at,
+                    punishment.expires_at
+                )
+                : "Навсегда";
+
+        const title =
+            punishment.punishment_type ===
+            "temporary_ban"
+                ? "🚫 Вы были временно заблокированы на сайте."
+                : "🚫 Вы были заблокированы на сайте.";
+
+        const overlay =
+            document.createElement("div");
+
+        overlay.id =
+            "global-site-ban-overlay";
+
+        overlay.className =
+            "global-site-ban-visible";
+
+        overlay.innerHTML = `
+            <div
+                class="global-site-ban-window"
+                role="alertdialog"
+                aria-modal="true"
+                aria-label="Блокировка сайта"
+            >
+
+                <div class="global-site-ban-title">
+                    ${title}
+                    <br>
+                    Администратором / Модератором.
+                </div>
+
+                <p class="global-site-ban-text">
+                    Доступ к сайту ограничен до снятия наказания.
+                </p>
+
+                <table class="global-site-ban-table">
+                    <tbody>
+
+                        <tr>
+                            <th>Причина:</th>
+                            <td>
+                                ${globalBanEscape(
+                                    punishment.reason ||
+                                    "Не указана"
+                                )}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Дата выдачи наказания:</th>
+                            <td>
+                                ${globalBanEscape(
+                                    globalBanFormatDate(
+                                        punishment.issued_at
+                                    )
+                                )}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Срок наказания:</th>
+                            <td>
+                                ${globalBanEscape(duration)}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>
+                                Время / Дата снятия наказания:
+                            </th>
+                            <td>
+                                ${globalBanEscape(endText)}
+                            </td>
+                        </tr>
+
+                        ${
+                            temporary
+                                ? `
+                                    <tr>
+                                        <th>⏱ Осталось:</th>
+                                        <td>
+                                            <strong
+                                                id="global-site-ban-countdown"
+                                                class="global-site-ban-countdown"
+                                            >
+                                                ${globalBanEscape(
+                                                    globalBanFormatRemaining(
+                                                        punishment.expires_at
+                                                    )
+                                                )}
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                  `
+                                : ""
+                        }
+
+                    </tbody>
+                </table>
+
+                <div class="global-site-ban-support">
+                    <strong>
+                        Не согласны с решением Администратора / модератора?
+                    </strong>
+                    <br>
+                    Служба поддержки:
+                    <a href="about.html">
+                        раздел «О сайте»
+                    </a>
+                </div>
+
+        `;
+
+        document.body.appendChild(overlay);
+
+        document.body.classList.add(
+            "global-site-ban-active"
+        );
+
+
+    }
+
+    function globalBanUpdateCountdown() {
+
+        if (!globalSiteBanData) {
+            return;
+        }
+
+        const expiresAt =
+            globalSiteBanData.expires_at;
+
+        if (!expiresAt) {
+            return;
+        }
+
+        const countdown =
+            document.getElementById(
+                "global-site-ban-countdown"
+            );
+
+        if (!countdown) {
+            return;
+        }
+
+        const remaining =
+            new Date(expiresAt).getTime() -
+            Date.now();
+
+        if (remaining <= 0) {
+
+            globalSiteBanData = null;
+
+            const overlay =
+                document.getElementById(
+                    "global-site-ban-overlay"
+                );
+
+            if (overlay) {
+                overlay.remove();
+            }
+
+            document.body.classList.remove(
+                "global-site-ban-active"
+            );
+
+            return;
+        }
+
+        countdown.textContent =
+            globalBanFormatRemaining(
+                expiresAt
+            );
+    }
+
+    async function globalBanCheck() {
+
+        /*
+           Ждём старый main.js, чтобы его
+           существующий supabaseClient успел появиться.
+        */
+        for (
+            let attempt = 0;
+            attempt < 50;
+            attempt++
+        ) {
+
+            if (
+                typeof supabaseClient !==
+                "undefined"
+            ) {
+                break;
+            }
+
+            await new Promise(
+                resolve =>
+                    setTimeout(
+                        resolve,
+                        100
+                    )
+            );
+        }
+
+        if (
+            typeof supabaseClient ===
+            "undefined"
+        ) {
+            console.error(
+                "Глобальная проверка бана: supabaseClient не найден."
+            );
+            return;
+        }
+
+        const {
+            data: userData,
+            error: userError
+        } =
+            await supabaseClient.auth.getUser();
+
+        if (
+            userError ||
+            !userData ||
+            !userData.user
+        ) {
+            return;
+        }
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient.rpc(
+                "get_active_user_punishment",
+                {
+                    target_user_id:
+                        userData.user.id
+                }
+            );
+
+        if (error) {
+
+            console.error(
+                "Глобальная проверка бана:",
+                error
+            );
+
+            return;
+        }
+
+        let punishment = null;
+
+        if (Array.isArray(data)) {
+
+            punishment =
+                data.find(
+                    item =>
+                        item &&
+                        globalBanIsBanType(
+                            item.punishment_type
+                        )
+                ) || null;
+
+        } else if (
+            data &&
+            globalBanIsBanType(
+                data.punishment_type
+            )
+        ) {
+
+            punishment = data;
+        }
+
+        if (!punishment) {
+
+            globalSiteBanData = null;
+
+            const overlay =
+                document.getElementById(
+                    "global-site-ban-overlay"
+                );
+
+            if (overlay) {
+                overlay.remove();
+            }
+
+            document.body.classList.remove(
+                "global-site-ban-active"
+            );
+
+            return;
+        }
+
+        /*
+         * Если это то же самое наказание, которое уже показано,
+         * не пересоздаём окно каждые 2 секунды.
+         */
+        if (
+            globalSiteBanData &&
+            globalSiteBanData.punishment_type ===
+                punishment.punishment_type &&
+            globalSiteBanData.issued_at ===
+                punishment.issued_at &&
+            globalSiteBanData.expires_at ===
+                punishment.expires_at
+        ) {
+            globalBanUpdateCountdown();
+            return;
+        }
+
+        globalSiteBanData =
+            punishment;
+
+        /*
+         * ЕСЛИ АКТИВНЫЙ BAN / TEMPORARY_BAN ОБНАРУЖЕН
+         * НА СТРАНИЦЕ НОВОСТИ — СРАЗУ ОТПРАВЛЯЕМ
+         * ПОЛЬЗОВАТЕЛЯ НА ГЛАВНУЮ.
+         *
+         * index.html также проверяет наказание,
+         * поэтому после перехода пользователь НЕ
+         * получает доступ к сайту — ему показывается
+         * глобальное окно блокировки.
+         */
+        const currentPage =
+            window.location.pathname
+                .split("/")
+                .pop()
+                .toLowerCase();
+
+        if (
+            currentPage === "news-post.html"
+        ) {
+            window.location.replace(
+                "index.html"
+            );
+            return;
+        }
+
+        globalBanBuildOverlay(
+            punishment
+        );
+
+        globalBanUpdateCountdown();
+    }
+
+    /*
+       Запускаем после загрузки DOM.
+    */
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            globalBanCheck,
+            {
+                once: true
+            }
+        );
+
+    } else {
+
+        globalBanCheck();
+    }
+
+    /*
+       Обновляем таймер каждую секунду.
+    */
+    setInterval(
+        globalBanUpdateCountdown,
+        1000
+    );
+
+    /*
+     * Повторно проверяем наказание раз в 2 секунды.
+     * Это позволяет обнаружить новый BAN / TEMPORARY_BAN
+     * даже если пользователь уже находится на странице.
+     */
+    setInterval(
+        globalBanCheck,
+        2000
+    );
+
+})();
+</script>
+
+
+<style>
+/* =========================================================
+   🔥 NEON NEWS PORTAL — ГЛАВНАЯ
+   Только оформление. Существующий HTML/JS не изменён.
+   ========================================================= */
+
+:root{
+    --news-red:#b00000;
+    --news-red-bright:#ff2020;
+    --news-dark:#090909;
+}
+
+/* ФОН */
+body{
+    background:
+        radial-gradient(circle at 7% 4%,rgba(176,0,0,.17),transparent 28%),
+        radial-gradient(circle at 93% 82%,rgba(255,0,0,.09),transparent 27%),
+        linear-gradient(135deg,#080808,#171717 48%,#090909);
+    background-attachment:fixed;
+    animation:newsPageIn .6s ease-out;
+}
+
+@keyframes newsPageIn{
+    from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* ВЕРХНИЙ БАННЕР */
+.top-banner{
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid rgba(255,255,255,.10);
+    box-shadow:
+        0 6px 25px rgba(0,0,0,.28),
+        0 0 25px rgba(176,0,0,.08);
+}
+
+.top-banner::after{
+    content:"";
+    position:absolute;
+    left:-35%;
+    bottom:0;
+    width:170%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,40,40,.9),transparent);
+    animation:newsScan 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes newsScan{
+    from{transform:translateX(-25%);opacity:.25}
+    50%{opacity:1}
+    to{transform:translateX(25%);opacity:.25}
+}
+
+.banner-video{
+    transition:box-shadow .35s ease;
+}
+
+.banner-video:hover{
+    box-shadow:
+        inset 0 0 25px rgba(176,0,0,.12),
+        0 0 22px rgba(176,0,0,.08);
+}
+
+/* ШАПКА */
+.header{
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(115deg,#650000,#b00000 50%,#720000);
+    border-bottom:1px solid rgba(255,255,255,.15);
+    box-shadow:
+        0 8px 32px rgba(176,0,0,.28),
+        0 0 35px rgba(176,0,0,.10);
+}
+
+.header::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    right:-190px;
+    top:-285px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.13);
+    box-shadow:0 0 35px rgba(255,40,40,.17);
+    animation:headerOrb 8s ease-in-out infinite alternate;
+    pointer-events:none;
+}
+
+.header::after{
+    content:"";
+    position:absolute;
+    left:-30%;
+    bottom:0;
+    width:160%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    animation:headerScan 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes headerOrb{
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(-35px,35px) scale(1.12)}
+}
+
+@keyframes headerScan{
+    from{transform:translateX(-30%);opacity:.2}
+    50%{opacity:1}
+    to{transform:translateX(30%);opacity:.2}
+}
+
+.header-content{
+    position:relative;
+    z-index:2;
+}
+
+.header h1{
+    text-shadow:
+        0 0 9px rgba(255,255,255,.25),
+        0 0 25px rgba(255,0,0,.25);
+}
+
+/* МЕНЮ */
+.menu{
+    position:relative;
+    z-index:5;
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.18);
+}
+
+.menu a{
+    position:relative;
+    overflow:hidden;
+    transition:
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        background .3s ease,
+        color .25s ease,
+        box-shadow .3s ease;
+}
+
+.menu a::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:
+        linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+    pointer-events:none;
+}
+
+.menu a:hover{
+    transform:translateY(-3px);
+    background:
+        linear-gradient(135deg,#850000,#b00000);
+    color:#fff;
+    box-shadow:
+        0 7px 18px rgba(0,0,0,.22),
+        0 0 18px rgba(176,0,0,.20);
+}
+
+.menu a:hover::after{
+    left:140%;
+}
+
+.menu a:active{
+    transform:translateY(-1px) scale(.985);
+}
+
+/* ОБЩИЕ БОКОВЫЕ БЛОКИ */
+.box{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.25);
+    border-radius:9px;
+    box-shadow:
+        0 9px 26px rgba(0,0,0,.13),
+        0 0 18px rgba(176,0,0,.06);
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+    animation:newsCardIn .55s ease both;
+}
+
+.box::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background:linear-gradient(#ff2020,#820000);
+    box-shadow:
+        0 0 11px rgba(255,0,0,.55),
+        0 0 23px rgba(176,0,0,.18);
+}
+
+.box:hover{
+    transform:translateY(-3px);
+    border-color:rgba(176,0,0,.40);
+    box-shadow:
+        0 13px 30px rgba(0,0,0,.18),
+        0 0 20px rgba(176,0,0,.10);
+}
+
+.box-title{
+    position:relative;
+    text-shadow:0 0 8px rgba(176,0,0,.12);
+}
+
+.box-title::after{
+    content:"";
+    display:block;
+    width:42px;
+    height:2px;
+    margin-top:7px;
+    border-radius:4px;
+    background:#b00000;
+    box-shadow:0 0 8px rgba(255,0,0,.55);
+}
+
+.box-body a{
+    position:relative;
+    transition:
+        color .25s ease,
+        padding-left .25s ease,
+        text-shadow .25s ease;
+}
+
+.box-body a:hover{
+    color:#b00000;
+    padding-left:5px;
+    text-shadow:0 0 8px rgba(176,0,0,.15);
+}
+
+@keyframes newsCardIn{
+    from{opacity:0;transform:translateY(12px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* ЦЕНТРАЛЬНАЯ ПУБЛИКАЦИЯ */
+.main,
+.latest-section{
+    position:relative;
+    border:1px solid rgba(176,0,0,.23);
+    border-radius:10px;
+    box-shadow:
+        0 11px 32px rgba(0,0,0,.14),
+        0 0 20px rgba(176,0,0,.06);
+    animation:newsMainIn .65s ease both;
+}
+
+@keyframes newsMainIn{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.main-title,
+.section-title{
+    position:relative;
+    background:
+        linear-gradient(135deg,#850000,#b00000 52%,#720000);
+    box-shadow:
+        0 4px 15px rgba(176,0,0,.15);
+    text-shadow:0 0 8px rgba(255,255,255,.14);
+}
+
+.main-title::after,
+.section-title::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:80px;
+    height:2px;
+    background:#ff3030;
+    box-shadow:0 0 9px rgba(255,0,0,.7);
+    animation:titleGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes titleGlow{
+    0%,100%{opacity:.45}
+    50%{opacity:1}
+}
+
+.article{
+    position:relative;
+}
+
+.article h2{
+    text-shadow:
+        0 0 8px rgba(176,0,0,.10);
+}
+
+.date{
+    color:#888;
+}
+
+/* ГЛАВНОЕ ФОТО */
+.main-photo{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.22);
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.16),
+        0 0 16px rgba(176,0,0,.07);
+}
+
+.main-photo::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            115deg,
+            transparent 0%,
+            transparent 42%,
+            rgba(255,255,255,.14) 50%,
+            transparent 58%,
+            transparent 100%
+        );
+    transform:translateX(-120%);
+    transition:transform .7s ease;
+    pointer-events:none;
+}
+
+.main-photo:hover::after{
+    transform:translateX(120%);
+}
+
+.main-photo img{
+    transition:
+        transform .65s cubic-bezier(.2,.8,.2,1),
+        filter .5s ease;
+}
+
+.main-photo:hover img{
+    transform:scale(1.035);
+    filter:saturate(1.05) contrast(1.02);
+}
+
+/* КНОПКА ЧИТАТЬ */
+.read-more{
+    position:relative;
+    overflow:hidden;
+    display:inline-block;
+    border-radius:6px;
+    background:
+        linear-gradient(135deg,#850000,#b00000 52%,#720000);
+    color:#fff!important;
+    box-shadow:
+        0 5px 16px rgba(176,0,0,.18);
+    transition:
+        transform .28s cubic-bezier(.2,.8,.2,1),
+        box-shadow .3s ease,
+        background .3s ease;
+}
+
+.read-more::after{
+    content:"";
+    position:absolute;
+    top:-20%;
+    left:-120%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+    pointer-events:none;
+}
+
+.read-more:hover{
+    transform:translateY(-4px);
+    background:
+        linear-gradient(135deg,#b00000,#df0000 52%,#900000);
+    box-shadow:
+        0 10px 24px rgba(0,0,0,.23),
+        0 0 20px rgba(176,0,0,.25);
+}
+
+.read-more:hover::after{
+    left:140%;
+}
+
+.read-more:active{
+    transform:translateY(-1px) scale(.985);
+}
+
+/* КАРТОЧКИ */
+.card{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.17);
+    border-radius:8px;
+    box-shadow:
+        0 7px 20px rgba(0,0,0,.09);
+    transition:
+        transform .32s cubic-bezier(.2,.8,.2,1),
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:3px;
+    height:0;
+    background:#b00000;
+    box-shadow:0 0 12px rgba(255,0,0,.55);
+    transition:height .35s ease;
+    z-index:2;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(176,0,0,.40);
+    box-shadow:
+        0 13px 30px rgba(0,0,0,.16),
+        0 0 20px rgba(176,0,0,.09);
+}
+
+.card:hover::before{
+    height:100%;
+}
+
+.card-photo{
+    position:relative;
+    overflow:hidden;
+}
+
+.card-photo img{
+    transition:
+        transform .6s cubic-bezier(.2,.8,.2,1),
+        filter .5s ease;
+}
+
+.card:hover .card-photo img{
+    transform:scale(1.06);
+    filter:saturate(1.06);
+}
+
+.card h3{
+    transition:
+        color .25s ease,
+        text-shadow .25s ease;
+}
+
+.card:hover h3{
+    color:#b00000;
+    text-shadow:0 0 8px rgba(176,0,0,.10);
+}
+
+.card > a{
+    position:relative;
+    display:inline-block;
+    transition:
+        transform .25s ease,
+        color .25s ease;
+}
+
+.card > a:hover{
+    color:#b00000;
+    transform:translateX(5px);
+}
+
+/* ПУБЛИКАЦИИ В САЙДБАРЕ */
+.sidebar-publication{
+    border-bottom:1px solid rgba(176,0,0,.10);
+    transition:
+        background .25s ease,
+        padding-left .25s ease;
+}
+
+.sidebar-publication:hover{
+    background:rgba(176,0,0,.035);
+    padding-left:5px;
+}
+
+.sidebar-publication a{
+    transition:
+        color .25s ease,
+        text-shadow .25s ease;
+}
+
+.sidebar-publication a:hover{
+    color:#b00000;
+    text-shadow:0 0 8px rgba(176,0,0,.16);
+}
+
+/* БАННЕРЫ */
+.side-banner{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.25);
+    box-shadow:
+        0 8px 22px rgba(0,0,0,.14),
+        0 0 17px rgba(176,0,0,.07);
+}
+
+.side-banner::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:65%;
+    height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
+    transform:skewX(-18deg);
+    transition:left .7s ease;
+    pointer-events:none;
+}
+
+.side-banner:hover::after{
+    left:140%;
+}
+
+/* FOOTER */
+footer{
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(135deg,#090909,#161616);
+    border-top:1px solid rgba(176,0,0,.35);
+    box-shadow:
+        0 -6px 25px rgba(0,0,0,.20);
+}
+
+footer::before{
+    content:"";
+    position:absolute;
+    left:-30%;
+    top:0;
+    width:160%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,#b00000,transparent);
+    box-shadow:0 0 10px rgba(255,0,0,.45);
+    animation:footerLine 4s linear infinite;
+}
+
+@keyframes footerLine{
+    from{transform:translateX(-25%)}
+    to{transform:translateX(25%)}
+}
+
+/* ПЛАВНОЕ ПОЯВЛЕНИЕ КАРТОЧЕК */
+.card:nth-child(1){animation:newsCardIn .5s .05s ease both}
+.card:nth-child(2){animation:newsCardIn .5s .12s ease both}
+.card:nth-child(3){animation:newsCardIn .5s .19s ease both}
+
+/* МОБИЛЬНАЯ ВЕРСИЯ */
+@media(max-width:700px){
+    body{
+        background:
+            radial-gradient(circle at 50% 0%,rgba(176,0,0,.17),transparent 35%),
+            #111;
+        background-attachment:fixed;
+    }
+
+    .box:hover{
+        transform:none;
+    }
+
+    .card:hover{
+        transform:translateY(-3px);
+    }
+
+    .menu a:hover{
+        transform:translateY(-2px);
+    }
+
+    .read-more:hover{
+        transform:translateY(-2px);
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important;
+    }
+}
+</style>
+
+</body>
+
+</html>

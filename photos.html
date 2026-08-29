@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Фото — Новостной портал Богаева М. Е.</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/mobile.css">
+
+<style>
+
+.photo-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    overflow: hidden;
+}
+
+.gallery-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #eeeeee;
+}
+
+.gallery-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.gallery-caption {
+    padding: 12px;
+    font-weight: bold;
+}
+
+.gallery-date {
+    padding: 0 12px 10px;
+    font-size: 13px;
+    color: #777777;
+}
+
+.gallery-link {
+    display: inline-block;
+    margin: 0 12px 15px;
+    color: #c00000;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.gallery-link:hover {
+    text-decoration: underline;
+}
+
+.photo-empty {
+    padding: 30px 10px;
+    text-align: center;
+}
+
+@media (max-width: 700px) {
+
+    .photo-gallery {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ВЕРХНИЙ БАННЕР -->
+
+<div class="top-banner">
+
+    <div class="banner-video">
+
+        <div class="banner-placeholder">
+            МЕСТО ДЛЯ ВИДЕО
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- САЙТ -->
+
+<div class="site">
+
+
+<!-- ШАПКА -->
+
+<header class="header">
+
+    <div class="header-content">
+
+        <h1>
+            НОВОСТНОЙ ПОРТАЛ БОГАЕВА М. Е.
+        </h1>
+
+        <p>
+            Новости • События • Материалы • Фото • Видео
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<!-- МЕНЮ -->
+
+<nav class="menu">
+
+    <a href="index.html">
+        Главная
+    </a>
+
+    <a href="news.html">
+        Новости
+    </a>
+
+    <a href="articles.html">
+        Статьи
+    </a>
+
+    <a href="photos.html">
+        Фото
+    </a>
+
+    <a href="videos.html">
+        Видео
+    </a>
+
+    <a href="about.html">
+        О сайте
+    </a>
+
+    <!-- ДОБАВИЛИ ПОИСК -->
+
+    <a href="search.html">
+        🔎 Поиск
+    </a>
+
+    <a href="chat.html" class="chat-link">
+        💬 Всеобщий чат
+    </a>
+
+</nav>
+
+
+
+<!-- ОСНОВНОЙ LAYOUT -->
+
+<div class="layout">
+
+
+<!-- ЛЕВАЯ КОЛОНКА -->
+
+<aside class="sidebar">
+
+
+    <div class="box">
+
+        <div class="box-title">
+            Разделы
+        </div>
+
+        <div class="box-body">
+
+            <a href="index.html">
+                Главная
+            </a>
+
+            <a href="news.html">
+                Последние новости
+            </a>
+
+            <a href="articles.html">
+                Статьи
+            </a>
+
+            <a href="photos.html">
+                Фотографии
+            </a>
+
+            <a href="videos.html">
+                Видео
+            </a>
+
+            <a href="about.html">
+                О сайте
+            </a>
+
+            <!-- ДОБАВИЛИ ПОИСК -->
+
+            <a href="search.html">
+                🔎 Поиск
+            </a>
+
+            <a href="chat.html" class="chat-link">
+                💬 Всеобщий чат
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="box">
+
+        <div class="box-title">
+            Последние публикации
+        </div>
+
+        <div
+            class="box-body"
+            id="sidebarPosts"
+        >
+
+            Загрузка...
+
+        </div>
+
+    </div>
+
+
+
+    <div class="side-banner">
+
+        БОКОВОЙ БАННЕР
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- ЦЕНТРАЛЬНАЯ ЧАСТЬ -->
+
+<main class="main-content">
+
+
+    <section class="main">
+
+
+        <div class="main-title">
+            ФОТОГАЛЕРЕЯ
+        </div>
+
+
+
+        <div class="article">
+
+
+            <h2>
+                Фотографии
+            </h2>
+
+
+            <div class="date">
+                Фотографии и визуальные материалы портала
+            </div>
+
+
+
+            <!-- ФОТОГАЛЕРЕЯ -->
+
+            <div
+                class="photo-gallery"
+                id="photoGallery"
+            >
+
+                Загрузка фотографий...
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ПРАВАЯ КОЛОНКА -->
+
+<aside class="right-sidebar">
+
+
+    <div class="side-banner">
+
+        БАННЕР
+
+    </div>
+
+
+
+    <div class="box">
+
+        <div class="box-title">
+            Популярное
+        </div>
+
+        <div class="box-body" id="popularPosts">
+
+            <div class="sidebar-publication">
+                Загрузка...
+            </div>
+
+        </div>
+
+    </div>
+
+
+</aside>
+
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    © 2026 Новостной портал Богаева М. Е.
+
+    <br>
+
+    Новости • События • Материалы
+
+</footer>
+
+
+</div>
+
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+
+// ==========================================
+// SUPABASE
+// ==========================================
+
+const SUPABASE_URL =
+    "https://fmqjevqagtasqpeezwnn.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_Me5hyK-zIp3_5yBpHP8VVA_OFk2bqSj";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+// ==========================================
+// ЗАГРУЗКА ФОТОГРАФИЙ
+// ==========================================
+
+async function loadPhotos() {
+
+
+    const gallery =
+        document.getElementById(
+            "photoGallery"
+        );
+
+
+    const sidebarPosts =
+        document.getElementById(
+            "sidebarPosts"
+        );
+
+
+
+    // ======================================
+    // ПОЛУЧАЕМ ПУБЛИКАЦИИ КАТЕГОРИИ PHOTOS
+    // ======================================
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("posts")
+        .select("*")
+        .eq("published", true)
+        .eq("category", "photos")
+        .order("created_at", {
+            ascending: false
+        });
+
+
+
+    // ======================================
+    // ОШИБКА
+    // ======================================
+
+    if (error) {
+
+        console.error(
+            "Ошибка загрузки фотографий:",
+            error
+        );
+
+
+        gallery.innerHTML =
+            '<div class="photo-empty">Не удалось загрузить фотографии.</div>';
+
+
+        sidebarPosts.innerHTML =
+            "Ошибка загрузки.";
+
+
+        return;
+
+    }
+
+
+
+    // ======================================
+    // ФОТОГРАФИЙ НЕТ
+    // ======================================
+
+    if (!data || data.length === 0) {
+
+        gallery.innerHTML =
+            '<div class="photo-empty">Пока опубликованных фотографий нет.</div>';
+
+
+        sidebarPosts.innerHTML =
+            "Пока публикаций нет.";
+
+
+        return;
+
+    }
+
+
+
+    // ======================================
+    // ОЧИЩАЕМ
+    // ======================================
+
+    gallery.innerHTML = "";
+
+    sidebarPosts.innerHTML = "";
+
+
+
+    // ======================================
+    // СОЗДАЁМ ГАЛЕРЕЮ
+    // ======================================
+
+    data.forEach(function(post, index) {
+
+
+        // ==================================
+        // ЭЛЕМЕНТ ГАЛЕРЕИ
+        // ==================================
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "gallery-item";
+
+
+
+        // ==================================
+        // ИЗОБРАЖЕНИЕ
+        // ==================================
+
+        const imageBox =
+            document.createElement(
+                "div"
+            );
+
+
+        imageBox.className =
+            "gallery-image";
+
+
+        if (post.image_url) {
+
+
+            const img =
+                document.createElement(
+                    "img"
+                );
+
+
+            img.src =
+                post.image_url;
+
+
+            img.alt =
+                post.title ||
+                "Фотография";
+
+
+            imageBox.appendChild(
+                img
+            );
+
+
+        } else {
+
+
+            imageBox.textContent =
+                "ФОТО ОТСУТСТВУЕТ";
+
+
+            imageBox.style.display =
+                "flex";
+
+
+            imageBox.style.alignItems =
+                "center";
+
+
+            imageBox.style.justifyContent =
+                "center";
+
+        }
+
+
+
+        // ==================================
+        // НАЗВАНИЕ
+        // ==================================
+
+        const caption =
+            document.createElement(
+                "div"
+            );
+
+
+        caption.className =
+            "gallery-caption";
+
+
+        caption.textContent =
+            post.title ||
+            "Без названия";
+
+
+
+        // ==================================
+        // ДАТА
+        // ==================================
+
+        const date =
+            document.createElement(
+                "div"
+            );
+
+
+        date.className =
+            "gallery-date";
+
+
+        date.textContent =
+            formatDate(
+                post.created_at
+            );
+
+
+
+        // ==================================
+        // ССЫЛКА
+        // ==================================
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+
+        link.className =
+            "gallery-link";
+
+
+        link.href =
+            "news-post.html?id="
+            + encodeURIComponent(
+                post.id
+            );
+
+
+        link.textContent =
+            "Открыть публикацию →";
+
+
+
+        // ==================================
+        // СОБИРАЕМ
+        // ==================================
+
+        item.appendChild(
+            imageBox
+        );
+
+
+        item.appendChild(
+            caption
+        );
+
+
+        item.appendChild(
+            date
+        );
+
+
+        item.appendChild(
+            link
+        );
+
+
+        gallery.appendChild(
+            item
+        );
+
+
+
+        // ==================================
+        // ПОСЛЕДНИЕ ПУБЛИКАЦИИ
+        // ==================================
+
+        if (index < 3) {
+
+
+            const sidebarItem =
+                document.createElement(
+                    "div"
+                );
+
+
+            sidebarItem.className =
+                "sidebar-publication";
+
+
+            const sidebarLink =
+                document.createElement(
+                    "a"
+                );
+
+
+            sidebarLink.href =
+                "news-post.html?id="
+                + encodeURIComponent(
+                    post.id
+                );
+
+
+            sidebarLink.textContent =
+                post.title ||
+                "Без названия";
+
+
+            sidebarItem.appendChild(
+                sidebarLink
+            );
+
+
+            sidebarPosts.appendChild(
+                sidebarItem
+            );
+
+        }
+
+    });
+
+}
+
+
+
+// ==========================================
+// ФОРМАТ ДАТЫ
+// ==========================================
+
+function formatDate(
+    dateString
+) {
+
+
+    if (!dateString) {
+
+        return "Дата неизвестна";
+
+    }
+
+
+    return new Date(
+        dateString
+    ).toLocaleDateString(
+        "ru-RU",
+        {
+            day: "2-digit",
+            month: "long",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+
+// ==========================================
+// ЗАПУСК
+// ==========================================
+
+loadPhotos();
+
+
+</script>
+
+
+
+<script>
+/* =================================================
+   ДИНАМИЧЕСКОЕ «ПОПУЛЯРНОЕ»
+   ================================================= */
+
+async function loadPopularPosts() {
+
+    const container =
+        document.getElementById("popularPosts");
+
+    if (!container) {
+        return;
+    }
+
+    if (typeof supabaseClient === "undefined") {
+        container.innerHTML = `
+            <div class="sidebar-publication">
+                Ошибка подключения.
+            </div>
+        `;
+        return;
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("posts")
+        .select("id,title,created_at")
+        .eq("published", true)
+        .order("created_at", {
+            ascending: false
+        })
+        .limit(3);
+
+    if (error) {
+        console.error(
+            "Ошибка загрузки популярных публикаций:",
+            error
+        );
+
+        container.innerHTML = `
+            <div class="sidebar-publication">
+                Не удалось загрузить публикации.
+            </div>
+        `;
+
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        container.innerHTML = `
+            <div class="sidebar-publication">
+                Публикаций пока нет.
+            </div>
+        `;
+
+        return;
+    }
+
+    container.innerHTML = "";
+
+    data.forEach(function(post) {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "sidebar-publication";
+
+        const link =
+            document.createElement("a");
+
+        link.href =
+            "news-post.html?id=" +
+            encodeURIComponent(post.id);
+
+        link.textContent =
+            post.title || "Без названия";
+
+        item.appendChild(link);
+        container.appendChild(item);
+
+    });
+}
+
+loadPopularPosts();
+</script>
+
+<script src="js/ban-guard.js"></script>
+
+
+<style>
+/* =========================================================
+   🔥 NEON NEWS PORTAL — ФОТОГАЛЕРЕЯ
+   Только визуальный слой. Старый код и функционал сохранены.
+   ========================================================= */
+
+body{
+    background:
+        radial-gradient(circle at 7% 4%,rgba(176,0,0,.17),transparent 28%),
+        radial-gradient(circle at 93% 82%,rgba(255,0,0,.09),transparent 27%),
+        linear-gradient(135deg,#080808,#171717 48%,#090909);
+    background-attachment:fixed;
+    animation:photosPageIn .6s ease-out;
+}
+
+@keyframes photosPageIn{
+    from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* БАННЕР */
+.top-banner{
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid rgba(255,255,255,.10);
+    box-shadow:0 6px 25px rgba(0,0,0,.28),0 0 25px rgba(176,0,0,.08);
+}
+
+.top-banner::after{
+    content:"";
+    position:absolute;
+    left:-35%;
+    bottom:0;
+    width:170%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,40,40,.9),transparent);
+    animation:photosScan 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes photosScan{
+    from{transform:translateX(-25%);opacity:.25}
+    50%{opacity:1}
+    to{transform:translateX(25%);opacity:.25}
+}
+
+/* ШАПКА */
+.header{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(115deg,#650000,#b00000 50%,#720000);
+    border-bottom:1px solid rgba(255,255,255,.15);
+    box-shadow:0 8px 32px rgba(176,0,0,.28),0 0 35px rgba(176,0,0,.10);
+}
+
+.header::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    right:-190px;
+    top:-285px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.13);
+    box-shadow:0 0 35px rgba(255,40,40,.17);
+    animation:photosOrb 8s ease-in-out infinite alternate;
+    pointer-events:none;
+}
+
+.header::after{
+    content:"";
+    position:absolute;
+    left:-30%;
+    bottom:0;
+    width:160%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    animation:photosHeaderScan 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes photosOrb{
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(-35px,35px) scale(1.12)}
+}
+
+@keyframes photosHeaderScan{
+    from{transform:translateX(-30%);opacity:.2}
+    50%{opacity:1}
+    to{transform:translateX(30%);opacity:.2}
+}
+
+.header-content{
+    position:relative;
+    z-index:2;
+}
+
+.header h1{
+    text-shadow:0 0 9px rgba(255,255,255,.25),0 0 25px rgba(255,0,0,.25);
+}
+
+/* МЕНЮ */
+.menu{
+    position:relative;
+    z-index:5;
+    box-shadow:0 5px 20px rgba(0,0,0,.18);
+}
+
+.menu a{
+    position:relative;
+    overflow:hidden;
+    transition:transform .28s cubic-bezier(.2,.8,.2,1),background .3s ease,color .25s ease,box-shadow .3s ease;
+}
+
+.menu a::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+    pointer-events:none;
+}
+
+.menu a:hover{
+    transform:translateY(-3px);
+    background:linear-gradient(135deg,#850000,#b00000);
+    color:#fff;
+    box-shadow:0 7px 18px rgba(0,0,0,.22),0 0 18px rgba(176,0,0,.20);
+}
+
+.menu a:hover::after{left:140%}
+.menu a:active{transform:translateY(-1px) scale(.985)}
+
+/* БОКОВЫЕ БЛОКИ */
+.box{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.25);
+    border-radius:9px;
+    box-shadow:0 9px 26px rgba(0,0,0,.13),0 0 18px rgba(176,0,0,.06);
+    transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+    animation:photosBoxIn .55s ease both;
+}
+
+.box::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background:linear-gradient(#ff2020,#820000);
+    box-shadow:0 0 11px rgba(255,0,0,.55),0 0 23px rgba(176,0,0,.18);
+}
+
+.box:hover{
+    transform:translateY(-3px);
+    border-color:rgba(176,0,0,.40);
+    box-shadow:0 13px 30px rgba(0,0,0,.18),0 0 20px rgba(176,0,0,.10);
+}
+
+.box-title{
+    position:relative;
+    text-shadow:0 0 8px rgba(176,0,0,.12);
+}
+
+.box-title::after{
+    content:"";
+    display:block;
+    width:42px;
+    height:2px;
+    margin-top:7px;
+    border-radius:4px;
+    background:#b00000;
+    box-shadow:0 0 8px rgba(255,0,0,.55);
+}
+
+.box-body a{
+    transition:color .25s ease,padding-left .25s ease,text-shadow .25s ease;
+}
+
+.box-body a:hover{
+    color:#b00000;
+    padding-left:5px;
+    text-shadow:0 0 8px rgba(176,0,0,.15);
+}
+
+@keyframes photosBoxIn{
+    from{opacity:0;transform:translateY(12px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* ЦЕНТРАЛЬНЫЙ БЛОК */
+.main{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.23);
+    border-radius:10px;
+    box-shadow:0 11px 32px rgba(0,0,0,.14),0 0 20px rgba(176,0,0,.06);
+    animation:photosMainIn .65s ease both;
+}
+
+@keyframes photosMainIn{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.main-title{
+    position:relative;
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000);
+    box-shadow:0 4px 15px rgba(176,0,0,.15);
+    text-shadow:0 0 8px rgba(255,255,255,.14);
+}
+
+.main-title::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:80px;
+    height:2px;
+    background:#ff3030;
+    box-shadow:0 0 9px rgba(255,0,0,.7);
+    animation:photosTitleGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes photosTitleGlow{
+    0%,100%{opacity:.45}
+    50%{opacity:1}
+}
+
+/* ГАЛЕРЕЯ */
+.photo-gallery{
+    position:relative;
+}
+
+.gallery-item{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.18);
+    border-radius:9px;
+    background:linear-gradient(145deg,#fff,#fafafa);
+    box-shadow:0 7px 20px rgba(0,0,0,.09);
+    transition:transform .32s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,border-color .3s ease;
+    animation:galleryReveal .55s ease both;
+}
+
+.gallery-item::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:3px;
+    height:0;
+    background:#b00000;
+    box-shadow:0 0 13px rgba(255,0,0,.55);
+    transition:height .35s ease;
+    z-index:4;
+}
+
+.gallery-item::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    bottom:0;
+    width:70%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,#ff2020,transparent);
+    transition:left .6s ease;
+    pointer-events:none;
+    z-index:5;
+}
+
+.gallery-item:hover{
+    transform:translateY(-6px) scale(1.005);
+    border-color:rgba(176,0,0,.42);
+    box-shadow:0 13px 30px rgba(0,0,0,.16),0 0 22px rgba(176,0,0,.11);
+}
+
+.gallery-item:hover::before{height:100%}
+.gallery-item:hover::after{left:125%}
+
+@keyframes galleryReveal{
+    from{opacity:0;transform:translateY(13px) scale(.99)}
+    to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* ФОТО */
+.gallery-image{
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid rgba(176,0,0,.13);
+}
+
+.gallery-image::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(115deg,transparent 0%,transparent 42%,rgba(255,255,255,.18) 50%,transparent 58%,transparent 100%);
+    transform:translateX(-120%);
+    transition:transform .7s ease;
+    pointer-events:none;
+    z-index:2;
+}
+
+.gallery-item:hover .gallery-image::after{
+    transform:translateX(120%);
+}
+
+.gallery-image img{
+    transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .5s ease;
+}
+
+.gallery-item:hover .gallery-image img{
+    transform:scale(1.07);
+    filter:saturate(1.08) contrast(1.02);
+}
+
+/* ПОДПИСЬ */
+.gallery-caption{
+    transition:color .25s ease,text-shadow .25s ease;
+}
+
+.gallery-item:hover .gallery-caption{
+    color:#b00000;
+    text-shadow:0 0 8px rgba(176,0,0,.10);
+}
+
+.gallery-date{
+    transition:color .25s ease;
+}
+
+.gallery-item:hover .gallery-date{
+    color:#a00000;
+}
+
+/* ССЫЛКА */
+.gallery-link{
+    position:relative;
+    overflow:hidden;
+    display:inline-block;
+    border-radius:5px;
+    transition:transform .25s ease,background .25s ease,color .25s ease,box-shadow .3s ease;
+}
+
+.gallery-link::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.25),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+}
+
+.gallery-link:hover{
+    color:#fff!important;
+    background:linear-gradient(135deg,#850000,#b00000);
+    text-decoration:none!important;
+    transform:translateX(3px) translateY(-2px);
+    box-shadow:0 6px 17px rgba(176,0,0,.20);
+    padding-left:12px;
+    padding-right:12px;
+}
+
+.gallery-link:hover::after{left:140%}
+
+/* ПУСТОЕ СОСТОЯНИЕ */
+.photo-empty{
+    border:1px dashed rgba(176,0,0,.28);
+    border-radius:8px;
+    color:#777;
+    box-shadow:inset 0 0 20px rgba(176,0,0,.025);
+}
+
+/* ПОСЛЕДНИЕ ПУБЛИКАЦИИ */
+.sidebar-publication{
+    position:relative;
+    border-bottom:1px solid rgba(176,0,0,.10);
+    transition:background .25s ease,padding-left .25s ease,box-shadow .25s ease;
+}
+
+.sidebar-publication:hover{
+    background:rgba(176,0,0,.035);
+    padding-left:5px;
+    box-shadow:inset 2px 0 0 rgba(176,0,0,.55);
+}
+
+.sidebar-publication a{
+    transition:color .25s ease,text-shadow .25s ease;
+}
+
+.sidebar-publication a:hover{
+    color:#b00000;
+    text-shadow:0 0 8px rgba(176,0,0,.16);
+}
+
+/* БАННЕРЫ */
+.side-banner{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.25);
+    box-shadow:0 8px 22px rgba(0,0,0,.14),0 0 17px rgba(176,0,0,.07);
+}
+
+.side-banner::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:65%;
+    height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
+    transform:skewX(-18deg);
+    transition:left .7s ease;
+    pointer-events:none;
+}
+
+.side-banner:hover::after{left:140%}
+
+/* FOOTER */
+footer{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg,#090909,#161616);
+    border-top:1px solid rgba(176,0,0,.35);
+    box-shadow:0 -6px 25px rgba(0,0,0,.20);
+}
+
+footer::before{
+    content:"";
+    position:absolute;
+    left:-30%;
+    top:0;
+    width:160%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,#b00000,transparent);
+    box-shadow:0 0 10px rgba(255,0,0,.45);
+    animation:photosFooterLine 4s linear infinite;
+}
+
+@keyframes photosFooterLine{
+    from{transform:translateX(-25%)}
+    to{transform:translateX(25%)}
+}
+
+/* ПОСЛЕДОВАТЕЛЬНОЕ ПОЯВЛЕНИЕ */
+.gallery-item:nth-child(1){animation-delay:.05s}
+.gallery-item:nth-child(2){animation-delay:.12s}
+.gallery-item:nth-child(3){animation-delay:.19s}
+.gallery-item:nth-child(4){animation-delay:.26s}
+.gallery-item:nth-child(5){animation-delay:.33s}
+.gallery-item:nth-child(6){animation-delay:.40s}
+
+/* МОБИЛЬНАЯ ВЕРСИЯ */
+@media(max-width:700px){
+    body{
+        background:
+            radial-gradient(circle at 50% 0%,rgba(176,0,0,.17),transparent 35%),
+            #111;
+        background-attachment:fixed;
+    }
+
+    .box:hover{transform:none}
+
+    .gallery-item:hover{
+        transform:translateY(-3px);
+    }
+
+    .menu a:hover{
+        transform:translateY(-2px);
+    }
+
+    .gallery-link:hover{
+        transform:translateX(2px) translateY(-1px);
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important;
+    }
+}
+</style>
+
+</body>
+
+</html>

@@ -1,0 +1,2612 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>
+    Поиск — Новостной портал Богаева М. Е.
+</title>
+
+<link rel="stylesheet"
+      href="css/style.css">
+
+<link rel="stylesheet"
+      href="css/mobile.css">
+
+
+<style>
+
+/* =========================================================
+   ПОИСК — ФОРМА
+   ========================================================= */
+
+.search-form {
+
+    display: flex;
+
+    gap: 8px;
+
+    width: 100%;
+
+    margin-bottom: 14px;
+
+    box-sizing: border-box;
+
+}
+
+
+.search-form input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    height: 40px;
+
+    padding: 0 12px;
+
+    border: 1px solid #bbb;
+
+    background: #fff;
+
+    color: #222;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    box-sizing: border-box;
+
+}
+
+
+.search-form input:focus {
+
+    outline: none;
+
+    border-color: #999;
+
+}
+
+
+.search-form button {
+
+    flex: 0 0 auto;
+
+    height: 40px;
+
+    padding: 0 20px;
+
+    border: none;
+
+    background: #c40000;
+
+    color: #fff;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.search-form button:hover {
+
+    background: #a90000;
+
+}
+
+
+
+/* =========================================================
+   ФИЛЬТРЫ
+   ========================================================= */
+
+.search-filters {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-bottom: 16px;
+
+}
+
+
+.search-filter {
+
+    padding: 7px 12px;
+
+    border: 1px solid #ccc;
+
+    background: #eee;
+
+    color: #333;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+}
+
+
+.search-filter:hover {
+
+    background: #ddd;
+
+}
+
+
+.search-filter.active {
+
+    background: #c40000;
+
+    color: #fff;
+
+    border-color: #c40000;
+
+}
+
+
+
+/* =========================================================
+   СТАТУС
+   ========================================================= */
+
+.search-status {
+
+    margin: 12px 0 18px;
+
+    color: #777;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+}
+
+
+
+/* =========================================================
+   РЕЗУЛЬТАТЫ
+   ========================================================= */
+
+.search-results {
+
+    width: 100%;
+
+    min-width: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+
+/* =========================================================
+   КАРТОЧКА РЕЗУЛЬТАТА
+   ========================================================= */
+
+.search-result-card {
+
+    display: flex;
+
+    width: 100%;
+
+    gap: 16px;
+
+    margin: 0 0 18px;
+
+    padding: 0 0 18px;
+
+    border-bottom: 1px solid #ddd;
+
+    box-sizing: border-box;
+
+}
+
+
+
+/* =========================================================
+   МЕДИА
+   ========================================================= */
+
+.search-result-media {
+
+    position: relative;
+
+    flex: 0 0 280px;
+
+    width: 280px;
+
+    height: 158px;
+
+    min-width: 280px;
+
+    overflow: hidden;
+
+    background: #222;
+
+    border: 1px solid #ccc;
+
+    box-sizing: border-box;
+
+}
+
+
+/* ВИДЕО */
+
+.search-result-media video {
+
+    display: block;
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    max-width: 100%;
+
+    max-height: 100%;
+
+    object-fit: cover;
+
+    background: #222;
+
+}
+
+
+/* ФОТО */
+
+.search-result-media img {
+
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    max-width: 100%;
+
+    max-height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+/* ЗАГЛУШКА */
+
+.search-result-media > span:not(.search-video-label) {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 100%;
+
+    height: 100%;
+
+    color: #aaa;
+
+    background: #eee;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   МЕТКА ВИДЕО
+   ========================================================= */
+
+.search-video-label {
+
+    position: absolute;
+
+    left: 9px;
+
+    bottom: 9px;
+
+    z-index: 5;
+
+    padding: 5px 8px;
+
+    background: rgba(0, 0, 0, 0.78);
+
+    color: #fff;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    pointer-events: none;
+
+}
+
+
+
+/* =========================================================
+   ИНФОРМАЦИЯ
+   ========================================================= */
+
+.search-result-info {
+
+    flex: 1;
+
+    min-width: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+.search-result-date {
+
+    margin-bottom: 6px;
+
+    color: #777;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+}
+
+
+.search-result-info h3 {
+
+    margin: 0 0 7px;
+
+    color: #222;
+
+    font-family: Georgia, serif;
+
+    font-size: 21px;
+
+    line-height: 1.2;
+
+}
+
+
+.search-result-category {
+
+    margin-bottom: 9px;
+
+    color: #777;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+}
+
+
+.search-result-info p {
+
+    margin: 0 0 12px;
+
+    color: #444;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    line-height: 1.45;
+
+}
+
+
+
+/* =========================================================
+   КНОПКА ОТКРЫТИЯ
+   ========================================================= */
+
+.search-result-info .read-more {
+
+    display: inline-block;
+
+    padding: 8px 12px;
+
+    background: #c40000;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+}
+
+
+.search-result-info .read-more:hover {
+
+    background: #a90000;
+
+}
+
+
+
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+
+    .search-form {
+
+        flex-direction: column;
+
+    }
+
+
+    .search-form input {
+
+        width: 100%;
+
+    }
+
+
+    .search-form button {
+
+        width: 100%;
+
+    }
+
+
+    .search-result-card {
+
+        display: block;
+
+    }
+
+
+    .search-result-media {
+
+        width: 100%;
+
+        min-width: 0;
+
+        height: auto;
+
+        aspect-ratio: 16 / 9;
+
+        margin-bottom: 12px;
+
+    }
+
+
+    .search-result-info h3 {
+
+        font-size: 19px;
+
+    }
+
+}
+
+</style>
+
+
+<style>
+/* ДОБАВЛЕНО ТОЛЬКО ДЛЯ СКРЫТИЯ ОПИСАНИЯ РЕЗУЛЬТАТА ПОИСКА В ОДНУ СТРОКУ */
+.search-result-info p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     ВЕРХНИЙ БАННЕР
+     ========================================================= -->
+
+<div class="top-banner">
+
+    <div class="banner-video">
+
+        <div class="banner-placeholder">
+            МЕСТО ДЛЯ ВИДЕО
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     САЙТ
+     ========================================================= -->
+
+<div class="site">
+
+
+<!-- =========================================================
+     ШАПКА
+     ========================================================= -->
+
+<header class="header">
+
+    <div class="header-content">
+
+        <h1>
+            НОВОСТНОЙ ПОРТАЛ БОГАЕВА М. Е.
+        </h1>
+
+        <p>
+            Новости • События • Материалы • Фото • Видео
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     МЕНЮ
+     ========================================================= -->
+
+<nav class="menu">
+
+    <a href="index.html">
+        Главная
+    </a>
+
+    <a href="news.html">
+        Новости
+    </a>
+
+    <a href="articles.html">
+        Статьи
+    </a>
+
+    <a href="photos.html">
+        Фото
+    </a>
+
+    <a href="videos.html">
+        Видео
+    </a>
+
+    <a href="about.html">
+        О сайте
+    </a>
+
+    <a href="search.html">
+        🔎 Поиск
+    </a>
+
+    <a href="chat.html" class="chat-link">
+        💬 Всеобщий чат
+    </a>
+
+</nav>
+
+
+
+<!-- =========================================================
+     ОСНОВНОЙ LAYOUT
+     ========================================================= -->
+
+<div class="layout">
+
+
+<!-- =========================================================
+     ЛЕВАЯ КОЛОНКА
+     ========================================================= -->
+
+<aside class="sidebar">
+
+
+    <div class="box">
+
+        <div class="box-title">
+            Разделы
+        </div>
+
+        <div class="box-body">
+
+            <a href="index.html">
+                Главная
+            </a>
+
+            <a href="news.html">
+                Последние новости
+            </a>
+
+            <a href="articles.html">
+                Статьи
+            </a>
+
+            <a href="photos.html">
+                Фотографии
+            </a>
+
+            <a href="videos.html">
+                Видео
+            </a>
+
+            <a href="about.html">
+                О сайте
+            </a>
+
+            <a href="search.html">
+                🔎 Поиск
+            </a>
+
+            <a href="chat.html" class="chat-link">
+                💬 Всеобщий чат
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="box">
+
+        <div class="box-title">
+            Последние публикации
+        </div>
+
+        <div
+            class="box-body"
+            id="sidebar-publications"
+        >
+
+            <div class="sidebar-publication">
+                Загрузка...
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="side-banner">
+        БОКОВОЙ БАННЕР
+    </div>
+
+
+</aside>
+
+
+
+<!-- =========================================================
+     ЦЕНТР
+     ========================================================= -->
+
+<main class="main-content">
+
+
+<section class="main">
+
+
+    <div class="main-title">
+        ПОИСК
+    </div>
+
+
+
+    <article class="article">
+
+
+        <h2>
+            Поиск публикаций
+        </h2>
+
+
+        <div class="date">
+            Найдите новости, статьи, фотографии
+            и видеоматериалы портала
+        </div>
+
+
+
+        <!-- =================================================
+             ФОРМА
+             ================================================= -->
+
+        <form
+            id="searchForm"
+            class="search-form"
+        >
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Введите название или текст..."
+                autocomplete="off"
+            >
+
+            <button type="submit">
+                Найти
+            </button>
+
+        </form>
+
+
+
+        <!-- =================================================
+             ФИЛЬТРЫ
+             ================================================= -->
+
+        <div
+            class="search-filters"
+            id="searchFilters"
+        >
+
+            <button
+                type="button"
+                class="search-filter active"
+                data-category="all"
+            >
+                Все
+            </button>
+
+            <button
+                type="button"
+                class="search-filter"
+                data-category="новости"
+            >
+                Новости
+            </button>
+
+            <button
+                type="button"
+                class="search-filter"
+                data-category="статьи"
+            >
+                Статьи
+            </button>
+
+            <button
+                type="button"
+                class="search-filter"
+                data-category="фото"
+            >
+                Фото
+            </button>
+
+            <button
+                type="button"
+                class="search-filter"
+                data-category="видео"
+            >
+                Видео
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             СТАТУС
+             ================================================= -->
+
+        <div
+            id="searchStatus"
+            class="search-status"
+        >
+            Введите запрос для поиска.
+        </div>
+
+
+
+        <!-- =================================================
+             РЕЗУЛЬТАТЫ
+             ================================================= -->
+
+        <div
+            id="searchResults"
+            class="search-results"
+        >
+        </div>
+
+
+    </article>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================================================
+     ПРАВАЯ КОЛОНКА
+     ========================================================= -->
+
+<aside class="right-sidebar">
+
+
+    <div class="side-banner">
+        БАННЕР
+    </div>
+
+
+    <div class="box">
+
+        <div class="box-title">
+            Популярное
+        </div>
+
+        <div
+            class="box-body"
+            id="popular-publications"
+        >
+
+            <div class="sidebar-publication">
+                Загрузка...
+            </div>
+
+        </div>
+
+    </div>
+
+
+</aside>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer>
+
+    © 2026 Новостной портал Богаева М. Е.
+
+    <br>
+
+    Новости • События • Материалы
+
+</footer>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     SUPABASE
+     ========================================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<script>
+
+/* =========================================================
+   SUPABASE
+   ========================================================= */
+
+const SUPABASE_URL =
+    "https://fmqjevqagtasqpeezwnn.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_Me5hyK-zIp3_5yBpHP8VVA_OFk2bqSj";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+/* =========================================================
+   ПЕРЕМЕННЫЕ
+   ========================================================= */
+
+let allPosts = [];
+
+let currentCategory = "all";
+
+
+
+/* =========================================================
+   ЭЛЕМЕНТЫ
+   ========================================================= */
+
+const searchForm =
+    document.getElementById(
+        "searchForm"
+    );
+
+
+const searchInput =
+    document.getElementById(
+        "searchInput"
+    );
+
+
+const searchResults =
+    document.getElementById(
+        "searchResults"
+    );
+
+
+const searchStatus =
+    document.getElementById(
+        "searchStatus"
+    );
+
+
+const filterButtons =
+    document.querySelectorAll(
+        ".search-filter"
+    );
+
+
+const sidebarPublications =
+    document.getElementById(
+        "sidebar-publications"
+    );
+
+
+
+/* =========================================================
+   НОРМАЛИЗАЦИЯ КАТЕГОРИИ
+   ========================================================= */
+
+function normalizeCategory(
+    category
+) {
+
+    return String(
+        category || ""
+    )
+    .trim()
+    .toLowerCase();
+
+}
+
+
+
+/* =========================================================
+   ОПИСАНИЕ
+   ========================================================= */
+
+function createDescription(
+    text
+) {
+
+    if (!text) {
+
+        return "Без описания.";
+
+    }
+
+
+    const cleanText =
+        String(text)
+        .replace(/\s+/g, " ")
+        .trim();
+
+
+    if (
+        cleanText.length <= 180
+    ) {
+
+        return cleanText;
+
+    }
+
+
+    return (
+        cleanText.substring(
+            0,
+            180
+        )
+        + "..."
+    );
+
+}
+
+
+
+/* =========================================================
+   ДАТА
+   ========================================================= */
+
+function formatDate(
+    dateString
+) {
+
+    if (!dateString) {
+
+        return "Дата неизвестна";
+
+    }
+
+
+    return new Date(
+        dateString
+    ).toLocaleString(
+        "ru-RU",
+        {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   ФИЛЬТР КАТЕГОРИИ
+   ========================================================= */
+
+function categoryMatches(
+    post,
+    category
+) {
+
+    if (
+        category === "all"
+    ) {
+
+        return true;
+
+    }
+
+
+    const postCategory =
+        normalizeCategory(
+            post.category
+        );
+
+
+    if (
+        category === "новости"
+    ) {
+
+        return (
+            postCategory === "новости" ||
+            postCategory === "новость" ||
+            postCategory === "news"
+        );
+
+    }
+
+
+    if (
+        category === "статьи"
+    ) {
+
+        return (
+            postCategory === "статьи" ||
+            postCategory === "статья" ||
+            postCategory === "article" ||
+            postCategory === "articles"
+        );
+
+    }
+
+
+    if (
+        category === "фото"
+    ) {
+
+        return (
+            postCategory === "фото" ||
+            postCategory === "фотографии" ||
+            postCategory === "photo" ||
+            postCategory === "photos"
+        );
+
+    }
+
+
+    if (
+        category === "видео"
+    ) {
+
+        return (
+            postCategory === "видео" ||
+            postCategory === "video" ||
+            postCategory === "videos"
+        );
+
+    }
+
+
+    return false;
+
+}
+
+
+
+/* =========================================================
+   ССЫЛКА НА РАЗДЕЛ
+   ========================================================= */
+
+function getCategoryLink(
+    category
+) {
+
+    const normalized =
+        normalizeCategory(
+            category
+        );
+
+
+    if (
+        normalized === "статьи" ||
+        normalized === "статья" ||
+        normalized === "article" ||
+        normalized === "articles"
+    ) {
+
+        return "articles.html";
+
+    }
+
+
+    if (
+        normalized === "фото" ||
+        normalized === "фотографии" ||
+        normalized === "photo" ||
+        normalized === "photos"
+    ) {
+
+        return "photos.html";
+
+    }
+
+
+    if (
+        normalized === "видео" ||
+        normalized === "video" ||
+        normalized === "videos"
+    ) {
+
+        return "videos.html";
+
+    }
+
+
+    return "news.html";
+
+}
+
+
+
+/* =========================================================
+   СОЗДАНИЕ МЕДИА
+   ========================================================= */
+
+function createSearchMedia(
+    post
+) {
+
+    const media =
+        document.createElement(
+            "div"
+        );
+
+
+    media.className =
+        "search-result-media";
+
+
+    /* ======================================
+       ВИДЕО
+       ====================================== */
+
+    if (
+        post.video_url
+    ) {
+
+        const video =
+            document.createElement(
+                "video"
+            );
+
+
+        video.src =
+            post.video_url;
+
+
+        video.preload =
+            "metadata";
+
+
+        video.muted =
+            true;
+
+
+        video.playsInline =
+            true;
+
+
+        video.controls =
+            true;
+
+
+        video.style.width =
+            "100%";
+
+
+        video.style.height =
+            "100%";
+
+
+        video.style.objectFit =
+            "cover";
+
+
+        video.style.display =
+            "block";
+
+
+        video.style.background =
+            "#222";
+
+
+        if (
+            post.image_url
+        ) {
+
+            video.poster =
+                post.image_url;
+
+        }
+
+
+        media.appendChild(
+            video
+        );
+
+
+        const label =
+            document.createElement(
+                "span"
+            );
+
+
+        label.className =
+            "search-video-label";
+
+
+        label.textContent =
+            "▶ ВИДЕО";
+
+
+        media.appendChild(
+            label
+        );
+
+
+        return media;
+
+    }
+
+
+
+    /* ======================================
+       ФОТО
+       ====================================== */
+
+    if (
+        post.image_url
+    ) {
+
+        const image =
+            document.createElement(
+                "img"
+            );
+
+
+        image.src =
+            post.image_url;
+
+
+        image.alt =
+            post.title ||
+            "Публикация";
+
+
+        image.loading =
+            "lazy";
+
+
+        media.appendChild(
+            image
+        );
+
+
+        return media;
+
+    }
+
+
+
+    /* ======================================
+       ЗАГЛУШКА
+       ====================================== */
+
+    const placeholder =
+        document.createElement(
+            "span"
+        );
+
+
+    const category =
+        normalizeCategory(
+            post.category
+        );
+
+
+    if (
+        category === "статьи" ||
+        category === "статья" ||
+        category === "article" ||
+        category === "articles"
+    ) {
+
+        placeholder.textContent =
+            "СТАТЬЯ";
+
+    }
+
+    else if (
+        category === "видео" ||
+        category === "video" ||
+        category === "videos"
+    ) {
+
+        placeholder.textContent =
+            "ВИДЕО";
+
+    }
+
+    else if (
+        category === "фото" ||
+        category === "фотографии" ||
+        category === "photo" ||
+        category === "photos"
+    ) {
+
+        placeholder.textContent =
+            "ФОТО";
+
+    }
+
+    else {
+
+        placeholder.textContent =
+            "ПУБЛИКАЦИЯ";
+
+    }
+
+
+    media.appendChild(
+        placeholder
+    );
+
+
+    return media;
+
+}
+
+
+
+/* =========================================================
+   СОЗДАНИЕ КАРТОЧКИ
+   ========================================================= */
+
+function createSearchCard(
+    post
+) {
+
+    const card =
+        document.createElement(
+            "article"
+        );
+
+
+    card.className =
+        "search-result-card";
+
+
+    const media =
+        createSearchMedia(
+            post
+        );
+
+
+    card.appendChild(
+        media
+    );
+
+
+    const info =
+        document.createElement(
+            "div"
+        );
+
+
+    info.className =
+        "search-result-info";
+
+
+    const date =
+        document.createElement(
+            "div"
+        );
+
+
+    date.className =
+        "search-result-date";
+
+
+    date.textContent =
+        formatDate(
+            post.created_at
+        );
+
+
+    info.appendChild(
+        date
+    );
+
+
+    const title =
+        document.createElement(
+            "h3"
+        );
+
+
+    title.textContent =
+        post.title ||
+        "Без названия";
+
+
+    info.appendChild(
+        title
+    );
+
+
+    const category =
+        document.createElement(
+            "div"
+        );
+
+
+    category.className =
+        "search-result-category";
+
+
+    category.textContent =
+        post.category ||
+        "Публикация";
+
+
+    info.appendChild(
+        category
+    );
+
+
+    const description =
+        document.createElement(
+            "p"
+        );
+
+
+    description.textContent =
+        createDescription(
+            post.content
+        );
+
+
+    info.appendChild(
+        description
+    );
+
+
+    const link =
+        document.createElement(
+            "a"
+        );
+
+
+    /* ======================================
+       ИЗМЕНЕНО:
+       ОТКРЫВАЕМ ИМЕННО ЭТУ ПУБЛИКАЦИЮ
+       ====================================== */
+
+    link.href =
+        "news-post.html?id=" +
+        encodeURIComponent(
+            post.id
+        );
+
+
+    link.className =
+        "read-more";
+
+
+    link.textContent =
+        "Открыть публикацию →";
+
+
+    info.appendChild(
+        link
+    );
+
+
+    card.appendChild(
+        info
+    );
+
+
+    return card;
+
+}
+
+
+
+/* =========================================================
+   ПОКАЗ РЕЗУЛЬТАТОВ
+   ========================================================= */
+
+function renderResults(
+    query = ""
+) {
+
+    searchResults.innerHTML =
+        "";
+
+
+    const cleanQuery =
+        String(query)
+        .trim()
+        .toLowerCase();
+
+
+    let results =
+        allPosts.filter(
+            function(post) {
+
+                return categoryMatches(
+                    post,
+                    currentCategory
+                );
+
+            }
+        );
+
+
+
+    /* ======================================
+       ПОИСК
+       ====================================== */
+
+    if (
+        cleanQuery
+    ) {
+
+        results =
+            results.filter(
+                function(post) {
+
+                    const title =
+                        String(
+                            post.title || ""
+                        )
+                        .toLowerCase();
+
+
+                    const content =
+                        String(
+                            post.content || ""
+                        )
+                        .toLowerCase();
+
+
+                    const category =
+                        String(
+                            post.category || ""
+                        )
+                        .toLowerCase();
+
+
+                    return (
+                        title.includes(
+                            cleanQuery
+                        )
+                        ||
+                        content.includes(
+                            cleanQuery
+                        )
+                        ||
+                        category.includes(
+                            cleanQuery
+                        )
+                    );
+
+                }
+            );
+
+    }
+
+
+
+    /* ======================================
+       НЕТ РЕЗУЛЬТАТОВ
+       ====================================== */
+
+    if (
+        results.length === 0
+    ) {
+
+        searchStatus.textContent =
+            cleanQuery
+                ? `По запросу «${query}» ничего не найдено.`
+                : "В этой категории пока нет публикаций.";
+
+
+        return;
+
+    }
+
+
+
+    /* ======================================
+       СТАТУС
+       ====================================== */
+
+    searchStatus.textContent =
+        cleanQuery
+            ? `Найдено публикаций: ${results.length}`
+            : `Публикаций: ${results.length}`;
+
+
+
+    /* ======================================
+       ВЫВОД
+       ====================================== */
+
+    results.forEach(
+        function(post) {
+
+            searchResults.appendChild(
+                createSearchCard(
+                    post
+                )
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   ЗАГРУЗКА ПОСТОВ
+   ========================================================= */
+
+async function loadPosts() {
+
+    searchStatus.textContent =
+        "Загрузка публикаций...";
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+        .from("posts")
+        .select("*")
+        .eq(
+            "published",
+            true
+        )
+        .order(
+            "created_at",
+            {
+                ascending: false
+            }
+        );
+
+
+    if (
+        error
+    ) {
+
+        console.error(
+            "Ошибка загрузки:",
+            error
+        );
+
+
+        searchStatus.textContent =
+            "Не удалось загрузить публикации.";
+
+
+        return;
+
+    }
+
+
+    allPosts =
+        data || [];
+
+
+    renderResults(
+        searchInput.value
+    );
+
+
+
+    /* ======================================
+       SIDEBAR
+       ====================================== */
+
+    sidebarPublications.innerHTML =
+        "";
+
+
+    allPosts
+        .slice(0, 5)
+        .forEach(
+            function(post) {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "sidebar-publication";
+
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                /* ======================================
+                   ИЗМЕНЕНО:
+                   SIDEBAR ОТКРЫВАЕТ КОНКРЕТНУЮ
+                   ПУБЛИКАЦИЮ
+                   ====================================== */
+
+                link.href =
+                    "news-post.html?id=" +
+                    encodeURIComponent(
+                        post.id
+                    );
+
+
+                link.textContent =
+                    post.title ||
+                    "Без названия";
+
+
+                item.appendChild(
+                    link
+                );
+
+
+                sidebarPublications.appendChild(
+                    item
+                );
+
+            }
+        );
+
+
+    /* ======================================
+       ПОПУЛЯРНОЕ
+       ====================================== */
+
+    renderPopularPublications();
+
+}
+
+
+
+/* =========================================================
+   🔥 ПОПУЛЯРНЫЕ ПУБЛИКАЦИИ
+   Реальные опубликованные материалы из Supabase.
+   ========================================================= */
+
+function renderPopularPublications() {
+
+    const popular =
+        document.getElementById(
+            "popular-publications"
+        );
+
+
+    if (!popular) {
+
+        return;
+
+    }
+
+
+    popular.innerHTML =
+        "";
+
+
+    if (
+        !allPosts ||
+        allPosts.length === 0
+    ) {
+
+        popular.innerHTML = `
+            <div class="sidebar-publication">
+                Публикаций пока нет.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    allPosts
+        .slice(0, 3)
+        .forEach(
+            function(post) {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "sidebar-publication";
+
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                link.href =
+                    "news-post.html?id=" +
+                    encodeURIComponent(
+                        post.id
+                    );
+
+
+                link.textContent =
+                    post.title ||
+                    "Без названия";
+
+
+                item.appendChild(
+                    link
+                );
+
+
+                popular.appendChild(
+                    item
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   SUBMIT ПОИСКА
+   ========================================================= */
+
+searchForm.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+
+        renderResults(
+            searchInput.value
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   ФИЛЬТРЫ
+   ========================================================= */
+
+filterButtons.forEach(
+    function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+
+                filterButtons.forEach(
+                    function(item) {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                currentCategory =
+                    button.dataset.category;
+
+
+                renderResults(
+                    searchInput.value
+                );
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   ЗАПУСК
+   ========================================================= */
+
+loadPosts();
+
+</script>
+
+<script src="js/ban-guard.js"></script>
+
+
+<style>
+/* =========================================================
+   🔥 NEON NEWS PORTAL — ПОИСК
+   Только визуальный слой. Старый код и функционал сохранены.
+   ========================================================= */
+
+body{
+    background:
+        radial-gradient(circle at 7% 4%,rgba(176,0,0,.17),transparent 28%),
+        radial-gradient(circle at 93% 82%,rgba(255,0,0,.09),transparent 27%),
+        linear-gradient(135deg,#080808,#171717 48%,#090909);
+    background-attachment:fixed;
+    animation:searchPageIn .6s ease-out;
+}
+
+@keyframes searchPageIn{
+    from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* БАННЕР */
+.top-banner{
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid rgba(255,255,255,.10);
+    box-shadow:0 6px 25px rgba(0,0,0,.28),0 0 25px rgba(176,0,0,.08);
+}
+
+.top-banner::after{
+    content:"";
+    position:absolute;
+    left:-35%;
+    bottom:0;
+    width:170%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,40,40,.9),transparent);
+    animation:searchScan 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes searchScan{
+    from{transform:translateX(-25%);opacity:.25}
+    50%{opacity:1}
+    to{transform:translateX(25%);opacity:.25}
+}
+
+/* ШАПКА */
+.header{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(115deg,#650000,#b00000 50%,#720000);
+    border-bottom:1px solid rgba(255,255,255,.15);
+    box-shadow:0 8px 32px rgba(176,0,0,.28),0 0 35px rgba(176,0,0,.10);
+}
+
+.header::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    right:-190px;
+    top:-285px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.13);
+    box-shadow:0 0 35px rgba(255,40,40,.17);
+    animation:searchOrb 8s ease-in-out infinite alternate;
+    pointer-events:none;
+}
+
+.header::after{
+    content:"";
+    position:absolute;
+    left:-30%;
+    bottom:0;
+    width:160%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    animation:searchHeaderScan 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes searchOrb{
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(-35px,35px) scale(1.12)}
+}
+
+@keyframes searchHeaderScan{
+    from{transform:translateX(-30%);opacity:.2}
+    50%{opacity:1}
+    to{transform:translateX(30%);opacity:.2}
+}
+
+.header-content{
+    position:relative;
+    z-index:2;
+}
+
+.header h1{
+    text-shadow:0 0 9px rgba(255,255,255,.25),0 0 25px rgba(255,0,0,.25);
+}
+
+/* МЕНЮ */
+.menu{
+    position:relative;
+    z-index:5;
+    box-shadow:0 5px 20px rgba(0,0,0,.18);
+}
+
+.menu a{
+    position:relative;
+    overflow:hidden;
+    transition:transform .28s cubic-bezier(.2,.8,.2,1),background .3s ease,color .25s ease,box-shadow .3s ease;
+}
+
+.menu a::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+    pointer-events:none;
+}
+
+.menu a:hover{
+    transform:translateY(-3px);
+    background:linear-gradient(135deg,#850000,#b00000);
+    color:#fff;
+    box-shadow:0 7px 18px rgba(0,0,0,.22),0 0 18px rgba(176,0,0,.20);
+}
+
+.menu a:hover::after{left:140%}
+.menu a:active{transform:translateY(-1px) scale(.985)}
+
+/* БОКСЫ */
+.box{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.25);
+    border-radius:9px;
+    box-shadow:0 9px 26px rgba(0,0,0,.13),0 0 18px rgba(176,0,0,.06);
+    transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+    animation:searchBoxIn .55s ease both;
+}
+
+.box::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background:linear-gradient(#ff2020,#820000);
+    box-shadow:0 0 11px rgba(255,0,0,.55),0 0 23px rgba(176,0,0,.18);
+}
+
+.box:hover{
+    transform:translateY(-3px);
+    border-color:rgba(176,0,0,.40);
+    box-shadow:0 13px 30px rgba(0,0,0,.18),0 0 20px rgba(176,0,0,.10);
+}
+
+.box-title{
+    position:relative;
+    text-shadow:0 0 8px rgba(176,0,0,.12);
+}
+
+.box-title::after{
+    content:"";
+    display:block;
+    width:42px;
+    height:2px;
+    margin-top:7px;
+    border-radius:4px;
+    background:#b00000;
+    box-shadow:0 0 8px rgba(255,0,0,.55);
+}
+
+.box-body a{
+    transition:color .25s ease,padding-left .25s ease,text-shadow .25s ease;
+}
+
+.box-body a:hover{
+    color:#b00000;
+    padding-left:5px;
+    text-shadow:0 0 8px rgba(176,0,0,.15);
+}
+
+@keyframes searchBoxIn{
+    from{opacity:0;transform:translateY(12px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* ЦЕНТР */
+.main{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.23);
+    border-radius:10px;
+    box-shadow:0 11px 32px rgba(0,0,0,.14),0 0 20px rgba(176,0,0,.06);
+    animation:searchMainIn .65s ease both;
+}
+
+@keyframes searchMainIn{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.main-title{
+    position:relative;
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000);
+    box-shadow:0 4px 15px rgba(176,0,0,.15);
+    text-shadow:0 0 8px rgba(255,255,255,.14);
+}
+
+.main-title::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:80px;
+    height:2px;
+    background:#ff3030;
+    box-shadow:0 0 9px rgba(255,0,0,.7);
+    animation:searchTitleGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes searchTitleGlow{
+    0%,100%{opacity:.45}
+    50%{opacity:1}
+}
+
+/* ПОИСКОВАЯ ФОРМА */
+.search-form{
+    position:relative;
+}
+
+.search-form input{
+    border:1px solid rgba(176,0,0,.25)!important;
+    border-radius:7px;
+    box-shadow:inset 0 0 12px rgba(176,0,0,.025);
+    transition:border-color .3s ease,box-shadow .3s ease,transform .25s ease;
+}
+
+.search-form input:hover{
+    border-color:rgba(176,0,0,.40)!important;
+}
+
+.search-form input:focus{
+    border-color:#b00000!important;
+    box-shadow:0 0 0 3px rgba(176,0,0,.10),0 0 17px rgba(176,0,0,.10);
+    transform:translateY(-1px);
+}
+
+.search-form button{
+    position:relative;
+    overflow:hidden;
+    border-radius:7px;
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000)!important;
+    box-shadow:0 5px 17px rgba(176,0,0,.18);
+    transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,background .3s ease;
+}
+
+.search-form button::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+}
+
+.search-form button:hover{
+    background:linear-gradient(135deg,#b00000,#df0000 52%,#900000)!important;
+    transform:translateY(-3px);
+    box-shadow:0 9px 23px rgba(0,0,0,.23),0 0 20px rgba(176,0,0,.25);
+}
+
+.search-form button:hover::after{left:140%}
+.search-form button:active{transform:translateY(-1px) scale(.98)}
+
+/* ФИЛЬТРЫ */
+.search-filter{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.18)!important;
+    border-radius:6px;
+    background:linear-gradient(145deg,#f3f3f3,#e9e9e9)!important;
+    transition:transform .25s ease,background .25s ease,color .25s ease,border-color .25s ease,box-shadow .3s ease;
+}
+
+.search-filter:hover{
+    transform:translateY(-2px);
+    border-color:rgba(176,0,0,.38)!important;
+    color:#a00000;
+    box-shadow:0 5px 13px rgba(0,0,0,.10);
+}
+
+.search-filter.active{
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000)!important;
+    border-color:#b00000!important;
+    box-shadow:0 5px 15px rgba(176,0,0,.18),0 0 14px rgba(176,0,0,.10);
+}
+
+.search-filter.active:hover{
+    color:#fff;
+    transform:translateY(-2px);
+}
+
+/* СТАТУС */
+.search-status{
+    padding:8px 11px;
+    border-left:3px solid rgba(176,0,0,.55);
+    border-radius:4px;
+    background:rgba(176,0,0,.035);
+    transition:color .25s ease,background .25s ease;
+}
+
+/* РЕЗУЛЬТАТЫ */
+.search-result-card{
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid rgba(176,0,0,.16)!important;
+    border-radius:8px;
+    padding:10px!important;
+    margin-bottom:9px!important;
+    transition:transform .32s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,background .3s ease,border-color .3s ease;
+    animation:searchResultIn .55s ease both;
+}
+
+.search-result-card::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:3px;
+    height:0;
+    background:#b00000;
+    box-shadow:0 0 13px rgba(255,0,0,.55);
+    transition:height .35s ease;
+    z-index:6;
+}
+
+.search-result-card:hover{
+    transform:translateY(-4px);
+    background:rgba(176,0,0,.018);
+    border-color:rgba(176,0,0,.30)!important;
+    box-shadow:0 10px 25px rgba(0,0,0,.10),0 0 18px rgba(176,0,0,.06);
+}
+
+.search-result-card:hover::before{height:100%}
+
+@keyframes searchResultIn{
+    from{opacity:0;transform:translateY(12px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* МЕДИА */
+.search-result-media{
+    border:1px solid rgba(176,0,0,.18)!important;
+    border-radius:8px;
+    box-shadow:0 5px 16px rgba(0,0,0,.09);
+    transition:transform .35s ease,box-shadow .3s ease,border-color .3s ease;
+}
+
+.search-result-card:hover .search-result-media{
+    transform:scale(1.025);
+    border-color:rgba(176,0,0,.38)!important;
+    box-shadow:0 9px 22px rgba(0,0,0,.15),0 0 15px rgba(176,0,0,.08);
+}
+
+.search-result-media img,
+.search-result-media video{
+    transition:transform .55s cubic-bezier(.2,.8,.2,1),filter .4s ease;
+}
+
+.search-result-card:hover .search-result-media img,
+.search-result-card:hover .search-result-media video{
+    transform:scale(1.045);
+    filter:saturate(1.06) contrast(1.02);
+}
+
+/* БЛИК */
+.search-result-media::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.20),transparent);
+    transform:skewX(-18deg);
+    transition:left .7s ease;
+    pointer-events:none;
+    z-index:4;
+}
+
+.search-result-card:hover .search-result-media::after{left:140%}
+
+/* МЕТКА ВИДЕО */
+.search-video-label{
+    border:1px solid rgba(255,255,255,.18);
+    border-radius:4px;
+    background:linear-gradient(135deg,rgba(105,0,0,.88),rgba(0,0,0,.82))!important;
+    box-shadow:0 0 12px rgba(176,0,0,.18);
+    transition:transform .25s ease,box-shadow .3s ease;
+}
+
+.search-result-card:hover .search-video-label{
+    transform:translateY(-2px);
+    box-shadow:0 0 17px rgba(255,0,0,.25);
+}
+
+/* ИНФОРМАЦИЯ */
+.search-result-info h3{
+    transition:color .25s ease,text-shadow .25s ease;
+}
+
+.search-result-card:hover .search-result-info h3{
+    color:#b00000;
+    text-shadow:0 0 8px rgba(176,0,0,.12);
+}
+
+.search-result-date,
+.search-result-category{
+    transition:color .25s ease;
+}
+
+.search-result-card:hover .search-result-date{
+    color:#a00000;
+}
+
+.search-result-card:hover .search-result-category{
+    color:#b00000;
+}
+
+/* КНОПКА ОТКРЫТИЯ */
+.search-result-info .read-more{
+    position:relative;
+    overflow:hidden;
+    border-radius:6px;
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000)!important;
+    box-shadow:0 5px 15px rgba(176,0,0,.17);
+    transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,background .3s ease;
+}
+
+.search-result-info .read-more::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+}
+
+.search-result-info .read-more:hover{
+    background:linear-gradient(135deg,#b00000,#df0000 52%,#900000)!important;
+    transform:translateY(-3px);
+    box-shadow:0 9px 21px rgba(0,0,0,.22),0 0 18px rgba(176,0,0,.22);
+}
+
+.search-result-info .read-more:hover::after{left:140%}
+
+/* ЗАГЛУШКИ */
+.search-result-media > span:not(.search-video-label){
+    transition:background .3s ease,color .3s ease,text-shadow .3s ease;
+}
+
+.search-result-card:hover .search-result-media > span:not(.search-video-label){
+    background:#250b0b;
+    color:#ff3030;
+    text-shadow:0 0 12px rgba(255,0,0,.32);
+}
+
+/* SIDEBAR */
+.sidebar-publication{
+    position:relative;
+    border-bottom:1px solid rgba(176,0,0,.10);
+    transition:background .25s ease,padding-left .25s ease,box-shadow .25s ease;
+}
+
+.sidebar-publication:hover{
+    background:rgba(176,0,0,.035);
+    padding-left:5px;
+    box-shadow:inset 2px 0 0 rgba(176,0,0,.55);
+}
+
+/* БАННЕРЫ */
+.side-banner{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.25);
+    box-shadow:0 8px 22px rgba(0,0,0,.14),0 0 17px rgba(176,0,0,.07);
+}
+
+.side-banner::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:65%;
+    height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
+    transform:skewX(-18deg);
+    transition:left .7s ease;
+    pointer-events:none;
+}
+
+.side-banner:hover::after{left:140%}
+
+/* FOOTER */
+footer{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg,#090909,#161616);
+    border-top:1px solid rgba(176,0,0,.35);
+    box-shadow:0 -6px 25px rgba(0,0,0,.20);
+}
+
+footer::before{
+    content:"";
+    position:absolute;
+    left:-30%;
+    top:0;
+    width:160%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,#b00000,transparent);
+    box-shadow:0 0 10px rgba(255,0,0,.45);
+    animation:searchFooterLine 4s linear infinite;
+}
+
+@keyframes searchFooterLine{
+    from{transform:translateX(-25%)}
+    to{transform:translateX(25%)}
+}
+
+/* ПОСЛЕДОВАТЕЛЬНОЕ ПОЯВЛЕНИЕ */
+.search-result-card:nth-child(1){animation-delay:.04s}
+.search-result-card:nth-child(2){animation-delay:.09s}
+.search-result-card:nth-child(3){animation-delay:.14s}
+.search-result-card:nth-child(4){animation-delay:.19s}
+.search-result-card:nth-child(5){animation-delay:.24s}
+.search-result-card:nth-child(6){animation-delay:.29s}
+.search-result-card:nth-child(7){animation-delay:.34s}
+
+/* МОБИЛЬНАЯ ВЕРСИЯ */
+@media(max-width:700px){
+    body{
+        background:
+            radial-gradient(circle at 50% 0%,rgba(176,0,0,.17),transparent 35%),
+            #111;
+        background-attachment:fixed;
+    }
+
+    .box:hover{transform:none}
+
+    .search-result-card:hover{
+        transform:translateY(-2px);
+    }
+
+    .search-result-card:hover .search-result-media{
+        transform:none;
+    }
+
+    .menu a:hover{transform:translateY(-2px)}
+
+    .search-form button:hover{
+        transform:translateY(-2px);
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important;
+    }
+}
+</style>
+
+</body>
+
+</html>
