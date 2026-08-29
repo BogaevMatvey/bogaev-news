@@ -1,0 +1,389 @@
+/* =========================================================
+   МОБИЛЬНАЯ ВЕРСИЯ
+   НОВОСТНОГО ПОРТАЛА БОГАЕВА М. Е.
+   ========================================================= */
+
+
+/* =========================
+   ПЛАНШЕТЫ
+   ========================= */
+
+@media (max-width: 900px) {
+
+    .site {
+        width: 98%;
+    }
+
+    .layout {
+        grid-template-columns: 190px minmax(0, 1fr);
+    }
+
+    .right-sidebar {
+        display: none;
+    }
+
+    .header h1 {
+        font-size: 25px;
+    }
+
+    .main-photo {
+        height: 320px;
+    }
+
+}
+
+
+/* =========================
+   МОБИЛЬНЫЕ УСТРОЙСТВА
+   ========================= */
+
+@media (max-width: 700px) {
+
+    body {
+        background: #fff;
+    }
+
+    .site {
+        width: 100%;
+        margin: 0;
+
+        border-left: none;
+        border-right: none;
+    }
+
+
+    /* ВЕРХНИЙ БАННЕР */
+
+    .top-banner {
+        min-height: 80px;
+
+        padding: 6px;
+    }
+
+    .banner-video {
+        height: 65px;
+    }
+
+
+    /* ШАПКА */
+
+    .header {
+        padding: 15px 12px;
+    }
+
+    .header h1 {
+        font-size: 21px;
+
+        line-height: 1.25;
+    }
+
+    .header p {
+        font-size: 11px;
+
+        line-height: 1.4;
+    }
+
+
+    /* МЕНЮ */
+
+    .menu {
+        overflow-x: auto;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .menu a {
+        flex-shrink: 0;
+
+        padding: 12px 13px;
+
+        font-size: 12px;
+    }
+
+
+    /* ОСНОВНАЯ СЕТКА */
+
+    .layout {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 10px;
+
+        padding: 7px;
+    }
+
+
+    /* ГЛАВНЫЙ КОНТЕНТ */
+
+    .main-content {
+        width: 100%;
+
+        order: 1;
+    }
+
+
+    /* САЙДБАР */
+
+    .sidebar {
+        width: 100%;
+
+        order: 2;
+    }
+
+
+    /* ПРАВЫЙ САЙДБАР */
+
+    .right-sidebar {
+        display: none;
+    }
+
+
+    /* СТАТЬЯ */
+
+    .article {
+        padding: 12px;
+    }
+
+    .article h2 {
+        font-size: 22px;
+    }
+
+    .article p {
+        font-size: 14px;
+
+        line-height: 1.6;
+    }
+
+
+    /* ГЛАВНОЕ ФОТО */
+
+    .main-photo {
+        width: 100%;
+
+        height: auto;
+
+        min-height: 220px;
+
+        max-height: 420px;
+    }
+
+    .main-photo img {
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover;
+    }
+
+
+    /* КАРТОЧКИ */
+
+    .cards {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .card-photo {
+        height: 190px;
+    }
+
+
+    /* БОКОВЫЕ БЛОКИ */
+
+    .box {
+        margin-bottom: 8px;
+    }
+
+    .box-title {
+        font-size: 13px;
+    }
+
+    .box-body {
+        font-size: 13px;
+    }
+
+
+    /* БАННЕР */
+
+    .side-banner {
+        min-height: 120px;
+    }
+
+
+    /* FOOTER */
+
+    footer {
+        padding: 18px 10px;
+
+        font-size: 11px;
+    }
+
+}
+
+
+/* =========================
+   МАЛЕНЬКИЕ ТЕЛЕФОНЫ
+   ========================= */
+
+@media (max-width: 480px) {
+
+    .top-banner {
+        min-height: 70px;
+    }
+
+    .banner-video {
+        height: 55px;
+    }
+
+
+    .header {
+        padding: 13px 10px;
+    }
+
+    .header h1 {
+        font-size: 19px;
+    }
+
+    .header p {
+        font-size: 10px;
+    }
+
+
+    .menu a {
+        padding: 11px 12px;
+
+        font-size: 11px;
+    }
+
+
+    .layout {
+        padding: 5px;
+    }
+
+
+    .main-title,
+    .section-title {
+        font-size: 13px;
+
+        padding: 8px;
+    }
+
+
+    .article {
+        padding: 10px;
+    }
+
+
+    .article h2 {
+        font-size: 20px;
+    }
+
+
+    .date {
+        font-size: 11px;
+    }
+
+
+    .main-photo {
+        min-height: 200px;
+        max-height: 320px;
+    }
+
+
+    .card-photo {
+        height: 170px;
+    }
+
+
+    .read-more {
+        width: 100%;
+
+        text-align: center;
+
+        padding: 10px;
+    }
+
+}
+
+
+/* =========================
+   ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ
+   ========================= */
+
+@media (max-width: 360px) {
+
+    .header h1 {
+        font-size: 17px;
+    }
+
+    .header p {
+        font-size: 9px;
+    }
+
+    .menu a {
+        padding: 10px;
+
+        font-size: 10px;
+    }
+
+    .article h2 {
+        font-size: 19px;
+    }
+
+}
+
+/* =========================
+   МОБИЛЬНАЯ ФОТОГАЛЕРЕЯ
+   ========================= */
+
+@media (max-width: 700px) {
+
+    .photo-gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        gap: 8px;
+    }
+
+    .gallery-caption {
+        padding: 7px;
+
+        font-size: 11px;
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .photo-gallery {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+}
+
+/* =========================
+   МОБИЛЬНЫЕ ВИДЕО
+   ========================= */
+
+@media (max-width: 700px) {
+
+    .video-card {
+        margin-top: 15px;
+    }
+
+    .video-info h3 {
+        font-size: 18px;
+    }
+
+    .video-info p {
+        font-size: 13px;
+    }
+
+}

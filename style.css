@@ -1,0 +1,1987 @@
+/* =========================================================
+   НОВОСТНОЙ ПОРТАЛ БОГАЕВА М. Е.
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #e7e7e7;
+    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ВЕРХНИЙ БАННЕР
+   ========================================================= */
+
+.top-banner {
+    width: 100%;
+    min-height: 120px;
+    background: #eeeeee;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-top: 3px solid #333;
+    border-bottom: 1px solid #ddd;
+
+    padding: 10px;
+}
+
+.banner-video {
+    width: 100%;
+    max-width: 1050px;
+    height: 90px;
+
+    overflow: hidden;
+    background: #dcdcdc;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-placeholder {
+    color: #777;
+    font-size: 15px;
+    text-align: center;
+}
+
+
+/* =========================================================
+   ОСНОВНОЙ САЙТ
+   ========================================================= */
+
+.site {
+    width: 96%;
+    max-width: 1200px;
+
+    margin: 12px auto;
+
+    background: #fff;
+
+    border: 1px solid #aaa;
+
+    box-shadow:
+        0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   ШАПКА
+   ========================================================= */
+
+.header {
+    background: #b00000;
+    color: #fff;
+
+    padding: 20px 18px;
+}
+
+.header-content {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.header h1 {
+    margin: 0;
+
+    font-size: 28px;
+    line-height: 1.2;
+
+    font-weight: bold;
+}
+
+.header p {
+    margin: 7px 0 0;
+
+    font-size: 13px;
+
+    color: #fff;
+}
+
+
+/* =========================================================
+   МЕНЮ
+   ========================================================= */
+
+.menu {
+    width: 100%;
+
+    background: #222;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0;
+
+    overflow-x: auto;
+}
+
+.menu a {
+    display: block;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    padding: 13px 15px;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.menu a:hover {
+    background: #b00000;
+    color: #fff;
+}
+
+.menu::-webkit-scrollbar {
+    height: 5px;
+}
+
+.menu::-webkit-scrollbar-track {
+    background: #222;
+}
+
+.menu::-webkit-scrollbar-thumb {
+    background: #555;
+}
+
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+
+.layout {
+    display: grid;
+
+    grid-template-columns:
+        220px
+        minmax(0, 1fr)
+        180px;
+
+    gap: 12px;
+
+    padding: 12px;
+}
+
+.sidebar,
+.right-sidebar {
+    min-width: 0;
+}
+
+.main-content {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   БЛОКИ
+   ========================================================= */
+
+.box {
+    border: 1px solid #ccc;
+
+    margin-bottom: 12px;
+
+    background: #fafafa;
+}
+
+.box-title {
+    background: #b00000;
+
+    color: #fff;
+
+    padding: 9px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+.box-body {
+    padding: 10px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   ССЫЛКИ САЙДБАРА
+   ========================================================= */
+
+.box-body a {
+    display: block;
+
+    color: #333;
+
+    text-decoration: none;
+
+    padding: 5px 0;
+
+    transition:
+        color 0.2s ease,
+        padding-left 0.2s ease;
+}
+
+.box-body a:hover {
+    color: #b00000;
+
+    padding-left: 4px;
+}
+
+
+/* =========================================================
+   ПОСЛЕДНИЕ ПУБЛИКАЦИИ
+   ========================================================= */
+
+.sidebar-publication {
+    padding: 6px 0;
+
+    border-bottom: 1px solid #eee;
+}
+
+.sidebar-publication:last-child {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   БОКОВЫЕ БАННЕРЫ
+   ========================================================= */
+
+.side-banner {
+    width: 100%;
+
+    min-height: 180px;
+
+    margin-bottom: 12px;
+
+    border: 1px solid #ccc;
+
+    background: #eeeeee;
+
+    color: #777;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ГЛАВНЫЙ БЛОК
+   ========================================================= */
+
+.main {
+    width: 100%;
+
+    border: 1px solid #ccc;
+
+    background: #fff;
+}
+
+.main-title,
+.section-title {
+    background: #b00000;
+
+    color: #fff;
+
+    padding: 9px 10px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   СТАТЬЯ
+   ========================================================= */
+
+.article {
+    padding: 16px;
+}
+
+.article h2 {
+    margin: 0 0 7px;
+
+    font-size: 26px;
+
+    line-height: 1.2;
+
+    color: #222;
+}
+
+.date {
+    color: #888;
+
+    font-size: 12px;
+
+    margin-bottom: 12px;
+}
+
+.article p {
+    margin: 12px 0;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   ГЛАВНОЕ МЕДИА
+   ========================================================= */
+
+.main-photo {
+    position: relative;
+
+    width: 100%;
+
+    margin: 15px 0;
+
+    background: #222;
+
+    border: 1px solid #ddd;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    aspect-ratio: 16 / 9;
+}
+
+.main-photo video,
+.main-photo .main-video {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+.main-photo img,
+.main-photo .main-image {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* =========================================================
+   КРУГЛАЯ PLAY-КНОПКА
+   ТОЛЬКО ГЛАВНОЕ ВИДЕО
+   ========================================================= */
+
+.main-photo .media-play-button {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 70px;
+    height: 70px;
+
+    margin: 0;
+    padding: 0;
+
+    transform: translate(-50%, -50%);
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(190, 0, 0, 0.95);
+
+    color: #fff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 9999;
+
+    box-sizing: border-box;
+
+    font-size: 0;
+}
+
+.main-photo .media-play-button::before {
+    content: "";
+
+    display: block;
+
+    width: 0;
+    height: 0;
+
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+
+    border-left: 18px solid #fff;
+
+    margin-left: 5px;
+}
+
+.main-photo .media-play-button:hover {
+    transform:
+        translate(-50%, -50%)
+        scale(1.08);
+
+    background: rgba(210, 0, 0, 0.98);
+}
+
+.main-photo .media-play-button.hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   ЧИТАТЬ ПОЛНОСТЬЮ
+   ========================================================= */
+
+.read-more {
+    display: inline-block;
+
+    margin-top: 5px;
+
+    padding: 9px 13px;
+
+    background: #b00000;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+}
+
+.read-more:hover {
+    background: #870000;
+}
+
+
+/* =========================================================
+   ПОСЛЕДНИЕ МАТЕРИАЛЫ
+   ========================================================= */
+
+.latest-section {
+    margin-top: 12px;
+
+    border: 1px solid #ccc;
+
+    background: #fff;
+}
+
+.cards {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 10px;
+
+    padding: 10px;
+}
+
+.card {
+    min-width: 0;
+
+    border: 1px solid #ccc;
+
+    background: #fafafa;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   МЕДИА КАРТОЧЕК
+   ========================================================= */
+
+.card-photo {
+    width: 100%;
+
+    height: 130px;
+
+    background: #ddd;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+.card-photo img,
+.card-photo .card-image {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.card-photo video,
+.card-photo .card-video {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: cover;
+
+    background: #000;
+}
+
+
+/* =========================================================
+   ТЕКСТ КАРТОЧКИ
+   ========================================================= */
+
+.card h3 {
+    margin: 10px;
+
+    font-size: 15px;
+
+    line-height: 1.3;
+
+    color: #222;
+}
+
+.card p {
+    margin: 10px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: #666;
+}
+
+.card a {
+    display: inline-block;
+
+    margin: 0 10px 12px;
+
+    color: #b00000;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   ПРАВАЯ КОЛОНКА
+   ========================================================= */
+
+.right-sidebar .box {
+    margin-bottom: 12px;
+}
+
+.right-sidebar .box-body {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   НОВОСТИ
+   ========================================================= */
+
+.news-item {
+    padding: 5px 0 10px;
+}
+
+.news-item h2 {
+    margin: 8px 0 12px;
+
+    font-size: 23px;
+
+    color: #222;
+
+    line-height: 1.3;
+}
+
+.news-date {
+    color: #888;
+
+    font-size: 12px;
+
+    margin-bottom: 8px;
+}
+
+.news-photo {
+    width: 100%;
+
+    height: 300px;
+
+    margin: 15px 0;
+
+    background: #eee;
+
+    border: 1px solid #ccc;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #777;
+
+    font-size: 13px;
+}
+
+.news-photo img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.placeholder-photo {
+    background: #ddd;
+}
+
+.news-divider {
+    border: 0;
+
+    border-top: 1px solid #ddd;
+
+    margin: 25px 0;
+}
+
+
+/* =========================================================
+   СТАТЬИ
+   ========================================================= */
+
+.article-card {
+    display: grid;
+
+    grid-template-columns:
+        240px
+        minmax(0, 1fr);
+
+    gap: 15px;
+
+    padding: 15px 0;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.article-card:last-child {
+    border-bottom: none;
+}
+
+.article-card-photo {
+    width: 100%;
+
+    height: 170px;
+
+    background: #ddd;
+
+    border: 1px solid #ccc;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.article-card-photo img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.article-placeholder {
+    color: #777;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+.article-card-content {
+    min-width: 0;
+}
+
+.article-card-date {
+    color: #888;
+
+    font-size: 12px;
+
+    margin-bottom: 7px;
+}
+
+.article-card-content h3 {
+    margin: 0 0 10px;
+
+    font-size: 20px;
+
+    line-height: 1.3;
+
+    color: #222;
+}
+
+.article-card-content p {
+    margin: 0 0 12px;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+
+    color: #555;
+}
+
+
+/* =========================================================
+   ФОТОГАЛЕРЕЯ
+   ========================================================= */
+
+.photo-gallery {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-top: 20px;
+}
+
+.gallery-item {
+    border: 1px solid #ccc;
+
+    background: #fafafa;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.gallery-item:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-item img {
+    width: 100%;
+
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+
+    background: #fff;
+}
+
+.gallery-caption {
+    padding: 9px;
+
+    font-size: 12px;
+
+    color: #555;
+
+    border-top: 1px solid #eee;
+}
+
+
+/* =========================================================
+   СТРАНИЦА ВИДЕО
+   ========================================================= */
+
+.video-card {
+    margin-top: 20px;
+
+    padding-bottom: 20px;
+
+    border-bottom: 1px solid #ddd;
+}
+
+.video-card:last-child {
+    border-bottom: none;
+}
+
+.video-player {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    background: #222;
+
+    border: 1px solid #333;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.video-player video {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    background: #000;
+}
+
+.video-placeholder {
+    color: #aaa;
+
+    font-size: 14px;
+}
+
+.video-info {
+    padding-top: 10px;
+}
+
+.video-date {
+    color: #888;
+
+    font-size: 12px;
+
+    margin-bottom: 6px;
+}
+
+.video-info h3 {
+    margin: 0 0 8px;
+
+    font-size: 20px;
+
+    color: #222;
+}
+
+.video-info p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    color: #666;
+}
+
+
+/* =========================================================
+   О САЙТЕ
+   ========================================================= */
+
+.about-heading {
+    margin: 25px 0 12px;
+
+    padding-bottom: 7px;
+
+    border-bottom: 1px solid #ddd;
+
+    font-size: 19px;
+
+    color: #222;
+}
+
+.about-list {
+    display: grid;
+
+    gap: 8px;
+
+    margin: 15px 0;
+}
+
+.about-item {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding: 12px;
+
+    background: #fafafa;
+
+    border: 1px solid #ddd;
+}
+
+.about-item strong {
+    font-size: 14px;
+
+    color: #222;
+}
+
+.about-item span {
+    font-size: 13px;
+
+    color: #666;
+
+    line-height: 1.5;
+}
+
+.contact-box {
+    padding: 12px;
+
+    margin-top: 10px;
+
+    background: #f5f5f5;
+
+    border-left: 4px solid #b00000;
+}
+
+.contact-box p {
+    margin: 6px 0;
+}
+
+
+/* =========================================================
+   ПОИСК
+   ========================================================= */
+
+.search-form {
+    display: flex;
+
+    gap: 8px;
+
+    margin-bottom: 15px;
+}
+
+.search-form input {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 9px 10px;
+
+    border: 1px solid #bbb;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 14px;
+}
+
+.search-form button {
+    padding: 9px 16px;
+
+    border: none;
+
+    background: #b00000;
+
+    color: #fff;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+.search-form button:hover {
+    background: #870000;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    background: #222;
+
+    color: #aaa;
+
+    text-align: center;
+
+    padding: 22px 15px;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+
+    margin-top: 0;
+}
+
+
+/* =========================================================
+   ВЫДЕЛЕНИЕ
+   ========================================================= */
+
+::selection {
+    background: #b00000;
+
+    color: #fff;
+}
+
+
+/* =========================================================
+   МЕДИА НЕ НАЙДЕНО
+   ========================================================= */
+
+.media-error {
+    width: 100%;
+
+    height: 250px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #ddd;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   АДАПТАЦИЯ
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+    .layout {
+        grid-template-columns:
+            200px
+            minmax(0, 1fr);
+    }
+
+    .right-sidebar {
+        display: none;
+    }
+
+    .main-photo {
+        aspect-ratio: 16 / 9;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .site {
+        width: 100%;
+
+        margin: 0;
+
+        border-left: none;
+        border-right: none;
+    }
+
+    .top-banner {
+        min-height: 90px;
+    }
+
+    .banner-video {
+        height: 70px;
+    }
+
+    .header {
+        padding: 16px 14px;
+    }
+
+    .header h1 {
+        font-size: 23px;
+    }
+
+    .layout {
+        grid-template-columns: 1fr;
+
+        padding: 8px;
+    }
+
+    .sidebar {
+        order: 2;
+    }
+
+    .main-content {
+        order: 1;
+    }
+
+    .main-photo {
+        aspect-ratio: 16 / 9;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .card-photo {
+        height: 220px;
+    }
+
+    .article-card {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .article-card-photo {
+        height: 220px;
+    }
+
+    .article-card-content h3 {
+        font-size: 19px;
+    }
+
+    .photo-gallery {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    body {
+        font-size: 13px;
+    }
+
+    .top-banner {
+        min-height: 75px;
+
+        padding: 6px;
+    }
+
+    .banner-video {
+        height: 60px;
+    }
+
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .header p {
+        font-size: 11px;
+    }
+
+    .menu a {
+        padding: 11px 12px;
+
+        font-size: 12px;
+    }
+
+    .layout {
+        padding: 6px;
+
+        gap: 8px;
+    }
+
+    .article {
+        padding: 12px;
+    }
+
+    .article h2 {
+        font-size: 22px;
+    }
+
+    .main-photo {
+        aspect-ratio: 16 / 9;
+    }
+
+    .box-title {
+        font-size: 13px;
+    }
+
+    .box-body {
+        font-size: 12px;
+    }
+
+    .card-photo {
+        height: 180px;
+    }
+
+    .photo-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .search-form {
+        flex-direction: column;
+    }
+
+    .search-form button {
+        width: 100%;
+    }
+
+}
+
+/* =========================================================
+   ✨ ФИНАЛЬНАЯ АНИМАЦИЯ И ПЛАВНЫЕ ПЕРЕХОДЫ
+   ДОБАВЛЕНО — СУЩЕСТВУЮЩИЙ CSS НЕ ТРОГАЕМ
+   ========================================================= */
+
+/* Плавная смена страниц/состояний */
+body {
+    animation: pageFadeIn 0.45s ease-out;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Верхнее меню */
+.menu a {
+    position: relative;
+    overflow: hidden;
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        transform 0.25s ease,
+        box-shadow 0.3s ease;
+}
+
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background: #ff4b2b;
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+}
+
+.menu a:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 5px 14px rgba(0, 0, 0, 0.22);
+}
+
+.menu a:hover::after {
+    width: 70%;
+}
+
+/* Кнопки и основные ссылки */
+button,
+.read-more,
+.card a {
+    transition:
+        transform 0.25s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+button:hover,
+.read-more:hover,
+.card a:hover {
+    transform: translateY(-2px);
+}
+
+/* Карточки — более мягкое поднятие */
+.card {
+    transition:
+        transform 0.3s cubic-bezier(.2,.8,.2,1),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.13);
+}
+
+/* Боковые публикации */
+.sidebar-publication {
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        padding-left 0.25s ease;
+}
+
+.sidebar-publication:hover {
+    transform: translateX(3px);
+    background: #f7f7f7;
+    padding-left: 4px;
+}
+
+/* Блоки */
+.box,
+.main,
+.latest-section {
+    transition:
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.box:hover,
+.latest-section:hover {
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Изображения карточек */
+.card-photo img,
+.card-photo .card-image,
+.gallery-item img,
+.news-photo img,
+.main-photo img {
+    transition:
+        transform 0.5s cubic-bezier(.2,.8,.2,1),
+        filter 0.4s ease;
+}
+
+.card:hover .card-photo img,
+.card:hover .card-photo .card-image,
+.gallery-item:hover img,
+.news-photo:hover img {
+    transform: scale(1.035);
+}
+
+/* Галерея */
+.gallery-item {
+    transition:
+        transform 0.3s cubic-bezier(.2,.8,.2,1),
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* Поле поиска */
+.search-form input {
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.search-form input:focus {
+    outline: none;
+    border-color: #b00000;
+    box-shadow:
+        0 0 0 3px rgba(176, 0, 0, 0.12);
+}
+
+.search-form button:hover {
+    transform: translateY(-2px);
+    box-shadow:
+        0 5px 14px rgba(176, 0, 0, 0.25);
+}
+
+/* Главная кнопка видео */
+.main-photo .media-play-button {
+    transition:
+        transform 0.3s cubic-bezier(.2,.8,.2,1),
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.main-photo .media-play-button:hover {
+    box-shadow:
+        0 8px 25px rgba(190, 0, 0, 0.35);
+}
+
+/* Плавное нажатие */
+button:active,
+.menu a:active,
+.read-more:active,
+.card a:active {
+    transform: translateY(0) scale(0.97);
+}
+
+/* Уважаем пользователей, отключивших анимацию */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* =========================================================
+   🎨 PREMIUM VISUAL POLISH
+   ДОБАВЛЕНО ПОВЕРХ СУЩЕСТВУЮЩЕГО CSS
+   ========================================================= */
+
+/* Живой фон */
+body {
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(176, 0, 0, 0.08),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(0, 0, 0, 0.07),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #ededed 0%,
+            #e5e5e5 50%,
+            #eeeeee 100%
+        );
+    background-attachment: fixed;
+}
+
+/* Мягкая глубина основного сайта */
+.site {
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.10);
+    border-color: rgba(120, 120, 120, 0.55);
+    transition:
+        box-shadow 0.4s ease,
+        transform 0.4s ease;
+}
+
+.site:hover {
+    box-shadow:
+        0 12px 38px rgba(0, 0, 0, 0.13);
+}
+
+/* Стеклянный эффект верхнего баннера */
+.top-banner {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.92),
+            rgba(238, 238, 238, 0.82)
+        );
+    backdrop-filter: blur(8px);
+}
+
+/* Более выразительная шапка */
+.header {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            115deg,
+            #8f0000,
+            #b00000 48%,
+            #760000
+        );
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    right: -100px;
+    top: -150px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    animation: headerGlow 7s ease-in-out infinite alternate;
+}
+
+@keyframes headerGlow {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+
+    to {
+        transform: translate(-35px, 35px) scale(1.12);
+    }
+}
+
+/* Меню */
+.menu {
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.18);
+}
+
+.menu a {
+    position: relative;
+}
+
+/* Активный пункт меню — можно назначить класс .active */
+.menu a.active {
+    background: #b00000;
+    color: #fff;
+}
+
+.menu a.active::after {
+    width: 70%;
+}
+
+/* Световой проход по кнопкам */
+.read-more,
+.search-form button {
+    position: relative;
+    overflow: hidden;
+}
+
+.read-more::after,
+.search-form button::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 70%;
+    height: 100%;
+    background: linear-gradient(
+        100deg,
+        transparent,
+        rgba(255, 255, 255, 0.28),
+        transparent
+    );
+    transition: left 0.55s ease;
+    pointer-events: none;
+}
+
+.read-more:hover::after,
+.search-form button:hover::after {
+    left: 140%;
+}
+
+/* Ripple-эффект для интерактивных элементов */
+button,
+.read-more,
+.menu a,
+.card a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button::after,
+.read-more::before,
+.card a::before {
+    pointer-events: none;
+}
+
+/* Карточки — глубина + мягкий свет */
+.card {
+    position: relative;
+    border-color: #d2d2d2;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    box-shadow:
+        inset 0 0 0 1px rgba(176, 0, 0, 0.18);
+    transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Заголовки блоков */
+.box-title,
+.main-title,
+.section-title {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            90deg,
+            #980000,
+            #b00000,
+            #980000
+        );
+    background-size: 200% 100%;
+    animation: titleShimmer 8s ease-in-out infinite;
+}
+
+@keyframes titleShimmer {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Новости появляются чуть мягче */
+.news-item,
+.article-card,
+.video-card {
+    animation: contentRise 0.55s ease both;
+}
+
+@keyframes contentRise {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Метка свежести */
+.new,
+.news-new,
+.is-new {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: #b00000;
+    color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    animation: newPulse 2s ease-in-out infinite;
+}
+
+@keyframes newPulse {
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(176, 0, 0, 0.28);
+    }
+
+    50% {
+        box-shadow: 0 0 0 6px rgba(176, 0, 0, 0);
+    }
+}
+
+/* Изображения — затемнение/увеличение при наведении */
+.gallery-item,
+.news-photo,
+.card-photo {
+    position: relative;
+}
+
+.gallery-item::after,
+.news-photo::after,
+.card-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.0);
+    transition: background 0.35s ease;
+    pointer-events: none;
+}
+
+.gallery-item:hover::after,
+.news-photo:hover::after,
+.card:hover .card-photo::after {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+/* Play-кнопка — лёгкое дыхание */
+.main-photo .media-play-button {
+    animation: playIdle 2.5s ease-in-out infinite;
+}
+
+.main-photo .media-play-button:hover {
+    animation: none;
+}
+
+@keyframes playIdle {
+    0%,
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(190, 0, 0, 0.22);
+    }
+
+    50% {
+        box-shadow:
+            0 0 0 10px rgba(190, 0, 0, 0);
+    }
+}
+
+/* Фокус элементов клавиатурой */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid #b00000;
+    outline-offset: 3px;
+}
+
+/* Галерея — красивый hover */
+.gallery-item:hover {
+    border-color: rgba(176, 0, 0, 0.45);
+}
+
+/* Ссылки карточек */
+.card a {
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.card a::after {
+    content: " →";
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
+
+.card a:hover::after {
+    transform: translateX(4px);
+}
+
+/* Плавный скролл к разделам */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Мобильные сенсорные устройства */
+@media (hover: none) {
+    .card:hover,
+    .gallery-item:hover,
+    .site:hover,
+    .box:hover {
+        transform: none;
+    }
+
+    .menu a:active,
+    .read-more:active,
+    button:active {
+        transform: scale(0.97);
+    }
+}
+
+/* Мобильный фон */
+@media (max-width: 700px) {
+    body {
+        background:
+            radial-gradient(
+                circle at 50% 0%,
+                rgba(176, 0, 0, 0.07),
+                transparent 35%
+            ),
+            #ededed;
+    }
+
+    .site {
+        box-shadow:
+            0 4px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .header::after {
+        width: 180px;
+        height: 180px;
+        right: -80px;
+        top: -100px;
+    }
+}
+
+
+/* =========================================================
+   🎬 КРАСИВАЯ КНОПКА ВИДЕО
+   ========================================================= */
+
+.video-player {
+    position: relative;
+}
+
+.video-player .media-play-button,
+.video-card .media-play-button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 82px;
+    height: 82px;
+    padding: 0;
+    margin: 0;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    border-radius: 50%;
+    background:
+        linear-gradient(
+            135deg,
+            #b00000,
+            #e00000
+        );
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.35),
+        0 0 0 8px rgba(176, 0, 0, 0.10);
+    transition:
+        transform 0.3s cubic-bezier(.2,.8,.2,1),
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+    z-index: 5;
+}
+
+.video-player .media-play-button::before,
+.video-card .media-play-button::before {
+    content: "";
+    width: 0;
+    height: 0;
+    margin-left: 5px;
+    border-top: 13px solid transparent;
+    border-bottom: 13px solid transparent;
+    border-left: 20px solid #fff;
+    transition:
+        transform 0.3s ease;
+}
+
+.video-player .media-play-button::after,
+.video-card .media-play-button::after {
+    content: "";
+    position: absolute;
+    inset: -9px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    animation: videoPlayRing 2.4s ease-in-out infinite;
+}
+
+.video-player .media-play-button:hover,
+.video-card .media-play-button:hover {
+    transform:
+        translate(-50%, -50%)
+        scale(1.10);
+    background:
+        linear-gradient(
+            135deg,
+            #c00000,
+            #f00000
+        );
+    box-shadow:
+        0 12px 32px rgba(0, 0, 0, 0.42),
+        0 0 0 10px rgba(176, 0, 0, 0.16);
+}
+
+.video-player .media-play-button:hover::before,
+.video-card .media-play-button:hover::before {
+    transform: translateX(2px) scale(1.08);
+}
+
+.video-player .media-play-button:active,
+.video-card .media-play-button:active {
+    transform:
+        translate(-50%, -50%)
+        scale(0.96);
+}
+
+@keyframes videoPlayRing {
+    0%,
+    100% {
+        opacity: 0.25;
+        transform: scale(0.96);
+    }
+
+    50% {
+        opacity: 0;
+        transform: scale(1.12);
+    }
+}
+
+/* Не показываем кнопку после запуска */
+.video-player .media-play-button.hidden,
+.video-card .media-play-button.hidden {
+    display: none !important;
+}
+
+/* Телефон */
+@media (max-width: 700px) {
+    .video-player .media-play-button,
+    .video-card .media-play-button {
+        width: 70px;
+        height: 70px;
+    }
+
+    .video-player .media-play-button::before,
+    .video-card .media-play-button::before {
+        border-top-width: 11px;
+        border-bottom-width: 11px;
+        border-left-width: 17px;
+    }
+}
