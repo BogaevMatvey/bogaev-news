@@ -1,0 +1,4791 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    Новость — Новостной портал Богаева М. Е.
+</title>
+
+<link
+    rel="stylesheet"
+    href="css/style.css"
+>
+
+<link
+    rel="stylesheet"
+    href="css/mobile.css"
+>
+
+
+<style>
+
+/* ==========================================
+   ВИДЕО ПУБЛИКАЦИИ
+   ========================================== */
+
+.post-video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #222;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+
+.post-video video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    background: #222;
+}
+
+
+
+/* ==========================================
+   КРУГЛАЯ PLAY-КНОПКА
+   ========================================== */
+
+.post-video-play {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 74px;
+    height: 74px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #c00000;
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 0;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.post-video-play:hover {
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.08);
+
+}
+
+
+.post-video-play::before {
+
+    content: "";
+
+    width: 0;
+    height: 0;
+
+    border-top:
+        13px solid transparent;
+
+    border-bottom:
+        13px solid transparent;
+
+    border-left:
+        19px solid white;
+
+    margin-left: 5px;
+
+}
+
+
+.post-video-play.hidden {
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+
+
+/* ==========================================
+   ФОТО ПУБЛИКАЦИИ
+   ========================================== */
+
+.post-image {
+
+    width: 100%;
+
+    margin-bottom: 20px;
+
+}
+
+
+.post-image img {
+
+    width: 100%;
+
+    height: auto;
+
+    display: block;
+
+}
+
+
+/* ==========================================
+   АНИМАЦИЯ ЛАЙКА
+   ========================================== */
+
+.post-likes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0 20px 0;
+}
+
+.post-like-button {
+    position: relative;
+    border: none;
+    background: #c00000;
+    color: white;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease;
+    overflow: visible;
+}
+
+.post-like-button:hover {
+    background: #a00000;
+    transform: translateY(-1px);
+}
+
+.post-like-button:active {
+    transform: scale(0.94);
+}
+
+.post-like-button.liked {
+    background: #777;
+    cursor: default;
+    animation: likeButtonPop 0.35s ease;
+}
+
+.post-like-button.like-burst {
+    animation: likeButtonPop 0.35s ease;
+}
+
+.post-like-count {
+    font-size: 15px;
+    color: #555;
+}
+
+@keyframes likeButtonPop {
+    0% { transform: scale(1); }
+    45% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .post-like-button,
+    .post-like-button.liked,
+    .post-like-button.like-burst {
+        animation: none;
+        transition: none;
+    }
+}
+
+
+/* =========================================================
+   💬 КОММЕНТАРИИ
+   ДОБАВЛЕНО — СУЩЕСТВУЮЩИЕ СТИЛИ НЕ ИЗМЕНЯЕМ
+   ========================================================= */
+
+.comments-section {
+    margin-top: 30px;
+    border-top: 2px solid #ddd;
+    padding-top: 25px;
+}
+
+/* =========================================================
+   🔇 ТАБЛИЦА ИНФОРМАЦИИ О МУТЕ
+   ДОБАВЛЕНО — СУЩЕСТВУЮЩИЕ СТИЛИ НЕ ИЗМЕНЯЕМ
+   ========================================================= */
+
+.mute-info-box {
+    margin: 0 0 25px 0;
+    padding: 15px;
+    border: 1px solid #ff2020;
+    border-radius: 10px;
+    background:
+        linear-gradient(135deg, rgba(90,0,0,.96), rgba(20,0,0,.98));
+    box-shadow:
+        0 0 8px rgba(255,0,0,.75),
+        0 0 22px rgba(255,0,0,.45),
+        0 0 45px rgba(176,0,0,.25),
+        inset 0 0 20px rgba(255,0,0,.10);
+    color: #fff;
+}
+
+.mute-info-title {
+    margin-bottom: 12px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-shadow:
+        0 0 7px rgba(255,255,255,.35),
+        0 0 15px rgba(255,0,0,.65);
+}
+
+.mute-info-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.mute-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 620px;
+    border: 1px solid #ff3030;
+    box-shadow:
+        0 0 10px rgba(255,0,0,.35),
+        inset 0 0 12px rgba(255,0,0,.08);
+}
+
+.mute-info-table th,
+.mute-info-table td {
+    border: 1px solid #ff3030;
+    padding: 10px 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.mute-info-table th {
+    background: rgba(80,0,0,.72);
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(255,40,40,.75);
+}
+
+.mute-info-table td {
+    background: rgba(25,0,0,.55);
+    color: #fff;
+    font-size: 14px;
+}
+
+.mute-info-table td:last-child {
+    color: #ff5a5a;
+    text-shadow: 0 0 8px rgba(255,0,0,.65);
+}
+
+.mute-countdown-cell {
+    min-width: 120px;
+}
+
+.mute-countdown {
+    color: #ff3030;
+    font-weight: bold;
+    white-space: nowrap;
+    text-shadow:
+        0 0 6px rgba(255,0,0,.85),
+        0 0 14px rgba(255,0,0,.55);
+}
+
+@media (max-width: 700px) {
+
+    .mute-info-box {
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .mute-info-title {
+        font-size: 16px;
+    }
+
+    .mute-info-table {
+        min-width: 560px;
+    }
+
+    .mute-info-table th,
+    .mute-info-table td {
+        padding: 8px 9px;
+        font-size: 11px;
+    }
+
+}
+
+.comments-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.comment-profile-box {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 25px;
+}
+
+.comment-profile-box input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #bbb;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.comment-profile-box button,
+.comment-form button,
+.comment-reply-form button {
+    border: none;
+    background: #c00000;
+    color: white;
+    padding: 10px 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.comment-profile-box button:hover,
+.comment-form button:hover,
+.comment-reply-form button:hover {
+    background: #a00000;
+}
+
+.comment-form {
+    margin-bottom: 30px;
+}
+
+.comment-form textarea,
+.comment-reply-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+    padding: 12px;
+    border: 1px solid #bbb;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.comment-form textarea {
+    min-height: 110px;
+}
+
+.comment-reply-form textarea {
+    min-height: 70px;
+}
+
+.comment-form button:disabled,
+.comment-reply-form button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.comment {
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.comment-pinned {
+    border-left: 4px solid #c00000;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.comment-author {
+    font-weight: bold;
+}
+
+.comment-time {
+    color: #777;
+    font-size: 13px;
+}
+
+.comment-text {
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.5;
+}
+
+.comment-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.comment-actions button {
+    border: 1px solid #ccc;
+    background: #f7f7f7;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+.comment-actions button:hover {
+    background: #e9e9e9;
+}
+
+.comment-actions button.active {
+    background: #ddd;
+    font-weight: bold;
+}
+
+.comment-replies {
+    margin-left: 30px;
+    margin-top: 12px;
+}
+
+.comment-reply-form {
+    margin-top: 12px;
+}
+
+.comment-reply-form button {
+    margin-top: 6px;
+}
+
+.comment-pending {
+    color: #8a6200;
+    background: #fff8dc;
+    padding: 10px;
+    border: 1px solid #ead68a;
+}
+
+.comment-error {
+    color: #a00000;
+    margin-top: 10px;
+}
+
+.comment-success {
+    color: #267326;
+    margin-top: 10px;
+}
+
+.comments-empty {
+    color: #777;
+    padding: 15px 0;
+}
+
+@media (max-width: 700px) {
+    .comment-header {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .comment-replies {
+        margin-left: 10px;
+    }
+}
+
+/* =========================================================
+   🔄 ЗАПРОС НА СМЕНУ НИКНЕЙМА
+   ДОБАВЛЕНО — СУЩЕСТВУЮЩИЕ СТИЛИ НЕ ИЗМЕНЯЕМ
+   ========================================================= */
+
+.nickname-change-request {
+    margin-top: 12px;
+}
+
+.nickname-change-button {
+    border: 1px solid #bbb;
+    background: #fff;
+    color: #333;
+    padding: 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nickname-change-button:hover {
+    background: #f0f0f0;
+}
+
+.nickname-change-form {
+    margin-top: 12px;
+    padding: 15px;
+    background: #fafafa;
+    border: 1px solid #ddd;
+}
+
+.nickname-change-form input,
+.nickname-change-form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #bbb;
+    font-family: inherit;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.nickname-change-form textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.nickname-change-form button {
+    border: none;
+    background: #c00000;
+    color: #fff;
+    padding: 9px 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nickname-change-form button:hover {
+    background: #a00000;
+}
+
+.nickname-change-form button:disabled {
+    background: #999;
+    cursor: not-allowed;
+}
+
+.nickname-request-status {
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+.nickname-request-pending {
+    color: #8a6200;
+    background: #fff8dc;
+    border: 1px solid #ead68a;
+    padding: 10px;
+}
+
+.nickname-request-success {
+    color: #267326;
+}
+
+.nickname-request-error {
+    color: #a00000;
+}
+
+
+/* ИСПРАВЛЕНИЕ: длинный текст новости не выходит за пределы статьи */
+.article p {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ВЕРХНИЙ БАННЕР -->
+
+<div class="top-banner">
+
+    <div class="banner-video">
+
+        <div class="banner-placeholder">
+            МЕСТО ДЛЯ ВИДЕО
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div class="site">
+
+
+    <!-- ШАПКА -->
+
+    <header class="header">
+
+        <div class="header-content">
+
+            <h1>
+                НОВОСТНОЙ ПОРТАЛ БОГАЕВА М. Е.
+            </h1>
+
+            <p>
+                Новости • События • Материалы • Фото • Видео
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- МЕНЮ -->
+
+    <nav class="menu">
+
+        <a href="index.html">
+            Главная
+        </a>
+
+        <a href="news.html">
+            Новости
+        </a>
+
+        <a href="articles.html">
+            Статьи
+        </a>
+
+        <a href="photos.html">
+            Фото
+        </a>
+
+        <a href="videos.html">
+            Видео
+        </a>
+
+        <a href="about.html">
+            О сайте
+        </a>
+
+        <!-- ПОИСК -->
+
+        <a href="search.html">
+            🔎 Поиск
+        </a>
+
+        <a href="chat.html" class="chat-link">
+            💬 Всеобщий чат
+        </a>
+
+    </nav>
+
+
+
+    <!-- ОСНОВНОЙ LAYOUT -->
+
+    <div class="layout">
+
+
+        <!-- ЛЕВАЯ КОЛОНКА -->
+
+        <aside class="sidebar">
+
+
+            <div class="box">
+
+                <div class="box-title">
+                    Разделы
+                </div>
+
+                <div class="box-body">
+
+                    <a href="index.html">
+                        Главная
+                    </a>
+
+                    <a href="news.html">
+                        Последние новости
+                    </a>
+
+                    <a href="articles.html">
+                        Статьи
+                    </a>
+
+                    <a href="photos.html">
+                        Фотографии
+                    </a>
+
+                    <a href="videos.html">
+                        Видео
+                    </a>
+
+                    <a href="about.html">
+                        О сайте
+                    </a>
+
+                    <!-- ПОИСК -->
+
+                    <a href="search.html">
+                        🔎 Поиск
+                    </a>
+
+                    <a href="chat.html" class="chat-link">
+                        💬 Всеобщий чат
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="box">
+
+                <div class="box-title">
+                    Последние публикации
+                </div>
+
+                <div
+                    class="box-body"
+                    id="latest-publications"
+                >
+
+                    <div class="sidebar-publication">
+                        Загрузка...
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="side-banner">
+
+                БОКОВОЙ БАННЕР
+
+            </div>
+
+
+        </aside>
+
+
+
+        <!-- ЦЕНТРАЛЬНАЯ ЧАСТЬ -->
+
+        <main class="main-content">
+
+
+            <section class="main">
+
+
+                <div class="main-title">
+
+                    НОВОСТЬ
+
+                </div>
+
+
+
+                <article
+                    class="article"
+                    id="post-container"
+                >
+
+                    Загрузка публикации...
+
+
+                </article>
+
+
+                <!-- =====================================================
+                     💬 КОММЕНТАРИИ
+                     ДОБАВЛЕНО — СУЩЕСТВУЮЩИЙ ARTICLE НЕ ТРОГАЕМ
+                     ===================================================== -->
+
+                <section
+                    class="comments-section"
+                    id="comments-section"
+                >
+
+                    <div class="comments-title">
+                        💬 Комментарии
+                    </div>
+
+                    <div
+                        id="comment-profile-box"
+                        class="comment-profile-box"
+                    >
+
+                        <strong>
+                            Ваш никнейм
+                        </strong>
+
+                        <br><br>
+
+                        <input
+                            type="text"
+                            id="comment-username"
+                            maxlength="30"
+                            placeholder="Введите никнейм"
+                            autocomplete="nickname"
+                        >
+
+                        <button
+                            type="button"
+                            id="save-comment-username"
+                        >
+                            Сохранить ник
+                        </button>
+
+                        <div
+                            id="profile-message"
+                        ></div>
+                        <div
+                            id="nickname-change-request-area"
+                            class="nickname-change-request"
+                        ></div>
+
+                    </div>
+
+                    <div
+                        id="comment-form-container"
+                    ></div>
+
+                    <div
+                        id="comments-list"
+                    >
+                        Загрузка комментариев...
+                    </div>
+
+                </section>
+
+
+            </section>
+
+
+        </main>
+
+
+
+        <!-- ПРАВАЯ КОЛОНКА -->
+
+        <aside class="right-sidebar">
+
+
+            <div class="side-banner">
+
+                БАННЕР
+
+            </div>
+
+
+
+            <div class="box">
+
+                <div class="box-title">
+
+                    Популярное
+
+                </div>
+
+                <div
+                    class="box-body"
+                    id="popular-publications"
+                >
+
+                    <div class="sidebar-publication">
+                        Загрузка...
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </aside>
+
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 Новостной портал Богаева М. Е.
+
+        <br>
+
+        Новости • События • Материалы
+
+    </footer>
+
+
+</div>
+
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+
+<script>
+
+
+/* =========================
+   SUPABASE
+   ========================= */
+
+
+const SUPABASE_URL =
+    "https://fmqjevqagtasqpeezwnn.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_Me5hyK-zIp3_5yBpHP8VVA_OFk2bqSj";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+/* =========================
+   ПОЛУЧАЕМ ID НОВОСТИ
+   ========================= */
+
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const postId =
+    params.get("id");
+
+
+
+const container =
+    document.getElementById(
+        "post-container"
+    );
+
+
+
+/* =========================
+   ЕСЛИ ID НЕТ
+   ========================= */
+
+
+if (!postId) {
+
+    container.innerHTML = `
+
+        <h2>
+            Новость не найдена
+        </h2>
+
+        <p>
+            Не указан идентификатор публикации.
+        </p>
+
+        <a
+            href="news.html"
+            class="read-more"
+        >
+            ← Вернуться к новостям
+        </a>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   ПОСЛЕДНИЕ ПУБЛИКАЦИИ
+   ========================================================= */
+
+
+async function loadLatestPublications() {
+
+    const sidebar =
+        document.getElementById(
+            "latest-publications"
+        );
+
+
+    if (!sidebar) {
+
+        return;
+
+    }
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+
+            .from("posts")
+
+            .select(
+                "id, title, created_at"
+            )
+
+            .eq(
+                "published",
+                true
+            )
+
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            )
+
+            .limit(5);
+
+
+    if (error) {
+
+        console.error(
+            "Ошибка загрузки последних публикаций:",
+            error
+        );
+
+
+        sidebar.innerHTML = `
+
+            <div class="sidebar-publication">
+                Не удалось загрузить публикации.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
+        sidebar.innerHTML = `
+
+            <div class="sidebar-publication">
+                Пока публикаций нет.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    sidebar.innerHTML = "";
+
+
+    data.forEach(
+        function(post) {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "sidebar-publication";
+
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            link.href =
+                "news-post.html?id=" +
+                encodeURIComponent(
+                    post.id
+                );
+
+
+            link.textContent =
+                post.title ||
+                "Без названия";
+
+
+            item.appendChild(
+                link
+            );
+
+
+            sidebar.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   ПОПУЛЯРНОЕ
+   ========================================================= */
+
+
+async function loadPopularPublications() {
+
+    const popular =
+        document.getElementById(
+            "popular-publications"
+        );
+
+
+    if (!popular) {
+
+        return;
+
+    }
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+
+            .from("posts")
+
+            .select(
+                "id, title, created_at"
+            )
+
+            .eq(
+                "published",
+                true
+            )
+
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            )
+
+            .limit(3);
+
+
+    if (error) {
+
+        console.error(
+            "Ошибка загрузки популярных публикаций:",
+            error
+        );
+
+
+        popular.innerHTML = `
+
+            <div class="sidebar-publication">
+                Не удалось загрузить материалы.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
+        popular.innerHTML = `
+
+            <div class="sidebar-publication">
+                Пока публикаций нет.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    popular.innerHTML = "";
+
+
+    data.forEach(
+        function(post) {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "sidebar-publication";
+
+
+            const link =
+                document.createElement(
+                    "a"
+                );
+
+
+            link.href =
+                "news-post.html?id=" +
+                encodeURIComponent(
+                    post.id
+                );
+
+
+            link.textContent =
+                post.title ||
+                "Без названия";
+
+
+            item.appendChild(
+                link
+            );
+
+
+            popular.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   ЗАГРУЗКА НОВОСТИ
+   ========================================================= */
+
+
+async function loadPost() {
+
+
+    if (!postId) {
+
+        return;
+
+    }
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+
+            .from("posts")
+
+            .select("*")
+
+            .eq(
+                "id",
+                postId
+            )
+
+            .eq(
+                "published",
+                true
+            )
+
+            .single();
+
+
+
+    /* =========================
+       ОШИБКА
+       ========================= */
+
+
+    if (
+        error ||
+        !data
+    ) {
+
+        console.error(
+            error
+        );
+
+
+        container.innerHTML = `
+
+            <h2>
+                Новость не найдена
+            </h2>
+
+            <p>
+                Публикация не существует
+                или ещё не опубликована.
+            </p>
+
+            <a
+                href="news.html"
+                class="read-more"
+            >
+                ← Вернуться к новостям
+            </a>
+
+        `;
+
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       ДАТА
+       ========================= */
+
+
+    let formattedDate =
+        "Дата не указана";
+
+
+    if (
+        data.created_at
+    ) {
+
+        const date =
+            new Date(
+                data.created_at
+            );
+
+
+        formattedDate =
+            date.toLocaleString(
+                "ru-RU",
+                {
+
+                    day: "2-digit",
+
+                    month: "long",
+
+                    year: "numeric",
+
+                    hour: "2-digit",
+
+                    minute: "2-digit"
+
+                }
+            );
+
+    }
+
+
+
+    /* =========================
+       МЕДИА
+       ========================= */
+
+
+    let mediaHTML = "";
+
+
+
+    /* =========================
+       ЕСЛИ ЕСТЬ ВИДЕО
+       ========================= */
+
+
+    if (
+        data.video_url
+    ) {
+
+        mediaHTML = `
+
+            <div
+                class="post-video"
+                id="post-video-container"
+            >
+
+                <video
+                    id="post-video"
+                    src="${escapeAttribute(data.video_url)}"
+                    controls
+                    preload="metadata"
+                    playsinline
+                    ${
+                        data.image_url
+                            ? `poster="${escapeAttribute(data.image_url)}"`
+                            : ""
+                    }
+                ></video>
+
+
+                <button
+                    type="button"
+                    id="post-play-button"
+                    class="post-video-play"
+                    aria-label="Воспроизвести видео"
+                ></button>
+
+            </div>
+
+        `;
+
+    }
+
+
+
+    /* =========================
+       ЕСЛИ ЕСТЬ ФОТО
+       ========================= */
+
+
+    else if (
+        data.image_url
+    ) {
+
+        mediaHTML = `
+
+            <div class="post-image">
+
+                <img
+                    src="${escapeAttribute(data.image_url)}"
+                    alt="${escapeAttribute(
+                        data.title ||
+                        "Новость"
+                    )}"
+                >
+
+            </div>
+
+        `;
+
+    }
+
+
+
+    /* =========================
+       ВЫВОД
+       ========================= */
+
+
+    container.innerHTML = `
+
+        <div class="date">
+
+            ${formattedDate}
+
+        </div>
+
+
+        <div
+            class="post-likes"
+            id="post-likes"
+        >
+
+            <button
+                type="button"
+                id="post-like-button"
+                class="post-like-button"
+            >
+                ❤️ Нравится
+            </button>
+
+            <span
+                id="post-like-count"
+                class="post-like-count"
+            >
+                Загрузка...
+            </span>
+
+        </div>
+
+
+        <h2>
+
+            ${escapeHTML(
+                data.title ||
+                "Без заголовка"
+            )}
+
+        </h2>
+
+
+        ${mediaHTML}
+
+
+        <p>
+
+            ${escapeHTML(
+                data.content ||
+                ""
+            )}
+
+        </p>
+
+
+        <p>
+
+            Опубликовано на новостном
+            портале Богаева М. Е.
+
+        </p>
+
+
+        <a
+            href="news.html"
+            class="read-more"
+        >
+
+            ← Все новости
+
+        </a>
+
+    `;
+
+
+
+    /* =========================
+       НАСТРАИВАЕМ PLAY
+       ========================= */
+
+
+    if (
+        data.video_url
+    ) {
+
+
+        const video =
+            document.getElementById(
+                "post-video"
+            );
+
+
+        const playButton =
+            document.getElementById(
+                "post-play-button"
+            );
+
+
+        if (
+            video &&
+            playButton
+        ) {
+
+
+            /* КНОПКА */
+
+            playButton.addEventListener(
+                "click",
+                function() {
+
+                    video.play();
+
+                }
+            );
+
+
+
+            /* ЗАПУСК */
+
+            video.addEventListener(
+                "play",
+                function() {
+
+                    playButton.classList.add(
+                        "hidden"
+                    );
+
+                }
+            );
+
+
+
+            /* ПАУЗА */
+
+            video.addEventListener(
+                "pause",
+                function() {
+
+                    playButton.classList.remove(
+                        "hidden"
+                    );
+
+                }
+            );
+
+
+
+            /* КОНЕЦ */
+
+            video.addEventListener(
+                "ended",
+                function() {
+
+                    playButton.classList.remove(
+                        "hidden"
+                    );
+
+                }
+            );
+
+        }
+
+    }
+
+}
+
+
+
+/* =========================================================
+   ЛАЙКИ
+   ========================================================= */
+
+
+async function loadPostLikes() {
+
+
+    if (!postId) {
+
+        return;
+
+    }
+
+
+    const likeButton =
+        document.getElementById(
+            "post-like-button"
+        );
+
+
+    const likeCount =
+        document.getElementById(
+            "post-like-count"
+        );
+
+
+    if (
+        !likeButton ||
+        !likeCount
+    ) {
+
+        return;
+
+    }
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("posts")
+            .select("likes")
+            .eq("id", postId)
+            .single();
+
+
+    if (error) {
+
+        console.error(
+            "Ошибка загрузки лайков:",
+            error
+        );
+
+        likeCount.textContent =
+            "Не удалось загрузить";
+
+        return;
+
+    }
+
+
+    likeCount.textContent =
+        (data.likes || 0) +
+        " лайков";
+
+
+    const likeKey =
+        "liked_post_" + postId;
+
+
+    const alreadyLiked =
+        localStorage.getItem(likeKey);
+
+
+    if (alreadyLiked) {
+
+        likeButton.textContent =
+            "❤️ Уже нравится";
+
+        likeButton.classList.add(
+            "liked"
+        );
+
+        likeButton.disabled = true;
+
+    }
+
+
+    likeButton.addEventListener(
+        "click",
+        async function() {
+
+            if (
+                localStorage.getItem(likeKey)
+            ) {
+
+                return;
+
+            }
+
+
+            likeButton.disabled = true;
+
+            likeButton.textContent =
+                "❤️ Загрузка...";
+
+
+            const {
+                data: newLikes,
+                error: likeError
+            } =
+                await supabaseClient.rpc(
+                    "increment_post_likes",
+                    {
+                        post_id: Number(postId)
+                    }
+                );
+
+
+            if (likeError) {
+
+                console.error(
+                    "Ошибка добавления лайка:",
+                    likeError
+                );
+
+                likeButton.disabled = false;
+
+                likeButton.textContent =
+                    "❤️ Нравится";
+
+                return;
+
+            }
+
+
+            localStorage.setItem(
+                likeKey,
+                "1"
+            );
+
+
+            likeCount.textContent =
+                (newLikes || 0) +
+                " лайков";
+
+
+            likeButton.textContent =
+                "❤️ Уже нравится";
+
+            likeButton.classList.add(
+                "liked"
+            );
+
+
+            /* Небольшая анимация после успешного лайка */
+
+            likeButton.classList.remove(
+                "like-burst"
+            );
+
+            void likeButton.offsetWidth;
+
+            likeButton.classList.add(
+                "like-burst"
+            );
+
+            likeButton.addEventListener(
+                "animationend",
+                function() {
+                    likeButton.classList.remove(
+                        "like-burst"
+                    );
+                },
+                { once: true }
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================
+   ЗАЩИТА HTML
+   ========================= */
+
+
+function escapeHTML(
+    text
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+
+
+/* =========================
+   ЗАЩИТА АТРИБУТОВ
+   ========================= */
+
+
+function escapeAttribute(
+    text
+) {
+
+    return String(text)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        );
+
+}
+
+
+
+
+/* =========================================================
+   💬 КОММЕНТАРИИ — ДОБАВЛЕННЫЙ БЛОК
+   Существующие функции выше НЕ ИЗМЕНЯЕМ.
+   ========================================================= */
+
+let commentUser = null;
+let commentProfile = null;
+
+
+/* =========================================================
+   АНОНИМНАЯ АВТОРИЗАЦИЯ
+   ========================================================= */
+
+async function initCommentUser() {
+
+    const {
+        data: sessionData,
+        error: sessionError
+    } = await supabaseClient.auth.getSession();
+
+    if (sessionError) {
+        console.error(
+            "Ошибка получения сессии комментариев:",
+            sessionError
+        );
+        return false;
+    }
+
+    if (
+        sessionData &&
+        sessionData.session &&
+        sessionData.session.user
+    ) {
+        commentUser = sessionData.session.user;
+    } else {
+        const {
+            data,
+            error
+        } = await supabaseClient.auth.signInAnonymously();
+
+        if (error) {
+            console.error(
+                "Ошибка анонимной авторизации:",
+                error
+            );
+            return false;
+        }
+
+        commentUser = data.user;
+    }
+
+    return await loadCommentProfile();
+}
+
+
+/* =========================================================
+   ПРОФИЛЬ
+   ========================================================= */
+
+async function loadCommentProfile() {
+
+    if (!commentUser) {
+        return false;
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("comment_profiles")
+        .select("user_id, username, username_locked, role, is_banned, banned_until, ban_reason")
+        .eq("user_id", commentUser.id)
+        .maybeSingle();
+
+    if (error) {
+        console.error(
+            "Ошибка загрузки профиля:",
+            error
+        );
+        return false;
+    }
+
+    commentProfile = data || null;
+
+    updateCommentProfileUI();
+
+    return true;
+}
+
+
+function updateCommentProfileUI() {
+
+    const box = document.getElementById(
+        "comment-profile-box"
+    );
+
+    const input = document.getElementById(
+        "comment-username"
+    );
+
+    const button = document.getElementById(
+        "save-comment-username"
+    );
+
+    const message = document.getElementById(
+        "profile-message"
+    );
+
+    if (!box || !input || !button) {
+        return;
+    }
+
+    if (commentProfile) {
+
+        input.value =
+            commentProfile.username;
+
+        input.disabled = true;
+
+        button.style.display = "none";
+
+        if (message) {
+            message.textContent =
+                "🔒 Никнейм сохранён и закреплён.";
+        }
+
+        createCommentForm();
+
+        return;
+    }
+
+    input.disabled = false;
+    button.style.display = "inline-block";
+
+    if (message) {
+        message.textContent = "";
+    }
+}
+
+
+/* =========================================================
+   СОХРАНЕНИЕ НИКА
+   ========================================================= */
+
+async function saveCommentUsername() {
+
+    if (!commentUser) {
+        return;
+    }
+
+    const input = document.getElementById(
+        "comment-username"
+    );
+
+    const message = document.getElementById(
+        "profile-message"
+    );
+
+    if (!input || !message) {
+        return;
+    }
+
+    const username = input.value.trim();
+
+    if (username.length < 2) {
+        message.className = "comment-error";
+        message.textContent =
+            "❌ Никнейм должен содержать минимум 2 символа.";
+        return;
+    }
+
+    if (username.length > 30) {
+        message.className = "comment-error";
+        message.textContent =
+            "❌ Максимальная длина никнейма — 30 символов.";
+        return;
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("comment_profiles")
+        .insert({
+            user_id: commentUser.id,
+            username: username,
+            username_locked: true
+        })
+        .select("user_id, username, username_locked, role, is_banned, banned_until, ban_reason")
+        .single();
+
+    if (error) {
+
+        console.error(
+            "Ошибка создания профиля:",
+            error
+        );
+
+        if (error.code === "23505") {
+            message.className = "comment-error";
+            message.textContent =
+                "❌ Этот никнейм уже занят.";
+        } else {
+            message.className = "comment-error";
+            message.textContent =
+                "❌ Не удалось сохранить никнейм.";
+        }
+
+        return;
+    }
+
+    commentProfile = data;
+
+    message.className = "comment-success";
+    message.textContent =
+        "✅ Никнейм сохранён.";
+
+    updateCommentProfileUI();
+}
+
+
+/* =========================================================
+   ПРОВЕРКА БАНА
+   ========================================================= */
+
+function isCommentUserBanned() {
+
+    if (!commentProfile) {
+        return false;
+    }
+
+    if (commentProfile.is_banned === true) {
+        return true;
+    }
+
+    if (
+        commentProfile.banned_until &&
+        new Date(commentProfile.banned_until).getTime() >
+        Date.now()
+    ) {
+        return true;
+    }
+
+    return false;
+}
+
+
+function getBanMessage() {
+
+    if (
+        commentProfile &&
+        commentProfile.banned_until &&
+        new Date(commentProfile.banned_until).getTime() >
+        Date.now()
+    ) {
+
+        const until = new Date(
+            commentProfile.banned_until
+        ).toLocaleString(
+            "ru-RU",
+            {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+
+        return (
+            "🚫 Вы временно заблокированы до " +
+            until +
+            "."
+        );
+    }
+
+    return "🚫 Вам запрещено пользоваться комментариями.";
+}
+
+/* =========================================================
+   ПРОВЕРКА АКТИВНОГО МУТА
+   ДОБАВЛЕНО — СУЩЕСТВУЮЩИЙ КОД НЕ ИЗМЕНЯЕМ
+   ========================================================= */
+
+async function getActiveCommentMute() {
+
+    if (!commentUser) {
+        return null;
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient.rpc(
+        "get_active_user_punishment",
+        {
+            target_user_id: commentUser.id
+        }
+    );
+
+    if (error) {
+        console.error(
+            "Ошибка проверки мута:",
+            error
+        );
+        return null;
+    }
+
+    if (
+        Array.isArray(data) &&
+        data.length > 0 &&
+        data[0].punishment_type === "mute"
+    ) {
+        return data[0];
+    }
+
+    return null;
+}
+
+
+function buildMuteInfoHTML(activeMute) {
+
+    if (!activeMute) {
+        return "";
+    }
+
+    const issuerRole =
+        String(
+            activeMute.issued_by_role ||
+            activeMute.issuer_role ||
+            activeMute.role ||
+            ""
+        ).toLowerCase();
+
+    const issuedBy =
+        issuerRole === "moderator" ||
+        issuerRole === "moder" ||
+        issuerRole === "модератор" ||
+        issuerRole === "модер"
+            ? "Модер"
+            : "Админ";
+
+    const reason =
+        activeMute.reason ||
+        activeMute.punishment_reason ||
+        "Не указана";
+
+    const issuedAtValue =
+        activeMute.created_at ||
+        activeMute.issued_at ||
+        activeMute.started_at ||
+        activeMute.punishment_created_at ||
+        activeMute.createdAt ||
+        activeMute.issuedAt ||
+        null;
+
+    const issuedAt =
+        issuedAtValue
+            ? new Date(issuedAtValue).toLocaleString(
+                "ru-RU",
+                {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            )
+            : "Дата не указана";
+
+    const expiresAt =
+        activeMute.expires_at
+            ? new Date(activeMute.expires_at).toLocaleString(
+                "ru-RU",
+                {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            )
+            : "Никогда";
+
+    return `
+        <div class="mute-info-box">
+            <div class="mute-info-title">
+                🔇 Вы получили мут
+            </div>
+            <div class="mute-info-table-wrap">
+                <table class="mute-info-table">
+                    <thead>
+                        <tr>
+                            <th>👤 Кто выдал</th>
+                            <th>⚠️ Причина</th>
+                            <th>📅 Дата выдачи наказания</th>
+                            <th>📅 Дата снятия наказания</th>
+                            <th>⏳ Осталось</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>${escapeHTML(String(issuedBy))}</td>
+                            <td>${escapeHTML(String(reason))}</td>
+                            <td>${escapeHTML(issuedAt)}</td>
+                            <td>${escapeHTML(expiresAt)}</td>
+                            <td class="mute-countdown-cell">
+                                ${
+                                    activeMute.expires_at
+                                        ? `<span
+                                            class="mute-countdown"
+                                            data-expires-at="${escapeHTML(
+                                                String(activeMute.expires_at)
+                                            )}"
+                                        >Загрузка...</span>`
+                                        : "∞"
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+
+function updateMuteCountdown() {
+
+    const countdown =
+        document.querySelector(
+            ".mute-countdown"
+        );
+
+    if (!countdown) {
+        return;
+    }
+
+    const expiresAt =
+        new Date(
+            countdown.dataset.expiresAt
+        ).getTime();
+
+    if (
+        !Number.isFinite(expiresAt)
+    ) {
+        countdown.textContent =
+            "∞";
+        return;
+    }
+
+    const remaining =
+        Math.max(
+            0,
+            expiresAt - Date.now()
+        );
+
+    const totalSeconds =
+        Math.floor(
+            remaining / 1000
+        );
+
+    const days =
+        Math.floor(
+            totalSeconds / 86400
+        );
+
+    const hours =
+        Math.floor(
+            (totalSeconds % 86400) / 3600
+        );
+
+    const minutes =
+        Math.floor(
+            (totalSeconds % 3600) / 60
+        );
+
+    const seconds =
+        totalSeconds % 60;
+
+    if (days > 0) {
+
+        countdown.textContent =
+            days + " д. " +
+            String(hours).padStart(2, "0") + ":" +
+            String(minutes).padStart(2, "0") + ":" +
+            String(seconds).padStart(2, "0");
+
+    } else {
+
+        countdown.textContent =
+            String(hours).padStart(2, "0") + ":" +
+            String(minutes).padStart(2, "0") + ":" +
+            String(seconds).padStart(2, "0");
+    }
+}
+
+
+async function refreshMuteInfoBox() {
+
+    const container =
+        document.getElementById(
+            "comment-form-container"
+        );
+
+    if (!container || !commentUser) {
+        return;
+    }
+
+    const activeMute =
+        await getActiveCommentMute();
+
+    const existingBox =
+        container.querySelector(
+            ".mute-info-box"
+        );
+
+    if (!activeMute) {
+
+        if (existingBox) {
+            existingBox.remove();
+        }
+
+        return;
+    }
+
+    if (existingBox) {
+
+        const countdown =
+            existingBox.querySelector(
+                ".mute-countdown"
+            );
+
+        if (countdown) {
+            countdown.dataset.expiresAt =
+                activeMute.expires_at || "";
+        }
+
+        return;
+    }
+
+    const html =
+        buildMuteInfoHTML(activeMute);
+
+    const form =
+        container.querySelector(
+            ".comment-form"
+        );
+
+    if (form) {
+        form.insertAdjacentHTML(
+            "beforebegin",
+            html
+        );
+
+        updateMuteCountdown();
+    }
+}
+
+
+function startMuteInfoAutoRefresh() {
+
+    if (
+        window.muteInfoRefreshTimer
+    ) {
+        return;
+    }
+
+    window.muteInfoRefreshTimer =
+        setInterval(
+            refreshMuteInfoBox,
+            1000
+        );
+
+    window.muteCountdownTimer =
+        setInterval(
+            updateMuteCountdown,
+            1000
+        );
+
+    updateMuteCountdown();
+}
+
+
+function getMuteMessage(punishment) {
+
+    if (
+        punishment &&
+        punishment.expires_at
+    ) {
+
+        const until = new Date(
+            punishment.expires_at
+        ).toLocaleString(
+            "ru-RU",
+            {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+
+        return (
+            "🔇 Вы не можете оставлять комментарии до " +
+            until +
+            "."
+        );
+    }
+
+    return "🔇 Вам запрещено оставлять комментарии.";
+}
+
+
+/* =========================================================
+   ФОРМА НОВОГО КОММЕНТАРИЯ
+   ========================================================= */
+
+async function createCommentForm() {
+
+    const container = document.getElementById(
+        "comment-form-container"
+    );
+
+    if (!container) {
+        return;
+    }
+
+    if (!commentProfile) {
+        container.innerHTML = "";
+        return;
+    }
+
+    if (isCommentUserBanned()) {
+        container.innerHTML = `
+            <div class="comment-error">
+                ${escapeHTML(getBanMessage())}
+            </div>
+        `;
+        return;
+    }
+
+    const activeMute =
+        await getActiveCommentMute();
+
+    let muteInfoHTML =
+        buildMuteInfoHTML(activeMute);
+
+    container.innerHTML = `
+        ${muteInfoHTML}
+
+        <div class="comment-form">
+
+            <textarea
+                id="new-comment-text"
+                maxlength="500"
+                placeholder="Напишите комментарий..."
+            ></textarea>
+
+            <button
+                type="button"
+                id="send-comment-button"
+            >
+                Отправить комментарий
+            </button>
+
+            <div id="comment-form-message"></div>
+
+        </div>
+    `;
+
+    const button = document.getElementById(
+        "send-comment-button"
+    );
+
+    if (button) {
+        button.addEventListener(
+            "click",
+            sendComment
+        );
+    }
+}
+
+
+/* =========================================================
+   ОТПРАВКА КОММЕНТАРИЯ
+   ========================================================= */
+
+async function sendComment() {
+
+    if (
+        !commentUser ||
+        !commentProfile
+    ) {
+        return;
+    }
+
+    if (isCommentUserBanned()) {
+
+        const message = document.getElementById(
+            "comment-form-message"
+        );
+
+        if (message) {
+            message.className = "comment-error";
+            message.textContent =
+                getBanMessage();
+        }
+
+        return;
+    }
+
+    const textarea = document.getElementById(
+        "new-comment-text"
+    );
+
+    const button = document.getElementById(
+        "send-comment-button"
+    );
+
+    const message = document.getElementById(
+        "comment-form-message"
+    );
+
+    if (!textarea || !button || !message) {
+        return;
+    }
+
+    const activeMute = await getActiveCommentMute();
+
+    if (activeMute) {
+        message.className = "comment-error";
+        message.textContent =
+            getMuteMessage(activeMute);
+        return;
+    }
+
+    const content = textarea.value.trim();
+
+    if (!content) {
+        message.className = "comment-error";
+        message.textContent =
+            "❌ Комментарий не может быть пустым.";
+        return;
+    }
+
+    if (content.length > 500) {
+        message.className = "comment-error";
+        message.textContent =
+            "❌ Максимум 500 символов.";
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Отправка...";
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("comments")
+        .insert({
+            post_id: Number(postId),
+            user_id: commentUser.id,
+            author_name: commentProfile.username,
+            content: content,
+            parent_id: null
+        })
+        .select("*")
+        .single();
+
+    if (error) {
+
+        console.error(
+            "Ошибка отправки комментария:",
+            error
+        );
+
+        button.disabled = false;
+        button.textContent =
+            "Отправить комментарий";
+
+        if (
+            error.message &&
+            error.message.includes(
+                "COMMENT_LIMIT_REACHED"
+            )
+        ) {
+            message.className = "comment-error";
+            message.textContent =
+                "🚫 Лимит: 3 комментария за последние 8 часов.";
+        } else {
+            message.className = "comment-error";
+            message.textContent =
+                "❌ Не удалось отправить комментарий.";
+        }
+
+        return;
+    }
+
+    textarea.value = "";
+
+    button.disabled = false;
+    button.textContent =
+        "Отправить комментарий";
+
+    message.className = "comment-success";
+
+    if (data && data.status === "pending") {
+        message.textContent =
+            "⏳ Комментарий отправлен на проверку.";
+    } else {
+        message.textContent =
+            "✅ Комментарий опубликован.";
+    }
+
+    await loadComments();
+    await loadNicknameChangeRequest();
+}
+
+
+/* =========================================================
+   ВРЕМЯ
+   ========================================================= */
+
+function pluralize(
+    number,
+    one,
+    few,
+    many
+) {
+
+    const n = Math.abs(number) % 100;
+    const n1 = n % 10;
+
+    if (n > 10 && n < 20) {
+        return number + " " + many;
+    }
+
+    if (n1 === 1) {
+        return number + " " + one;
+    }
+
+    if (n1 >= 2 && n1 <= 4) {
+        return number + " " + few;
+    }
+
+    return number + " " + many;
+}
+
+
+function formatCommentTime(createdAt) {
+
+    const date = new Date(createdAt);
+    const now = new Date();
+
+    let seconds = Math.floor(
+        (now.getTime() - date.getTime()) / 1000
+    );
+
+    if (seconds < 0) {
+        seconds = 0;
+    }
+
+    if (seconds < 60) {
+        return "Только что";
+    }
+
+    const minutes = Math.floor(
+        seconds / 60
+    );
+
+    if (minutes < 60) {
+        return pluralize(
+            minutes,
+            "минуту",
+            "минуты",
+            "минут"
+        ) + " назад";
+    }
+
+    const hours = Math.floor(
+        minutes / 60
+    );
+
+    if (hours < 24) {
+        return pluralize(
+            hours,
+            "час",
+            "часа",
+            "часов"
+        ) + " назад";
+    }
+
+    const days = Math.floor(
+        hours / 24
+    );
+
+    if (days < 7) {
+        return pluralize(
+            days,
+            "день",
+            "дня",
+            "дней"
+        ) + " назад";
+    }
+
+    const weeks = Math.floor(
+        days / 7
+    );
+
+    if (weeks < 4) {
+        return pluralize(
+            weeks,
+            "неделю",
+            "недели",
+            "недель"
+        ) + " назад";
+    }
+
+    const months = Math.floor(
+        days / 30
+    );
+
+    if (months < 12) {
+        return pluralize(
+            months,
+            "месяц",
+            "месяца",
+            "месяцев"
+        ) + " назад";
+    }
+
+    const years = Math.floor(
+        days / 365
+    );
+
+    return pluralize(
+        years,
+        "год",
+        "года",
+        "лет"
+    ) + " назад";
+}
+
+
+/* =========================================================
+   ЗАГРУЗКА КОММЕНТАРИЕВ
+   ========================================================= */
+
+async function loadComments() {
+
+    const list = document.getElementById(
+        "comments-list"
+    );
+
+    if (!list || !postId) {
+        return;
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("comments")
+        .select("*")
+        .eq("post_id", Number(postId))
+        .eq("status", "published")
+        .order("is_pinned", {
+            ascending: false
+        })
+        .order("created_at", {
+            ascending: true
+        });
+
+    if (error) {
+
+        console.error(
+            "Ошибка загрузки комментариев:",
+            error
+        );
+
+        list.innerHTML = `
+            <div class="comment-error">
+                ❌ Не удалось загрузить комментарии.
+            </div>
+        `;
+
+        return;
+    }
+
+    if (!data || data.length === 0) {
+
+        list.innerHTML = `
+            <div class="comments-empty">
+                Пока комментариев нет.
+            </div>
+        `;
+
+        return;
+    }
+
+    const rootComments = data.filter(
+        comment =>
+            comment.parent_id === null
+    );
+
+    list.innerHTML = "";
+
+    rootComments.forEach(
+        comment => {
+
+            list.appendChild(
+                createCommentElement(
+                    comment,
+                    data,
+                    0
+                )
+            );
+
+        }
+    );
+}
+
+
+/* =========================================================
+   ЭЛЕМЕНТ КОММЕНТАРИЯ
+   ========================================================= */
+
+function createCommentElement(
+    comment,
+    allComments,
+    depth = 0
+) {
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.className =
+        "comment" +
+        (
+            comment.is_pinned
+                ? " comment-pinned"
+                : ""
+        );
+
+    const header =
+        document.createElement("div");
+
+    header.className =
+        "comment-header";
+
+    const author =
+        document.createElement("span");
+
+    author.className =
+        "comment-author";
+
+    author.textContent =
+        (
+            comment.is_pinned
+                ? "📌 "
+                : ""
+        ) +
+        comment.author_name;
+
+    const time =
+        document.createElement("span");
+
+    time.className =
+        "comment-time";
+
+    time.dataset.createdAt =
+        comment.created_at;
+
+    time.textContent =
+        formatCommentTime(
+            comment.created_at
+        );
+
+    header.appendChild(author);
+    header.appendChild(time);
+
+    const text =
+        document.createElement("div");
+
+    text.className =
+        "comment-text";
+
+    /*
+       textContent — не innerHTML.
+       HTML/скрипты из комментария не выполняются.
+    */
+
+    text.textContent =
+        comment.content;
+
+    wrapper.appendChild(header);
+    wrapper.appendChild(text);
+
+    const actions =
+        document.createElement("div");
+
+    actions.className =
+        "comment-actions";
+
+
+    /* ↩️ */
+
+    let replyButton = null;
+
+    if (depth < 2) {
+
+        replyButton =
+            document.createElement("button");
+
+        replyButton.type = "button";
+        replyButton.textContent =
+            "↩️ Ответить";
+
+        replyButton.addEventListener(
+            "click",
+            function() {
+                showReplyForm(
+                    wrapper,
+                    comment.id,
+                    comment.author_name
+                );
+            }
+        );
+
+    }
+
+
+    /* ⚑ */
+
+    const reportButton =
+        document.createElement("button");
+
+    reportButton.type = "button";
+    reportButton.textContent =
+        "⚑ Пожаловаться";
+
+    reportButton.addEventListener(
+        "click",
+        function() {
+            reportComment(
+                comment.id
+            );
+        }
+    );
+
+
+    if (replyButton) {
+        actions.appendChild(replyButton);
+    }
+
+    actions.appendChild(reportButton);
+
+    wrapper.appendChild(actions);
+
+
+    /* =====================================================
+       ОТВЕТЫ
+       ===================================================== */
+
+    const replies =
+        depth < 2
+            ? allComments.filter(
+                item =>
+                    item.parent_id === comment.id
+            )
+            : [];
+
+    if (replies.length) {
+
+        const repliesContainer =
+            document.createElement("div");
+
+        repliesContainer.className =
+            "comment-replies";
+
+        replies.forEach(
+            reply => {
+
+                repliesContainer.appendChild(
+                    createCommentElement(
+                        reply,
+                        allComments,
+                        depth + 1
+                    )
+                );
+
+            }
+        );
+
+        wrapper.appendChild(
+            repliesContainer
+        );
+    }
+
+
+    return wrapper;
+}
+
+
+/* =========================================================
+   ФОРМА ОТВЕТА
+   ========================================================= */
+
+function showReplyForm(
+    parentElement,
+    parentId,
+    parentAuthorName
+) {
+
+    if (!commentProfile) {
+
+        alert(
+            "Сначала сохраните никнейм."
+        );
+
+        return;
+    }
+
+    if (isCommentUserBanned()) {
+
+        alert(
+            getBanMessage()
+        );
+
+        return;
+    }
+
+    const existing =
+        parentElement.querySelector(
+            ".comment-reply-form"
+        );
+
+    if (existing) {
+        existing.remove();
+        return;
+    }
+
+    const form =
+        document.createElement("div");
+
+    form.className =
+        "comment-reply-form";
+
+    form.innerHTML = `
+        <div class="comment-reply-target">
+            Ответ пользователю: @${parentAuthorName}
+        </div>
+
+        <textarea
+            maxlength="500"
+            placeholder="Напишите ответ..."
+        ></textarea>
+
+        <br>
+
+        <button type="button">
+            Отправить ответ
+        </button>
+
+        <button type="button" class="comment-reply-back-button">
+            Назад
+        </button>
+
+        <div></div>
+    `;
+
+    const textarea =
+        form.querySelector("textarea");
+
+    const button =
+        form.querySelector("button");
+
+    const backButton =
+        form.querySelector(
+            ".comment-reply-back-button"
+        );
+
+    const message =
+        form.querySelector("div");
+
+    backButton.addEventListener(
+        "click",
+        function() {
+            form.remove();
+        }
+    );
+
+    button.addEventListener(
+        "click",
+        async function() {
+
+            const activeMute =
+                await getActiveCommentMute();
+
+            if (activeMute) {
+                message.className =
+                    "comment-error";
+                message.textContent =
+                    getMuteMessage(activeMute);
+                return;
+            }
+
+            const content =
+                textarea.value.trim();
+
+            if (!content) {
+
+                message.className =
+                    "comment-error";
+
+                message.textContent =
+                    "❌ Ответ не может быть пустым.";
+
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent =
+                "Отправка...";
+
+            const {
+                data,
+                error
+            } = await supabaseClient
+                .from("comments")
+                .insert({
+                    post_id: Number(postId),
+                    user_id: commentUser.id,
+                    author_name:
+                        commentProfile.username,
+                    content: content,
+                    parent_id: parentId
+                })
+                .select("*")
+                .single();
+
+            if (error) {
+
+                console.error(
+                    "Ошибка отправки ответа:",
+                    error
+                );
+
+                button.disabled = false;
+                button.textContent =
+                    "Отправить ответ";
+
+                if (
+                    error.message &&
+                    error.message.includes(
+                        "REPLY_LIMIT_REACHED"
+                    )
+                ) {
+                    message.className =
+                        "comment-error";
+
+                    message.textContent =
+                        "🚫 У вас активный лимит: максимум 3 ответа на один комментарий за 8 часов.";
+                } else {
+                    message.className =
+                        "comment-error";
+
+                    message.textContent =
+                        "❌ Не удалось отправить ответ.";
+                }
+
+                return;
+            }
+
+            textarea.value = "";
+
+            button.disabled = false;
+            button.textContent =
+                "Отправить ответ";
+
+            message.className =
+                "comment-success";
+
+            message.textContent =
+                data && data.status === "pending"
+                    ? "⏳ Ответ отправлен на проверку."
+                    : "✅ Ответ опубликован.";
+
+            await loadComments();
+        }
+    );
+
+    parentElement.appendChild(form);
+}
+
+
+/* =========================================================
+   ⚑ ЖАЛОБА
+   ========================================================= */
+
+async function reportComment(
+    commentId
+) {
+
+    if (!commentUser) {
+        alert(
+            "Не удалось определить пользователя."
+        );
+        return;
+    }
+
+    if (isCommentUserBanned()) {
+        alert(
+            getBanMessage()
+        );
+        return;
+    }
+
+    const reason =
+        prompt(
+            "Введите причину жалобы:\n\n" +
+            "spam — Спам\n" +
+            "advertising — Реклама\n" +
+            "insult — Оскорбление\n" +
+            "inappropriate — Неприемлемое содержание\n" +
+            "suspicious_link — Подозрительная ссылка\n" +
+            "other — Другое"
+        );
+
+    if (!reason) {
+        return;
+    }
+
+    const normalized =
+        reason.trim().toLowerCase();
+
+    const allowed = [
+        "spam",
+        "advertising",
+        "insult",
+        "inappropriate",
+        "suspicious_link",
+        "other"
+    ];
+
+    if (!allowed.includes(normalized)) {
+
+        alert(
+            "❌ Неверная причина жалобы."
+        );
+
+        return;
+    }
+
+    const {
+        error
+    } = await supabaseClient
+        .from("comment_reports")
+        .insert({
+            comment_id: commentId,
+            user_id: commentUser.id,
+            reason: normalized
+        });
+
+    if (error) {
+
+        if (error.code === "23505") {
+
+            alert(
+                "⚠️ Вы уже жаловались на этот комментарий."
+            );
+
+        } else {
+
+            console.error(error);
+
+            alert(
+                "❌ Не удалось отправить жалобу."
+            );
+        }
+
+        return;
+    }
+
+    alert(
+        "✅ Жалоба отправлена администратору."
+    );
+}
+
+
+/* =========================================================
+   ОБНОВЛЯЕМ ОТОБРАЖЕНИЕ ВРЕМЕНИ
+   ========================================================= */
+
+setInterval(
+    function() {
+
+        document
+            .querySelectorAll(".comment-time")
+            .forEach(
+                function(element) {
+
+                    if (
+                        element.dataset.createdAt
+                    ) {
+                        element.textContent =
+                            formatCommentTime(
+                                element.dataset.createdAt
+                            );
+                    }
+
+                }
+            );
+
+    },
+    60000
+);
+
+
+
+/* =========================================================
+   🔄 ЗАПРОС НА СМЕНУ НИКНЕЙМА
+   ДОБАВЛЕНО — СУЩЕСТВУЮЩИЕ ФУНКЦИИ НЕ ИЗМЕНЯЕМ.
+   ========================================================= */
+
+async function loadNicknameChangeRequest() {
+
+    if (!commentUser || !commentProfile) {
+        return;
+    }
+
+    const area = document.getElementById(
+        "nickname-change-request-area"
+    );
+
+    if (!area) {
+        return;
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("nickname_change_requests")
+        .select(
+            "id, current_username, requested_username, reason, status, admin_reason, created_at, reviewed_at"
+        )
+        .eq("user_id", commentUser.id)
+        .order("created_at", {
+            ascending: false
+        })
+        .limit(1);
+
+    if (error) {
+        console.error(
+            "Ошибка загрузки запроса на смену никнейма:",
+            error
+        );
+
+        area.innerHTML = `
+            <div class="nickname-request-status nickname-request-error">
+                ❌ Не удалось загрузить запрос на смену никнейма.
+            </div>
+        `;
+
+        return;
+    }
+
+    const latestRequest =
+        data && data.length
+            ? data[0]
+            : null;
+
+    /*
+       Пока предыдущий запрос ожидает решения —
+       новый запрос создавать нельзя.
+    */
+
+    if (
+        latestRequest &&
+        latestRequest.status === "pending"
+    ) {
+
+        area.innerHTML = `
+            <div class="nickname-request-status nickname-request-pending">
+                ⏳ Запрос на смену никнейма уже отправлен.<br>
+                Новый запрос будет доступен после решения администратора.
+                <br><br>
+                <strong>
+                    Запрошенный ник:
+                </strong>
+                ${escapeHTML(
+                    latestRequest.requested_username
+                )}
+            </div>
+        `;
+
+        return;
+    }
+
+    /*
+       Если последний запрос был отклонён —
+       показываем причину, но позволяем отправить новый.
+    */
+
+    let previousMessage = "";
+
+    if (
+        latestRequest &&
+        latestRequest.status === "rejected"
+    ) {
+
+        previousMessage = `
+            <div class="nickname-request-status nickname-request-error">
+                ❌ Последний запрос был отклонён.
+                ${
+                    latestRequest.admin_reason
+                        ? "<br><strong>Причина:</strong> " +
+                          escapeHTML(
+                              latestRequest.admin_reason
+                          )
+                        : ""
+                }
+            </div>
+        `;
+    }
+
+    area.innerHTML = `
+        ${previousMessage}
+
+        <button
+            type="button"
+            id="nickname-change-request-button"
+            class="nickname-change-button"
+        >
+            🔄 Запросить смену никнейма
+        </button>
+
+        <div
+            id="nickname-change-request-form"
+            style="display:none;"
+        ></div>
+    `;
+
+    const requestButton =
+        document.getElementById(
+            "nickname-change-request-button"
+        );
+
+    if (requestButton) {
+
+        requestButton.addEventListener(
+            "click",
+            showNicknameChangeRequestForm
+        );
+    }
+}
+
+
+function showNicknameChangeRequestForm() {
+
+    const form =
+        document.getElementById(
+            "nickname-change-request-form"
+        );
+
+    const button =
+        document.getElementById(
+            "nickname-change-request-button"
+        );
+
+    if (!form) {
+        return;
+    }
+
+    if (
+        form.style.display === "block"
+    ) {
+
+        form.style.display = "none";
+
+        if (button) {
+            button.textContent =
+                "🔄 Запросить смену никнейма";
+        }
+
+        return;
+    }
+
+    form.style.display = "block";
+
+    if (button) {
+        button.textContent =
+            "✖ Отменить";
+    }
+
+    form.innerHTML = `
+        <div class="nickname-change-form">
+
+            <div>
+                <strong>Текущий ник:</strong>
+                ${escapeHTML(
+                    commentProfile.username
+                )}
+            </div>
+
+            <br>
+
+            <input
+                type="text"
+                id="requested-nickname"
+                maxlength="30"
+                placeholder="Новый никнейм"
+                autocomplete="off"
+            >
+
+            <textarea
+                id="nickname-change-reason"
+                maxlength="300"
+                placeholder="Причина смены никнейма (необязательно)"
+            ></textarea>
+
+            <button
+                type="button"
+                id="send-nickname-change-request"
+            >
+                Отправить запрос
+            </button>
+
+            <div
+                id="nickname-change-request-message"
+                class="nickname-request-status"
+            ></div>
+
+        </div>
+    `;
+
+    const sendButton =
+        document.getElementById(
+            "send-nickname-change-request"
+        );
+
+    if (sendButton) {
+
+        sendButton.addEventListener(
+            "click",
+            sendNicknameChangeRequest
+        );
+    }
+}
+
+
+async function sendNicknameChangeRequest() {
+
+    if (
+        !commentUser ||
+        !commentProfile
+    ) {
+        return;
+    }
+
+    const nicknameInput =
+        document.getElementById(
+            "requested-nickname"
+        );
+
+    const reasonInput =
+        document.getElementById(
+            "nickname-change-reason"
+        );
+
+    const button =
+        document.getElementById(
+            "send-nickname-change-request"
+        );
+
+    const message =
+        document.getElementById(
+            "nickname-change-request-message"
+        );
+
+    if (
+        !nicknameInput ||
+        !reasonInput ||
+        !button ||
+        !message
+    ) {
+        return;
+    }
+
+    const requestedUsername =
+        nicknameInput.value.trim();
+
+    const reason =
+        reasonInput.value.trim();
+
+    if (
+        requestedUsername.length < 2
+    ) {
+
+        message.className =
+            "nickname-request-status nickname-request-error";
+
+        message.textContent =
+            "❌ Новый никнейм должен содержать минимум 2 символа.";
+
+        return;
+    }
+
+    if (
+        requestedUsername.length > 30
+    ) {
+
+        message.className =
+            "nickname-request-status nickname-request-error";
+
+        message.textContent =
+            "❌ Максимальная длина никнейма — 30 символов.";
+
+        return;
+    }
+
+    if (
+        requestedUsername ===
+        commentProfile.username
+    ) {
+
+        message.className =
+            "nickname-request-status nickname-request-error";
+
+        message.textContent =
+            "❌ Новый никнейм должен отличаться от текущего.";
+
+        return;
+    }
+
+    if (reason.length > 300) {
+
+        message.className =
+            "nickname-request-status nickname-request-error";
+
+        message.textContent =
+            "❌ Причина не должна превышать 300 символов.";
+
+        return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Отправка...";
+
+    /*
+       Дополнительная серверная проверка:
+       нельзя создать второй pending-запрос,
+       даже если пользователь открыл несколько вкладок.
+    */
+
+    const {
+        data: existingPending,
+        error: pendingError
+    } = await supabaseClient
+        .from("nickname_change_requests")
+        .select("id")
+        .eq("user_id", commentUser.id)
+        .eq("status", "pending")
+        .limit(1);
+
+    if (pendingError) {
+
+        console.error(
+            "Ошибка проверки существующего запроса:",
+            pendingError
+        );
+
+        button.disabled = false;
+        button.textContent =
+            "Отправить запрос";
+
+        message.className =
+            "nickname-request-status nickname-request-error";
+
+        message.textContent =
+            "❌ Не удалось проверить текущие запросы.";
+
+        return;
+    }
+
+    if (
+        existingPending &&
+        existingPending.length > 0
+    ) {
+
+        button.disabled = false;
+        button.textContent =
+            "Отправить запрос";
+
+        message.className =
+            "nickname-request-status nickname-request-error";
+
+        message.textContent =
+            "⏳ У вас уже есть запрос на рассмотрении.";
+
+        await loadNicknameChangeRequest();
+
+        return;
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+        .from("nickname_change_requests")
+        .insert({
+            user_id: commentUser.id,
+            current_username: commentProfile.username,
+            requested_username: requestedUsername,
+            reason: reason || null,
+            status: "pending"
+        })
+        .select("*")
+        .single();
+
+    if (error) {
+
+        console.error(
+            "Ошибка отправки запроса на смену никнейма:",
+            error
+        );
+
+        button.disabled = false;
+        button.textContent =
+            "Отправить запрос";
+
+        if (
+            error.code === "23505"
+        ) {
+
+            message.className =
+                "nickname-request-status nickname-request-error";
+
+            message.textContent =
+                "❌ Такой никнейм уже занят.";
+
+        } else {
+
+            message.className =
+                "nickname-request-status nickname-request-error";
+
+            message.textContent =
+                "❌ Не удалось отправить запрос.";
+        }
+
+        return;
+    }
+
+    message.className =
+        "nickname-request-status nickname-request-success";
+
+    message.textContent =
+        "✅ Запрос отправлен администратору.";
+
+    /*
+       После успешной отправки снова показываем
+       только статус pending.
+    */
+
+    await loadNicknameChangeRequest();
+}
+
+
+/* =========================================================
+   ЗАПУСК КОММЕНТАРИЕВ
+   ========================================================= */
+
+async function initComments() {
+
+    if (!postId) {
+        return;
+    }
+
+    const initialized =
+        await initCommentUser();
+
+    if (!initialized) {
+
+        const list =
+            document.getElementById(
+                "comments-list"
+            );
+
+        if (list) {
+            list.innerHTML = `
+                <div class="comment-error">
+                    ❌ Не удалось подключить систему комментариев.
+                    Проверь Anonymous Sign-Ins в Supabase.
+                </div>
+            `;
+        }
+
+        return;
+    }
+
+    const saveButton =
+        document.getElementById(
+            "save-comment-username"
+        );
+
+    if (saveButton) {
+
+        saveButton.addEventListener(
+            "click",
+            saveCommentUsername
+        );
+
+    }
+
+    await loadComments();
+
+    startMuteInfoAutoRefresh();
+}
+
+
+
+/* =========================
+   ЗАПУСК
+   ========================= */
+
+
+loadLatestPublications();
+
+loadPopularPublications();
+
+loadPost().then(
+    function() {
+
+        loadPostLikes();
+
+    }
+);
+
+/* 💬 Запуск добавленной системы комментариев */
+initComments();
+
+
+</script>
+
+
+<script>
+/* =========================================================
+   🔒 ЗАЩИТА NEWS-POST ОТ BAN / TEMPORARY_BAN
+   ДОБАВЛЕНО — СУЩЕСТВУЮЩИЙ КОД НЕ ТРОГАЕМ
+   ========================================================= */
+
+(function () {
+
+    let redirectCheckRunning = false;
+
+    async function checkNewsPostBan() {
+
+        if (redirectCheckRunning) {
+            return;
+        }
+
+        redirectCheckRunning = true;
+
+        try {
+
+            if (
+                typeof supabaseClient ===
+                "undefined"
+            ) {
+                return;
+            }
+
+            const {
+                data: userData,
+                error: userError
+            } = await supabaseClient.auth.getUser();
+
+            if (
+                userError ||
+                !userData ||
+                !userData.user
+            ) {
+                return;
+            }
+
+            const {
+                data,
+                error
+            } = await supabaseClient.rpc(
+                "get_active_user_punishment",
+                {
+                    target_user_id:
+                        userData.user.id
+                }
+            );
+
+            if (error) {
+                console.error(
+                    "Ошибка проверки BAN на news-post:",
+                    error
+                );
+                return;
+            }
+
+            let punishment = null;
+
+            if (Array.isArray(data)) {
+
+                punishment =
+                    data.find(
+                        function (item) {
+
+                            if (!item) {
+                                return false;
+                            }
+
+                            const type =
+                                String(
+                                    item.punishment_type ||
+                                    ""
+                                ).toLowerCase();
+
+                            if (
+                                type !== "ban" &&
+                                type !== "temporary_ban"
+                            ) {
+                                return false;
+                            }
+
+                            if (!item.expires_at) {
+                                return true;
+                            }
+
+                            return (
+                                new Date(
+                                    item.expires_at
+                                ).getTime() > Date.now()
+                            );
+                        }
+                    ) || null;
+
+            } else if (data) {
+
+                const type =
+                    String(
+                        data.punishment_type ||
+                        ""
+                    ).toLowerCase();
+
+                const active =
+                    type === "ban" ||
+                    (
+                        type === "temporary_ban" &&
+                        (
+                            !data.expires_at ||
+                            new Date(
+                                data.expires_at
+                            ).getTime() > Date.now()
+                        )
+                    );
+
+                if (active) {
+                    punishment = data;
+                }
+            }
+
+            if (!punishment) {
+                return;
+            }
+
+            /*
+             * BAN / TEMPORARY_BAN найден.
+             * Не оставляем пользователя на news-post.html.
+             * Отправляем на index.html, где уже находится
+             * глобальное окно блокировки.
+             */
+            window.location.replace(
+                "index.html"
+            );
+
+        } finally {
+
+            redirectCheckRunning = false;
+        }
+    }
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            checkNewsPostBan,
+            { once: true }
+        );
+
+    } else {
+
+        checkNewsPostBan();
+    }
+
+    /*
+     * Если бан выдан, пока news-post.html уже открыт,
+     * обнаруживаем его автоматически без F5.
+     */
+    setInterval(
+        checkNewsPostBan,
+        2000
+    );
+
+})();
+</script>
+
+
+
+<style>
+/* =========================================================
+   🔥 NEON NEWS POST — ВИЗУАЛЬНЫЙ СЛОЙ
+   Функционал существующего файла не изменяется.
+   ========================================================= */
+
+body{
+    background:
+        radial-gradient(circle at 7% 4%,rgba(176,0,0,.17),transparent 28%),
+        radial-gradient(circle at 93% 82%,rgba(255,0,0,.09),transparent 27%),
+        linear-gradient(135deg,#080808,#171717 48%,#090909);
+    background-attachment:fixed;
+    animation:postPageIn .6s ease-out;
+}
+
+@keyframes postPageIn{
+    from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.top-banner{
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid rgba(255,255,255,.10);
+    box-shadow:0 6px 25px rgba(0,0,0,.28),0 0 25px rgba(176,0,0,.08);
+}
+
+.top-banner::after{
+    content:"";
+    position:absolute;
+    left:-35%;
+    bottom:0;
+    width:170%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,40,40,.9),transparent);
+    animation:postScan 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes postScan{
+    from{transform:translateX(-25%);opacity:.25}
+    50%{opacity:1}
+    to{transform:translateX(25%);opacity:.25}
+}
+
+.header{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(115deg,#650000,#b00000 50%,#720000);
+    border-bottom:1px solid rgba(255,255,255,.15);
+    box-shadow:0 8px 32px rgba(176,0,0,.28),0 0 35px rgba(176,0,0,.10);
+}
+
+.header::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    right:-190px;
+    top:-285px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.13);
+    box-shadow:0 0 35px rgba(255,40,40,.17);
+    animation:postOrb 8s ease-in-out infinite alternate;
+    pointer-events:none;
+}
+
+.header::after{
+    content:"";
+    position:absolute;
+    left:-30%;
+    bottom:0;
+    width:160%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    animation:postHeaderScan 4s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes postOrb{
+    from{transform:translate(0,0) scale(1)}
+    to{transform:translate(-35px,35px) scale(1.12)}
+}
+
+@keyframes postHeaderScan{
+    from{transform:translateX(-30%);opacity:.2}
+    50%{opacity:1}
+    to{transform:translateX(30%);opacity:.2}
+}
+
+.header-content{
+    position:relative;
+    z-index:2;
+}
+
+.header h1{
+    text-shadow:0 0 9px rgba(255,255,255,.25),0 0 25px rgba(255,0,0,.25);
+}
+
+.menu{
+    position:relative;
+    z-index:5;
+    box-shadow:0 5px 20px rgba(0,0,0,.18);
+}
+
+.menu a{
+    position:relative;
+    overflow:hidden;
+    transition:transform .28s cubic-bezier(.2,.8,.2,1),background .3s ease,color .25s ease,box-shadow .3s ease;
+}
+
+.menu a::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+    pointer-events:none;
+}
+
+.menu a:hover{
+    transform:translateY(-3px);
+    background:linear-gradient(135deg,#850000,#b00000);
+    color:#fff;
+    box-shadow:0 7px 18px rgba(0,0,0,.22),0 0 18px rgba(176,0,0,.20);
+}
+
+.menu a:hover::after{left:140%}
+.menu a:active{transform:translateY(-1px) scale(.985)}
+
+.box{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.25);
+    border-radius:9px;
+    box-shadow:0 9px 26px rgba(0,0,0,.13),0 0 18px rgba(176,0,0,.06);
+    transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+
+.box::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:4px;
+    height:100%;
+    background:linear-gradient(#ff2020,#820000);
+    box-shadow:0 0 11px rgba(255,0,0,.55),0 0 23px rgba(176,0,0,.18);
+}
+
+.box:hover{
+    transform:translateY(-3px);
+    border-color:rgba(176,0,0,.40);
+    box-shadow:0 13px 30px rgba(0,0,0,.18),0 0 20px rgba(176,0,0,.10);
+}
+
+.box-title{
+    position:relative;
+    text-shadow:0 0 8px rgba(176,0,0,.12);
+}
+
+.box-title::after{
+    content:"";
+    display:block;
+    width:42px;
+    height:2px;
+    margin-top:7px;
+    border-radius:4px;
+    background:#b00000;
+    box-shadow:0 0 8px rgba(255,0,0,.55);
+}
+
+.box-body a{
+    transition:color .25s ease,padding-left .25s ease,text-shadow .25s ease;
+}
+
+.box-body a:hover{
+    color:#b00000;
+    padding-left:5px;
+    text-shadow:0 0 8px rgba(176,0,0,.15);
+}
+
+.main{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.23);
+    border-radius:10px;
+    box-shadow:0 11px 32px rgba(0,0,0,.14),0 0 20px rgba(176,0,0,.06);
+    animation:postMainIn .65s ease both;
+}
+
+@keyframes postMainIn{
+    from{opacity:0;transform:translateY(15px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.main-title{
+    position:relative;
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000);
+    box-shadow:0 4px 15px rgba(176,0,0,.15);
+    text-shadow:0 0 8px rgba(255,255,255,.14);
+}
+
+.main-title::after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:80px;
+    height:2px;
+    background:#ff3030;
+    box-shadow:0 0 9px rgba(255,0,0,.7);
+    animation:postTitleGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes postTitleGlow{
+    0%,100%{opacity:.45}
+    50%{opacity:1}
+}
+
+/* СТАТЬЯ */
+.article{
+    position:relative;
+}
+
+.article h2{
+    text-shadow:0 0 12px rgba(176,0,0,.08);
+    transition:color .25s ease,text-shadow .25s ease;
+}
+
+.article h2:hover{
+    color:#b00000;
+    text-shadow:0 0 12px rgba(176,0,0,.16);
+}
+
+.article .date{
+    color:#777;
+    transition:color .25s ease;
+}
+
+.article:hover .date{
+    color:#a00000;
+}
+
+/* ВИДЕО */
+.post-video{
+    position:relative;
+    border:1px solid rgba(176,0,0,.28);
+    border-radius:9px;
+    box-shadow:0 10px 28px rgba(0,0,0,.18),0 0 20px rgba(176,0,0,.08);
+    transition:border-color .3s ease,box-shadow .3s ease,transform .3s ease;
+}
+
+.post-video::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
+    transform:skewX(-18deg);
+    transition:left .7s ease;
+    pointer-events:none;
+    z-index:4;
+}
+
+.post-video:hover{
+    transform:translateY(-3px);
+    border-color:rgba(255,0,0,.42);
+    box-shadow:0 14px 32px rgba(0,0,0,.22),0 0 24px rgba(176,0,0,.14);
+}
+
+.post-video:hover::after{left:140%}
+
+.post-video video{
+    transition:filter .4s ease;
+}
+
+.post-video:hover video{
+    filter:saturate(1.06) contrast(1.02);
+}
+
+/* PLAY */
+.post-video-play{
+    background:linear-gradient(135deg,#850000,#d00000 52%,#720000)!important;
+    box-shadow:0 0 0 5px rgba(176,0,0,.10),0 0 25px rgba(255,0,0,.28),0 8px 24px rgba(0,0,0,.22);
+    transition:opacity .2s ease,transform .25s ease,box-shadow .3s ease!important;
+}
+
+.post-video-play:hover{
+    box-shadow:0 0 0 7px rgba(176,0,0,.12),0 0 32px rgba(255,0,0,.38),0 10px 28px rgba(0,0,0,.25);
+}
+
+/* ФОТО */
+.post-image{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.22);
+    border-radius:9px;
+    box-shadow:0 10px 28px rgba(0,0,0,.15),0 0 18px rgba(176,0,0,.06);
+}
+
+.post-image::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.18),transparent);
+    transform:skewX(-18deg);
+    transition:left .7s ease;
+    pointer-events:none;
+}
+
+.post-image:hover::after{left:140%}
+
+.post-image img{
+    transition:transform .55s cubic-bezier(.2,.8,.2,1),filter .4s ease;
+}
+
+.post-image:hover img{
+    transform:scale(1.025);
+    filter:saturate(1.06) contrast(1.02);
+}
+
+/* ЛАЙК */
+.post-likes{
+    position:relative;
+}
+
+.post-like-button{
+    position:relative;
+    overflow:hidden;
+    border-radius:7px;
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000)!important;
+    box-shadow:0 5px 16px rgba(176,0,0,.18);
+    transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,background .3s ease!important;
+}
+
+.post-like-button::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.27),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+}
+
+.post-like-button:hover{
+    background:linear-gradient(135deg,#b00000,#df0000 52%,#900000)!important;
+    transform:translateY(-3px);
+    box-shadow:0 9px 22px rgba(0,0,0,.22),0 0 20px rgba(176,0,0,.22);
+}
+
+.post-like-button:hover::after{left:140%}
+
+.post-like-button.liked{
+    background:linear-gradient(135deg,#5f0000,#777 55%,#4d4d4d)!important;
+    box-shadow:0 5px 15px rgba(0,0,0,.16);
+}
+
+.post-like-count{
+    font-weight:bold;
+    transition:color .25s ease,text-shadow .25s ease;
+}
+
+.post-likes:hover .post-like-count{
+    color:#a00000;
+    text-shadow:0 0 7px rgba(176,0,0,.12);
+}
+
+/* КОММЕНТАРИИ */
+.comments-section{
+    position:relative;
+    border-top:2px solid rgba(176,0,0,.22)!important;
+}
+
+.comments-title{
+    position:relative;
+    text-shadow:0 0 10px rgba(176,0,0,.12);
+}
+
+.comments-title::after{
+    content:"";
+    display:block;
+    width:55px;
+    height:2px;
+    margin-top:7px;
+    background:#b00000;
+    box-shadow:0 0 9px rgba(255,0,0,.5);
+}
+
+.comment-profile-box,
+.comment-form,
+.comment-reply-form{
+    border:1px solid rgba(176,0,0,.20)!important;
+    border-radius:8px;
+    box-shadow:0 6px 18px rgba(0,0,0,.06);
+}
+
+.comment-profile-box{
+    background:linear-gradient(145deg,#f7f7f7,#f1f1f1)!important;
+}
+
+.comment-profile-box input,
+.comment-form textarea,
+.comment-reply-form textarea,
+.nickname-change-form input,
+.nickname-change-form textarea{
+    border:1px solid rgba(176,0,0,.22)!important;
+    border-radius:6px;
+    transition:border-color .3s ease,box-shadow .3s ease,transform .25s ease;
+}
+
+.comment-profile-box input:focus,
+.comment-form textarea:focus,
+.comment-reply-form textarea:focus,
+.nickname-change-form input:focus,
+.nickname-change-form textarea:focus{
+    outline:none;
+    border-color:#b00000!important;
+    box-shadow:0 0 0 3px rgba(176,0,0,.09),0 0 15px rgba(176,0,0,.08);
+    transform:translateY(-1px);
+}
+
+.comment-profile-box button,
+.comment-form button,
+.comment-reply-form button,
+.nickname-change-form button{
+    border-radius:6px;
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000)!important;
+    box-shadow:0 5px 15px rgba(176,0,0,.15);
+    transition:transform .25s ease,box-shadow .3s ease,background .3s ease;
+}
+
+.comment-profile-box button:hover,
+.comment-form button:hover,
+.comment-reply-form button:hover,
+.nickname-change-form button:hover{
+    background:linear-gradient(135deg,#b00000,#df0000 52%,#900000)!important;
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,0,0,.18),0 0 17px rgba(176,0,0,.18);
+}
+
+.comment{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.16)!important;
+    border-radius:8px;
+    box-shadow:0 5px 16px rgba(0,0,0,.06);
+    transition:transform .28s ease,box-shadow .3s ease,border-color .3s ease;
+    animation:commentIn .45s ease both;
+}
+
+.comment::before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:3px;
+    height:0;
+    background:#b00000;
+    box-shadow:0 0 11px rgba(255,0,0,.45);
+    transition:height .3s ease;
+}
+
+.comment:hover{
+    transform:translateY(-2px);
+    border-color:rgba(176,0,0,.28)!important;
+    box-shadow:0 9px 21px rgba(0,0,0,.10),0 0 13px rgba(176,0,0,.05);
+}
+
+.comment:hover::before{height:100%}
+
+.comment-pinned{
+    border-left:4px solid #c00000!important;
+    box-shadow:0 0 18px rgba(176,0,0,.10);
+}
+
+.comment-author{
+    transition:color .25s ease,text-shadow .25s ease;
+}
+
+.comment:hover .comment-author{
+    color:#a00000;
+    text-shadow:0 0 7px rgba(176,0,0,.12);
+}
+
+.comment-actions button{
+    border:1px solid rgba(176,0,0,.15)!important;
+    border-radius:5px;
+    transition:transform .22s ease,background .25s ease,border-color .25s ease,color .25s ease;
+}
+
+.comment-actions button:hover{
+    background:#fff0f0!important;
+    color:#a00000;
+    border-color:rgba(176,0,0,.35)!important;
+    transform:translateY(-2px);
+}
+
+.nickname-change-button{
+    border-radius:6px;
+    transition:transform .25s ease,background .25s ease,box-shadow .25s ease;
+}
+
+.nickname-change-button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 5px 15px rgba(0,0,0,.10);
+}
+
+@keyframes commentIn{
+    from{opacity:0;transform:translateY(8px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+/* БОКОВЫЕ ПУБЛИКАЦИИ */
+.sidebar-publication{
+    position:relative;
+    border-bottom:1px solid rgba(176,0,0,.10);
+    transition:background .25s ease,padding-left .25s ease,box-shadow .25s ease;
+}
+
+.sidebar-publication:hover{
+    background:rgba(176,0,0,.035);
+    padding-left:5px;
+    box-shadow:inset 2px 0 0 rgba(176,0,0,.55);
+}
+
+.side-banner{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(176,0,0,.25);
+    box-shadow:0 8px 22px rgba(0,0,0,.14),0 0 17px rgba(176,0,0,.07);
+}
+
+.side-banner::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:65%;
+    height:100%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent);
+    transform:skewX(-18deg);
+    transition:left .7s ease;
+    pointer-events:none;
+}
+
+.side-banner:hover::after{left:140%}
+
+/* КНОПКИ ВОЗВРАТА */
+.read-more{
+    position:relative;
+    overflow:hidden;
+    border-radius:6px;
+    background:linear-gradient(135deg,#850000,#b00000 52%,#720000)!important;
+    box-shadow:0 5px 15px rgba(176,0,0,.17);
+    transition:transform .28s cubic-bezier(.2,.8,.2,1),box-shadow .3s ease,background .3s ease;
+}
+
+.read-more::after{
+    content:"";
+    position:absolute;
+    left:-120%;
+    top:-20%;
+    width:65%;
+    height:140%;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.28),transparent);
+    transform:skewX(-18deg);
+    transition:left .6s ease;
+}
+
+.read-more:hover{
+    background:linear-gradient(135deg,#b00000,#df0000 52%,#900000)!important;
+    transform:translateY(-3px);
+    box-shadow:0 9px 21px rgba(0,0,0,.22),0 0 18px rgba(176,0,0,.22);
+}
+
+.read-more:hover::after{left:140%}
+
+/* FOOTER */
+footer{
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg,#090909,#161616);
+    border-top:1px solid rgba(176,0,0,.35);
+    box-shadow:0 -6px 25px rgba(0,0,0,.20);
+}
+
+footer::before{
+    content:"";
+    position:absolute;
+    left:-30%;
+    top:0;
+    width:160%;
+    height:1px;
+    background:linear-gradient(90deg,transparent,#b00000,transparent);
+    box-shadow:0 0 10px rgba(255,0,0,.45);
+    animation:postFooterLine 4s linear infinite;
+}
+
+@keyframes postFooterLine{
+    from{transform:translateX(-25%)}
+    to{transform:translateX(25%)}
+}
+
+/* МОБИЛЬНАЯ ВЕРСИЯ */
+@media(max-width:700px){
+    body{
+        background:
+            radial-gradient(circle at 50% 0%,rgba(176,0,0,.17),transparent 35%),
+            #111;
+        background-attachment:fixed;
+    }
+
+    .box:hover{transform:none}
+
+    .menu a:hover{transform:translateY(-2px)}
+
+    .post-video:hover{
+        transform:none;
+    }
+
+    .post-image:hover img{
+        transform:none;
+    }
+
+    .comment:hover{
+        transform:translateY(-1px);
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms!important;
+        animation-iteration-count:1!important;
+        transition-duration:.01ms!important;
+    }
+}
+</style>
+
+</body>
+
+</html>ф
